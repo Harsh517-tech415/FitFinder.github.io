@@ -9,13 +9,14 @@ const Navbar = () => {
   const { Color, textColor,nav,verify} = useContext(Update);
   const [border, setBorder] = useState(`3px ${Color} solid`)
   return (
-    <AppBar component="nav" poistion="sticky">
+    <AppBar component="nav" poistion="sticky" style={{background:"white",height:"60px"}}>
       <Stack
+      position="fixed"
         direction="row"
         justifyContent="space-around"
         sx={{
           gap: { sm: "122px", xs: "40px" },
-          mt: { sm: "4px", lg: "2px" },
+          mt: { sm: "20px", lg: "20px" },
           justifyContent: "none",
         }}
       >
@@ -23,7 +24,7 @@ const Navbar = () => {
           <img
             src={Logo}
             alt="logo"
-            style={{ width: "36px", height: "40px", margin: "0 20px" }}
+            style={{ width: "36px", height: "40px", marginLeft: "25px",mb:"1px" }}
           />
         </Link>
         <Stack direction="row" gap="40px" fontSize="24px" alignItem="flex-end">

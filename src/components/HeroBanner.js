@@ -92,6 +92,11 @@ const HeroBanner = () => {
         Exercise
       </Typography>
       <img
+      style={{
+        marginTop:"24px",
+        height:"500px",
+        width:"900px"
+      }}
         src={list[a]}
         alt="banner"
         className="hero-banner-img"
