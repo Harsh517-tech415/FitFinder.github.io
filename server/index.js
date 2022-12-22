@@ -29,7 +29,7 @@ app.use(cors(
 ({
     user:"root",
     host:"localhost",
-    password:'25332',
+    password:'*****',
     database:"WealthApp"
 }) 
 
