@@ -8,12 +8,20 @@ body {
   margin: 0px;
   box-sizing: border-box;
 }
-/* .login
-{
-  margin-top: 50px;
-} */
+
 ::-webkit-scrollbar {
   width: 0px;
+}
+input{
+  font-size: 14px;
+}
+input:focus
+{border-width: 1px;
+  outline-color: #1a73e8;
+
+}
+input::placeholder{
+  padding-left: 19px;
 }
 
 .right-arrow1,
