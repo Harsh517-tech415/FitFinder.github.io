@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Update } from "../App";
 const Navbar = () => {
   const location=useLocation();
-  const { Color, textColor} = useContext(Update);
+  const { Color, textColor,nav,verify} = useContext(Update);
   const [border, setBorder] = useState(`3px ${Color} solid`)
   return (
     <AppBar component="nav" poistion="sticky">
@@ -27,6 +27,20 @@ const Navbar = () => {
           />
         </Link>
         <Stack direction="row" gap="40px" fontSize="24px" alignItem="flex-end">
+          <Link
+          to="/"
+            style={{
+              textDecoration: "none",
+              color: textColor,
+              borderBottom: location.pathname==="/" ? border : "",
+            }}
+            onClick={() => {
+              setBorder(`3px ${Color} solid`);
+            }}
+          >
+            Home
+          </Link>
+
           <Link
             to="/explore"
             style={{
@@ -64,9 +78,9 @@ const Navbar = () => {
           >
             Dashboard
           </Link>
-          <Stack  sx={{ ml: { sm: "100px", lg: "800px" } }}>
+          <Stack  sx={{ ml: { sm: "35px", lg: "700px" } }}>
           <Link
-            to="/signup"
+          to={nav}
             onClick={() => {
               setBorder(`3px ${textColor} solid`);
             }}
@@ -75,9 +89,10 @@ const Navbar = () => {
               color: textColor,
               fontWeight: 550,
               marginTop: 2,
+              
             }}
             >
-            Sign
+            {verify}
           </Link>
           </Stack>
         </Stack>

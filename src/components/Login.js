@@ -1,7 +1,7 @@
 import { Box, Stack, TextField, Typography, Button } from "@mui/material";
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useNavigate} from "react-router-dom";
+import React, { useContext, useState,useEffect} from "react";
+import { Navigate, useNavigate} from "react-router-dom";
 import { Update } from "../App";
 const Login = () => {
   const navigate=useNavigate();
@@ -16,30 +16,26 @@ const Login = () => {
      username:usernameSin,
      password:passwordSin
     }).then((response)=>{
-      if(response.data==="Username not found please Register your account")
+      if(response.data==="Username not found please Register your account" 
+      ||response.data==="Username or Password is incorrect try again"
+      ||response.data==="Please enter username and password")
       {
       setSinColor("red")
       setPassword('')
       setUsername('')
       setRes(response.data)
       }
-      else if(response.data==="Username or Password is incorrect try again")
-      {
-        setSinColor("red")
-      setPassword('')
-      setUsername('')
-      setRes(response.data)
-      }
-      else {
+      
+      else  {
         setSinColor("green")
       setPassword('')
       setUsername('')
       setRes(response.data)
-      navigate("/workout")
-      
+      navigate("/home")
       }
     })
   }
+ 
   return (
     <Box sx={{ ml: { xs: "380px", lg: "600px" }, mt: "120px" }}>
     <Typography color={sinColor}>{res}</Typography>
@@ -48,6 +44,7 @@ const Login = () => {
           Username
         </Typography>
         <TextField
+        placeholder="Username"
         value={usernameSin}
           sx={{
             input: { fontSize: "20px", color: textColor },
@@ -70,6 +67,7 @@ const Login = () => {
         </Typography>
         <TextField
         value={passwordSin}
+        placeholder="Password"
         type="password"
           onChange={(event) => {
             setPassword(event.target.value);

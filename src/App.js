@@ -14,6 +14,7 @@ import Dashboard from './Pages/Dashboard';
 import Workout from './Pages/Workout'
 import Signup from './Pages/Signup';
 import Login from './components/Login';
+import Home from './Pages/Home'
 
 export const Update=createContext();
 function App() {
@@ -23,6 +24,8 @@ const [bColor,setbColor]=useState("white");
 const [Icon,setIcon]=useState(icon)
 const [rightArrow,setrightArrow]=useState();
 const [leftArrow,setleftArrow]=useState();
+const [nav,setNav]=useState('./signup')
+const [verify,setVerify]=useState('Sign')
 const getColor=(item1,item2,item3,item4,item5,item6)=>
   {
     setColor(item1)
@@ -33,12 +36,13 @@ const getColor=(item1,item2,item3,item4,item5,item6)=>
     setleftArrow(item6)
   }
   return (
-  <Update.Provider value={{Color:Color,textColor:textColor,bColor:bColor,getColor:getColor,Icon:Icon,rightArrow:rightArrow,leftArrow:leftArrow}}>
+  <Update.Provider value={{verify:verify,setVerify:setVerify,setNav:setNav,nav:nav,Color:Color,textColor:textColor,bColor:bColor,getColor:getColor,Icon:Icon,rightArrow:rightArrow,leftArrow:leftArrow}}>
   <BrowserRouter>
    <Box width="400px" sx={{width:{x1:'1488px'}}} m="auto">
     <Navbar/>
    <Toggle/>
     <Routes>
+    <Route path="/" element={<Home/>}/>
       <Route path="/explore" element={<Explore/>}/>
       <Route path="/exercise/:id" element={<ExerciseDetail/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>

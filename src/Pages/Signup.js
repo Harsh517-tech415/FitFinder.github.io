@@ -3,7 +3,10 @@ import { Stack, Typography,Box, TextField, Button } from '@mui/material'
 import Axios from 'axios'
 import React, { useContext,useState } from 'react'
 import { Update } from '../App'
-import { Navigate } from 'react-router-dom'
+
+
+
+Axios.defaults.withCredentials=true
 const Signup = () => {
   const navigate=useNavigate();
     const {textColor}=useContext(Update)
@@ -45,13 +48,14 @@ setResColor("red")
   
    return (
     
-      <Box sx={{ml:{xs:"380px",lg:"600px"},mt:"120px"}}>
+      <Box  sx={{ml:{xs:"380px",lg:"600px"},mt:"120px"}}>
         <Stack direction="column">
            <Typography color={resColor} >{res}</Typography>
             <Typography color={textColor} fontSize="23px" fontWeight="100px">
                 Username
             </Typography>
             <TextField
+            placeholder='Username'
             onChange={(event)=>{setUsernameReg(event.target.value)}}
             sx={{
                 input:{fontSize:"20px",color:textColor},
@@ -61,6 +65,7 @@ setResColor("red")
         <Stack mt="23px">
         <Typography color={textColor} fontSize="23px" fontWeight="100px">Password</Typography>
         <TextField type="password"
+                  placeholder="Password"
         onChange={(event)=>{setPasswordReg(event.target.value)}}
         sx={{input:{fontSize:"20px",color:textColor},
                 width:{sm:"300px",lg:"300px"}}}/>    
