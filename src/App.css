@@ -9,8 +9,20 @@ body {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  width: 0px;
+.nextButton
+{
+  display: inline-flex;
+  height: 40px;
+  padding: 0;
+  background: cadetblue;
+  border:none;
+  outline:none;
+  border-radius:5px;
+  overflow:hidden;
+  font-size:16px;
+  font-weight: 500;
+  cursor:pointer;
+
 }
 input{
   font-size: 14px;
@@ -59,6 +71,7 @@ input::placeholder{
   display: flex;
   flex-wrap: wrap;
 }
+
 
 .detail-image {
   width: 729px;

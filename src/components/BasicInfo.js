@@ -1,22 +1,25 @@
-import { Box } from '@mui/material'
+import { Box,Stack } from '@mui/material'
 import { red } from '@mui/material/colors'
 import { color, style } from '@mui/system'
 import React from 'react'
 
 const BasicInfo = () => {
   return (
+    <Stack direction="row">
  <Box sx={{
     width:"500px",
     height:"350px",
-    marginLeft:{sm:"120px",lg:"470px"},
+    marginLeft:{sm:"120px",lg:"600px"},
+    marginRight:{sm:"100px",lg:"500px"},
     borderColor:"red",
     boxShadow:"0 0 5px 5px #f44336",
-    borderRadius:"10px"
+    borderRadius:"10px",
+    marginTop:"70px"
  }}>
- <form>
+ <form >
  <label
  style=
- {{ 
+ {{ marginLeft:"110px",
     fontSize:"40px",
     fontFamily:"Google Sans,Noto Sans Myanmar UI,arial,sans-serif",
     color:"red"
@@ -37,7 +40,8 @@ const BasicInfo = () => {
     borderRadius:"5px",
     height:"34px",
     width:"178px",
-    border:"1px solid grey",    
+    border:"1px solid grey", 
+    marginLeft:"70px"   
 }}
     required
 placeholder="First name"
@@ -66,7 +70,7 @@ placeholder="Last name"
     height:"34px",
     width:"178px",
     border:"1px solid grey",  
-    marginRight:"44px",
+    marginLeft:"70px",
     marginTop:"24px",
     width:"370px"
     } }
@@ -79,33 +83,17 @@ placeholder="Last name"
     height:"34px",
     width:"178px",
     border:"1px solid grey",  
-    marginRight:"44px",
+    marginLeft:"70px",
     marginTop:"24px",
     width:"370px"
     } }
 />
 <br/>
-<button type="submit"
-action="#"
-style=
-    {{
-    borderRadius:"5px",
-    height:"34px",
-    width:"178px",
-    border:"1px solid grey",  
-    marginRight:"136px",
-    marginTop:"30px",
-    backgroundColor:"#616161"
-    }}
-    onClick={(event)=>
-    {
-        event.preventDefault();
-            
-    }}>Next</button>
- </form>
-
+<button type="submit" variant='outlined' onClick={(event)=>{event.preventresest()}}>Done</button>
+</form>
  </Box>
 
+ </Stack>
     )
 }
 
