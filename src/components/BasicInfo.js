@@ -1,9 +1,10 @@
-import { Box,Stack } from '@mui/material'
-import { red } from '@mui/material/colors'
-import { color, style } from '@mui/system'
-import React from 'react'
-
+import { Box,Stack,Button, TextField, InputAdornment } from '@mui/material'
+import React,{useState,useContext} from 'react'
+import {FiUser} from 'react-icons/fi'
+import {DatabaseUpdate} from './Form'
 const BasicInfo = () => {
+  const {setNext,firstname,setFirstname,lastname,setLastname,emailname,setEmailname,dob,setDob}=useContext(DatabaseUpdate)
+    
   return (
     <Stack direction="row">
  <Box sx={{
@@ -14,7 +15,8 @@ const BasicInfo = () => {
     borderColor:"red",
     boxShadow:"0 0 5px 5px #f44336",
     borderRadius:"10px",
-    marginTop:"70px"
+    marginTop:"70px",
+    marginBottom:"10px"
  }}>
  <form >
  <label
@@ -34,62 +36,91 @@ const BasicInfo = () => {
  }}
   >Information </label>
  <br/>
-    <input
+    <TextField
     type="text" 
+    label="First name"
+    size="small"
+    required
+    placeholder='First name'
+    color='error' 
     style={{
-    borderRadius:"5px",
-    height:"34px",
     width:"178px",
-    border:"1px solid grey", 
-    marginLeft:"70px"   
+    marginLeft:"70px",
+    marginTop:"30px"   
+}}
+value={firstname}
+onChange={(e)=>{setFirstname(e.target.value)}}
+InputProps={{
+    endAdornment:<InputAdornment positoin="end"><FiUser/></InputAdornment>
+}}
+/>
+<TextField
+    type="text" 
+    size="small"
+    color='error' 
+    style={{
+    width:"178px",
+    marginLeft:"15px",
+    marginTop:"30px"   
+}}
+label="Last name"
+    required
+placeholder="Last name"
+value={lastname}
+onChange={(e)=>{setLastname(e.target.value)}}
+/>
+<TextField
+    type="email" 
+    size="small"
+    color='error' 
+    style={{
+    width:"370px",
+    marginLeft:"70px",
+    marginTop:"30px"   
 }}
     required
-placeholder="First name"
-/>
-    <input
-    type="text"
-     
-    style={{
-    borderRadius:"5px",
-    height:"34px",
-    width:"178px",
-    border:"1px solid grey",
-    marginRight:"50px",
-    marginLeft:"10px",
-    marginTop:"30px"
-    
+placeholder="Email"
+InputProps={{
+    endAdornment:<InputAdornment>@gmail.com</InputAdornment>
 }}
-required
-placeholder="Last name"
+value={emailname}
+onChange={(e)=>{setEmailname(e.target.value)}}
 />
-<input
-    type="email"
+<TextField
+ type="date"
+ size="small"
+ color="error"
+ required
+value={dob}
+onChange={(e)=>{setDob(e.target.value)}}
     style=
     {{
-    borderRadius:"5px",
-    height:"34px",
-    width:"178px",
-    border:"1px solid grey",  
-    marginLeft:"70px",
-    marginTop:"24px",
-    width:"370px"
-    } }
-    placeholder="Email Id"
-/>
-<input type="date"
-    style=
-    {{
-    borderRadius:"5px",
-    height:"34px",
-    width:"178px",
-    border:"1px solid grey",  
     marginLeft:"70px",
     marginTop:"24px",
     width:"370px"
     } }
 />
 <br/>
-<button type="submit" variant='outlined' onClick={(event)=>{event.preventresest()}}>Done</button>
+<Button 
+onClick={()=>{
+if(firstname=="" || lastname==""||emailname==""||dob=="")
+{
+    alert("Please provide required information")
+}
+else 
+{
+setNext(false)
+}
+}} 
+className="done"
+size="small"
+ variant='outlined'
+  color="error"
+sx={{
+ml:"220px",
+mt:"40px"
+}}
+>Done</Button>
 </form>
  </Box>
 
