@@ -29,21 +29,22 @@ app.use(cors(
 ({
     user:"root",
     host:"localhost",
-    password:'*****',
-    database:"WealthApp"
+    password:'25332',
+    database:"Wealthapp",
+    port:5500
 }) 
 
 app.post('/register',(req,res)=>
 {
     const username=req.body.username;
     const password=req.body.password;
-    db.query("select * from WealthApp where Username=?",[username],
+    db.query("select * from Wealthapp where Username=?",[username],
     (err,result)=>
     {
      if(err)
      {res.send("Username already taken")}    
     else
-    {db.query("insert into WealthApp(Username,password) values(?,?)",[username,password],
+    {db.query("insert into Wealthapp(Username,password) values(?,?)",[username,password],
     (err,result)=>{
         res.send("Username registered")
 
@@ -68,7 +69,7 @@ app.post('/login',(req,res)=>
     const username=req.body.username;
     const password=req.body.password;
    if(username.length>0 && password.length>0){
-    db.query("select * from WealthApp WHERE Username=?",[username],
+    db.query("select * from Wealthapp WHERE Username=?",[username],
     (err,result)=>{
         if(err)
         {
@@ -76,7 +77,7 @@ app.post('/login',(req,res)=>
         }
         else
         {
-            db.query("select * from WealthApp where Password=?",[password],
+            db.query("select * from Wealthapp where Password=?",[password],
             (err,result)=>
             {
                 if(err)

@@ -1,12 +1,33 @@
-import { Box, InputAdornment, TextField,Button } from "@mui/material";
-import React,{useContext} from "react";
+import { Box, InputAdornment, TextField,Button, Typography } from "@mui/material";
+import React,{useContext,useEffect,useState} from "react";
 import ScaleIcon from "@mui/icons-material/Scale";
 import {GiBodyHeight} from 'react-icons/gi'
 import BoyIcon from '@mui/icons-material/Boy';
+import HeightIcon from '@mui/icons-material/Height';
 import { DatabaseUpdate } from "./Form";
 const HealthInfo = () => {
-const {weight,setWeight,height,setHeight,age,setAge,bmi,setBmi}=useContext(DatabaseUpdate)
-  return (
+const {weight,setWeight,heightFT,setHeightFT,heightIN,setHeightIN,age,setAge,bmi,setBmi,setStarted}=useContext(DatabaseUpdate)
+const [displayBmi,setDisplayBmi]=useState("")
+const [bmiColor,setBmiColor]=useState("red")
+let w=weight*2.204623*703,h=Math.pow(heightFT*12 + +heightIN,2),b=w/h
+setBmi(b.toFixed(2))  
+
+useEffect(()=>{if(bmi<=16.0){setDisplayBmi("*Severely UnderWeight")}
+  else if(bmi>16.0 && bmi<18.4){setDisplayBmi("*Underweight")}
+  else if(bmi>=18.5 && bmi<=24.9){setDisplayBmi("*Normal")}
+  else if(bmi>=25.0 && bmi<=29.9){setDisplayBmi("*Overweight")}
+  else if(bmi>=30.0 && bmi<=34.9){setDisplayBmi("*Moderately Obese")}
+  else if(bmi>=35.0 && bmi<=39.9){setDisplayBmi("*Severely Obese")}
+  else if(bmi>=40.0){setDisplayBmi("Morbidly Obese")}},[bmi])  
+
+  useEffect(()=>{
+  if(displayBmi=="*Severely Underweight" || displayBmi== "*Underweight"){setBmiColor("#FFE189")}
+  else if(displayBmi==="*Normal"){setBmiColor("green")}
+  else if(displayBmi==="*Overweight"){setBmiColor("orange")}
+  else if(displayBmi==="*Moderately Obese" || displayBmi==="*Severely Obese" || displayBmi=="*Morbidly Obese"){setBmiColor("red")}
+},[displayBmi])
+
+return (
     <Box
       sx={{
         width: "500px",
@@ -57,29 +78,12 @@ const {weight,setWeight,height,setHeight,age,setAge,bmi,setBmi}=useContext(Datab
          InputProps={{
             endAdornment:<InputAdornment position="end"><ScaleIcon/></InputAdornment>
          }} />
-        <TextField
-          type="number"
-          label="Height"
-          size="small"
-          color="success"
-          placeholder="0FT 0.0 IN"
-          value={height}
-          onChange={(e)=>{setHeight(e.target.value)}}
-          style={{
-            marginLeft: "30px",
-            marginTop: "30px",
-            width:"150px"
-          }}
-          required
-          InputProps={{
-            endAdornment:<InputAdornment position="end"><GiBodyHeight/></InputAdornment>
-          }}
-        />
+        
         <TextField
           required
           type="number"
           value={age}
-          onClick={(e)=>{setAge(e.target.value)}}
+          onChange={(e)=>{setAge(e.target.value)}}
           size="small"
           label="Age"
           color="success"
@@ -93,28 +97,75 @@ const {weight,setWeight,height,setHeight,age,setAge,bmi,setBmi}=useContext(Datab
           }}
         />
         <TextField
+          type="number"
+          label="Height"
+          size="small"
+          color="success"
+          placeholder="0 FT"
+          value={heightFT}
+          onChange={(e)=>{setHeightFT(e.target.value)}}
+          style={{
+            marginLeft: "70px",
+            marginTop: "30px",
+            width:"150px"
+          }}
+          required
+          InputProps={{
+            endAdornment:<InputAdornment position="end"><GiBodyHeight/></InputAdornment>
+          }}
+        />
+        <TextField
+          type="number"
+          label="Height"
+          size="small"
+          color="success"
+          placeholder="0.0 IN"
+          value={heightIN}
+          onChange={(e)=>{setHeightIN(e.target.value)
+          }}
+          style={{
+            marginLeft: "70px",
+            marginTop: "30px",
+            width:"150px"
+          }}
+          required
+          InputProps={{
+            endAdornment:<InputAdornment position="end"><HeightIcon/></InputAdornment>
+          }}
+        />
+          <Typography style={{color:bmiColor}} sx=
+          {{ml:"70px",
+          marginTop: "20px",
+        }}>{displayBmi}</Typography>
+        <TextField
           type="text"
-          label="BMI"
           value={bmi}
-          onChange={(e)=>{setBmi(e.target.value)}}
+          onChange={()=>{
+
+        }}
         disabled
           style={{
-            width: "250px",
+            width: "370px",
             marginLeft: "70px",
             marginRight:"150px",
-            marginTop: "24px",
           }}
           size="small"
           InputProps={{
             endAdornment:<InputAdornment>kg/m</InputAdornment>
           }}
         />
-        <br />
+          <br />
         <Button
-        size="small"
+        size="medium"
         color="success"
         variant="outlined"
-        sx={{ml:"200px",mt:"24px"}}>
+        sx={{ml:"200px",mt:"10px"}}
+        onClick={()=>{if(weight==="" || heightFT==="" || heightIN==="" ||age===""|| bmi===""){
+          alert("Please provide the required info")
+        }
+        else{
+          setStarted(false)
+        }}}>
         Submit
         </Button>
     </Box>

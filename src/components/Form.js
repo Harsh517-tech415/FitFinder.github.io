@@ -12,13 +12,17 @@ const Form = () => {
   const [lastname, setLastname] = useState("");
   const [emailname, setEmailname] = useState("");
   const [dob, setDob] = useState("");
-  const [weight, setWeight] = useState();
-  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState(0);
+  const [heightFT, setHeightFT] = useState(0);
+  const [heightIN, setHeightIN] = useState(0);
   const [age, setAge] = useState();
   const [bmi, setBmi] = useState();
-  const [display, setDisplay] = useState("ok");
+  const [displayNext, setDisplayNext] = useState("ok");
   const [back, setBack] = useState(true);
   const [next, setNext] = useState(true);
+  const [displayStarted,setDisplayStarted]=useState("none")
+  const [started,setStarted]=useState(true)
+  
   const sliderRight = () => {
     let slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft + 1600;
@@ -40,13 +44,16 @@ const Form = () => {
         setDob: setDob,
         weight: weight,
         setWeight: setWeight,
-        height: height,
-        setHeight: setHeight,
+        heightFT: heightFT,
+        heightIN: heightIN,
+        setHeightFT: setHeightFT,
+        setHeightIN: setHeightIN,
         age: age,
         setAge: setAge,
         bmi: bmi,
         setBmi: setBmi,
         setNext: setNext,
+        setStarted:setStarted
       }}
     >
       <Stack direction="column">
@@ -80,31 +87,51 @@ const Form = () => {
       <Button
         onClick={() => {
           sliderLeft();
+          setBack(true)
+          setDisplayNext("ok")
+          setDisplayStarted("none")
         }}
         size="small"
         variant="outlined"
         color="error"
         disabled={back}
         sx={{ ml: { sm: "190px", lg: "640px" } }}
-      >
+     >
         {<ArrowLeftIcon />}Back
       </Button>
       <Button
         type="button"
         disabled={next}
-        style={{ display: display }}
         onClick={() => {
           sliderRight();
           setBack(false);
-          setDisplay("none");
+          setDisplayNext("none");
+          setDisplayStarted("ok")
+          setStarted(true)
         }}
         size="small"
         variant="outlined"
         color="error"
-        sx={{ ml: { sm: "205px", lg: "270px" } }}
+        sx={{ 
+          ml: { sm: "205px", lg: "270px" },
+          display: displayNext 
+        
+        }}
       >
         Next
         <ArrowRightIcon />
+      </Button>
+      <Button
+      variant="contained"
+      color="primary"
+      disabled={started}
+
+      sx={{
+        ml: { sm: "205px", lg: "270px" },
+        display:displayStarted
+      }}
+      >
+        Get Started  
       </Button>
     </DatabaseUpdate.Provider>
   );
