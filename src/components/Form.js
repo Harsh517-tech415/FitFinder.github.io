@@ -56,7 +56,7 @@ const Form = () => {
         setStarted:setStarted
       }}
     >
-      <Stack direction="column">
+      <Stack direction="column">                                                                                        
         <button
           style={{
             marginTop: "80px",
@@ -69,6 +69,10 @@ const Form = () => {
             boxShadow: "0px 0px 6px 5px red",
           }}
         ></button>
+        <hr style={{
+          margin:"auto 20px",
+          border: "1.5px solid rgb(150,150,150)"
+        }}/>
         <div
           id="slider"
           style={{
@@ -79,7 +83,7 @@ const Form = () => {
           }}
         >
           <BasicInfo />
-          <Box sx={{ width: "500px", height: "350px" }}></Box>
+          <Box ></Box>
           <HealthInfo />
         </div>
       </Stack>

@@ -5,7 +5,9 @@ import {GiBodyHeight} from 'react-icons/gi'
 import BoyIcon from '@mui/icons-material/Boy';
 import HeightIcon from '@mui/icons-material/Height';
 import { DatabaseUpdate } from "./Form";
+import { useForm} from "react-hook-form";
 const HealthInfo = () => {
+  const {handleSubmit}=useForm()
 const {weight,setWeight,heightFT,setHeightFT,heightIN,setHeightIN,age,setAge,bmi,setBmi,setStarted}=useContext(DatabaseUpdate)
 const [displayBmi,setDisplayBmi]=useState("")
 const [bmiColor,setBmiColor]=useState("red")
@@ -21,12 +23,12 @@ useEffect(()=>{if(bmi<=16.0){setDisplayBmi("*Severely UnderWeight")}
   else if(bmi>=40.0){setDisplayBmi("Morbidly Obese")}},[bmi])  
 
   useEffect(()=>{
-  if(displayBmi=="*Severely Underweight" || displayBmi== "*Underweight"){setBmiColor("#FFE189")}
+  if(displayBmi==="*Severely Underweight" || displayBmi=== "*Underweight"){setBmiColor("#FFE189")}
   else if(displayBmi==="*Normal"){setBmiColor("green")}
   else if(displayBmi==="*Overweight"){setBmiColor("orange")}
-  else if(displayBmi==="*Moderately Obese" || displayBmi==="*Severely Obese" || displayBmi=="*Morbidly Obese"){setBmiColor("red")}
+  else if(displayBmi==="*Moderately Obese" || displayBmi==="*Severely Obese" || displayBmi==="*Morbidly Obese"){setBmiColor("red")}
 },[displayBmi])
-
+const onSubmit=""
 return (
     <Box
       sx={{
@@ -38,7 +40,7 @@ return (
         borderColor: "red",
         boxShadow: "0 0 5px 5px green",
         borderRadius: "10px",
-        marginTop: "70px",
+        marginTop: "170px",
       }}
     >
         <label
@@ -60,6 +62,7 @@ return (
         >
           Information{" "}
         </label>
+<form onSubmit={handleSubmit(onSubmit)}>
 
         <TextField 
         type="number"
@@ -168,6 +171,7 @@ return (
         }}}>
         Submit
         </Button>
+        </form>
     </Box>
   );
 };

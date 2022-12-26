@@ -1,24 +1,25 @@
 import { Box,Stack,Button, TextField, InputAdornment } from '@mui/material'
-import React,{useState,useContext} from 'react'
+import React,{useContext} from 'react'
+import { useForm } from 'react-hook-form'
 import {FiUser} from 'react-icons/fi'
 import {DatabaseUpdate} from './Form'
 const BasicInfo = () => {
   const {setNext,firstname,setFirstname,lastname,setLastname,emailname,setEmailname,dob,setDob}=useContext(DatabaseUpdate)
-    
+    const {handleSubmit}=useForm();
+        const onSubmit=""
   return (
     <Stack direction="row">
  <Box sx={{
     width:"500px",
     height:"350px",
-    marginLeft:{sm:"120px",lg:"600px"},
-    marginRight:{sm:"100px",lg:"500px"},
+    ml:{sm:"120px",lg:"600px"},
+    mr:{sm:"100px",lg:"500px"},
     borderColor:"red",
     boxShadow:"0 0 5px 5px #f44336",
     borderRadius:"10px",
-    marginTop:"70px",
-    marginBottom:"10px"
+    marginTop:"170px",
  }}>
- <form >
+ <form onSubmit={handleSubmit(onSubmit)}>
  <label
  style=
  {{ marginLeft:"110px",
@@ -38,21 +39,21 @@ const BasicInfo = () => {
  <br/>
     <TextField
     type="text" 
-    label="First name"
     size="small"
-    required
     placeholder='First name'
     color='error' 
     style={{
-    width:"178px",
-    marginLeft:"70px",
-    marginTop:"30px"   
-}}
-value={firstname}
-onChange={(e)=>{setFirstname(e.target.value)}}
-InputProps={{
-    endAdornment:<InputAdornment positoin="end"><FiUser/></InputAdornment>
-}}
+        width:"178px",
+        marginLeft:"70px",
+        marginTop:"30px"
+    }}
+    required
+    value={firstname}
+    onChange={(e)=>{setFirstname(e.target.value)}}
+    InputProps={{
+        endAdornment:<InputAdornment positoin="end"><FiUser/></InputAdornment>
+    }}
+    label="*First Name"
 />
 <TextField
     type="text" 
@@ -72,7 +73,8 @@ onChange={(e)=>{setLastname(e.target.value)}}
 <TextField
     type="email" 
     size="small"
-    color='error' 
+    color='error'
+    autoComplete="email"                          
     style={{
     width:"370px",
     marginLeft:"70px",
@@ -101,16 +103,11 @@ onChange={(e)=>{setDob(e.target.value)}}
     } }
 />
 <br/>
-<Button 
+<Button
+type="submit" 
 onClick={()=>{
-if(firstname=="" || lastname==""||emailname==""||dob=="")
-{
-    alert("Please provide required information")
-}
-else 
-{
-setNext(false)
-}
+    if(firstname==="" || lastname===""||emailname===""||dob===""){}
+else{setNext(false)}
 }} 
 className="done"
 size="small"
