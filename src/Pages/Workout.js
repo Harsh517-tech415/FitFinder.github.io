@@ -8,7 +8,6 @@ import Form from '../components/Form';
 const Workout = () => {
   return (
     <div>
-    <Form/>
     </div>
   )
 }

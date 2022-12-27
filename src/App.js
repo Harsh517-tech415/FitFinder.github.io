@@ -15,7 +15,8 @@ import Workout from './Pages/Workout'
 import Signup from './Pages/Signup';
 import Login from './components/Login';
 import Home from './Pages/Home'
-
+import Checking from './lib/Checking'
+import Form from './components/Form';
 export const Update=createContext();
 function App() {
 const [Color,setColor]=useState("#FF2625");
@@ -48,7 +49,9 @@ const getColor=(item1,item2,item3,item4,item5,item6)=>
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/workout" element={<Workout/>}/>
       <Route path="/signup" element={<Signup/>}/>
-      <Route path="/login" element=<Login/>/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/form" element={<Form/>}/>
+      {/* <Route path="/checking" element={<Checking/>}/> */}
     </Routes>
     <Footer/>
    </Box>

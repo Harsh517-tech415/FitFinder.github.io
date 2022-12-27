@@ -8,7 +8,7 @@ import { DatabaseUpdate } from "./Form";
 import { useForm} from "react-hook-form";
 const HealthInfo = () => {
   const {handleSubmit}=useForm()
-const {weight,setWeight,heightFT,setHeightFT,heightIN,setHeightIN,age,setAge,bmi,setBmi,setStarted}=useContext(DatabaseUpdate)
+const {weight,setWeight,heightFT,setHeightFT,heightIN,setHeightIN,age,setAge,bmi,setBmi,setStarted,displayHealthInfo}=useContext(DatabaseUpdate)
 const [displayBmi,setDisplayBmi]=useState("")
 const [bmiColor,setBmiColor]=useState("red")
 let w=weight*2.204623*703,h=Math.pow(heightFT*12 + +heightIN,2),b=w/h
@@ -32,15 +32,15 @@ const onSubmit=""
 return (
     <Box
       sx={{
-        width: "500px",
-        height: "350px",
-        marginLeft: { sm: "150px" },
-        marginBottom: "10px",
-        marginRight: { sm: "160px", lg: "440px" },
+        width:"500px",
+    height:"350px",
+    ml:{sm:"170px",lg:"650px"},
+    // borderRadius:"10px",
+    marginTop:"170px",
         borderColor: "red",
         boxShadow: "0 0 5px 5px green",
-        borderRadius: "10px",
-        marginTop: "170px",
+        display:displayHealthInfo
+
       }}
     >
         <label
@@ -159,6 +159,7 @@ return (
         />
           <br />
         <Button
+        type="submit"
         size="medium"
         color="success"
         variant="outlined"

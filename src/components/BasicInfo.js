@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import {FiUser} from 'react-icons/fi'
 import {DatabaseUpdate} from './Form'
 const BasicInfo = () => {
-  const {setNext,firstname,setFirstname,lastname,setLastname,emailname,setEmailname,dob,setDob}=useContext(DatabaseUpdate)
+  const {setNext,firstname,setFirstname,lastname,setLastname,emailname,setEmailname,dob,setDob,displayBasic}=useContext(DatabaseUpdate)
     const {handleSubmit}=useForm();
         const onSubmit=""
   return (
@@ -12,12 +12,12 @@ const BasicInfo = () => {
  <Box sx={{
     width:"500px",
     height:"350px",
-    ml:{sm:"120px",lg:"600px"},
-    mr:{sm:"100px",lg:"500px"},
+    ml:{sm:"170px",lg:"650px"},
     borderColor:"red",
     boxShadow:"0 0 5px 5px #f44336",
-    borderRadius:"10px",
+    // borderRadius:"10px",
     marginTop:"170px",
+    display:displayBasic
  }}>
  <form onSubmit={handleSubmit(onSubmit)}>
  <label

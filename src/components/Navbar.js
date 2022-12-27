@@ -9,7 +9,7 @@ const Navbar = () => {
   const { Color, textColor,nav,verify} = useContext(Update);
   const [border, setBorder] = useState(`3px ${Color} solid`)
   return (
-    <AppBar component="nav" poistion="sticky" style={{background:"white",height:"60px"}}>
+    <AppBar component="nav" poistion="sticky"  style={{background:"white",height:"60px"}}>
       <Stack
       position="fixed"
         direction="row"
