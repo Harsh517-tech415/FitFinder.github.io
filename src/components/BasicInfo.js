@@ -51,7 +51,7 @@ const BasicInfo = () => {
     value={firstname}
     onChange={(e)=>{setFirstname(e.target.value)}}
     InputProps={{
-        endAdornment:<InputAdornment positoin="end"><FiUser/></InputAdornment>
+        endAdornment:<InputAdornment positoin="end" ><FiUser/></InputAdornment>
     }}
     label="*First Name"
 />

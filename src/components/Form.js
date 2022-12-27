@@ -4,6 +4,7 @@ import BasicInfo from "./BasicInfo";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import HealthInfo from "./HealthInfo";
+import { Link } from "react-router-dom";
 export const DatabaseUpdate = createContext();
 const Form = () => {
   const [firstname, setFirstname] = useState("");
@@ -94,18 +95,20 @@ const Form = () => {
         Next
         <ArrowRightIcon />
       </Button>
-      <Button
+     <Button
       variant="contained"
       color="primary"
       disabled={started}
-
       sx={{
         ml: { sm: "150px", lg: "150px" },
         mt:"10px",
-        display:displayStarted
+        display:displayStarted,
       }}
       >
-        Get Started  
+        <Link to="/" 
+        style={{textDecoration:"none",color:"white"}}
+        > Get Started  
+      </Link>
       </Button>
     </DatabaseUpdate.Provider>
   );

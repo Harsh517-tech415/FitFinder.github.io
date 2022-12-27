@@ -17,6 +17,9 @@ import Login from './components/Login';
 import Home from './Pages/Home'
 import Checking from './lib/Checking'
 import Form from './components/Form';
+import Yoga from './Pages/Yoga';
+import Gym from './Pages/Gym';
+import HomeWorkout from './Pages/HomeWorkout';
 export const Update=createContext();
 function App() {
 const [Color,setColor]=useState("#FF2625");
@@ -41,7 +44,7 @@ const getColor=(item1,item2,item3,item4,item5,item6)=>
   <BrowserRouter>
    <Box width="400px" sx={{width:{x1:'1488px'}}} m="auto">
     <Navbar/>
-   <Toggle/>
+   {/* <Toggle/> */}
     <Routes>
     <Route path="/" element={<Home/>}/>
       <Route path="/explore" element={<Explore/>}/>
@@ -51,6 +54,10 @@ const getColor=(item1,item2,item3,item4,item5,item6)=>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/form" element={<Form/>}/>
+      <Route path="/yoga" element={<Yoga/>}/>
+      <Route path="/gym" element={<Gym/>}/>
+      <Route path="/homeworkout" element={<HomeWorkout/>}/>
+
       {/* <Route path="/checking" element={<Checking/>}/> */}
     </Routes>
     <Footer/>
