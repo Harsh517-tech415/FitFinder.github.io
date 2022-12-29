@@ -8,15 +8,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import workout from '../assets/images/workout.png'
 import barbell from '../assets/images/barbell.png'
 import yoga from '../assets/images/yoga.png'
-const url =require('url')
 const Navbar = () => {
   const location = useLocation();
-  const { Color, textColor, nav, verify } = useContext(Update);
+  const { Color, textColor, nav, verify,displayAppBar } = useContext(Update);
   const [boxShadow, setboxShadow] = useState("none");
   const [border, setBorder] = useState(`3px ${Color} solid`);
   const [rotate, setRotate] = useState("1800deg");
   const [displayDropMenu,setDisplayDropMenu]=useState("none")
-  const [displayAppBar,setDisplayAppBar]=useState("none")
   window.onscroll = () => {
     if (document.documentElement.scrollTop < 10) {
       setboxShadow("none");
@@ -25,11 +23,12 @@ const Navbar = () => {
     }
   };
   return (
+ 
     <AppBar
     
       component="nav"
       position="sticky"
-      style={{ display:{displayAppBar},boxShadow: boxShadow, backgroundColor: "white", height: "60px", }}
+      style={{ display:displayAppBar,boxShadow: boxShadow, backgroundColor: "white", height: "60px", }}
     >
       <Stack
         position="fixed"
@@ -92,7 +91,7 @@ const Navbar = () => {
             }}
             fontSize={20}
             onClick={() => {
-              if (rotate == "180deg") 
+              if (rotate === "180deg") 
             {
               setRotate("0deg");
               setDisplayDropMenu("block")
@@ -108,9 +107,9 @@ const Navbar = () => {
             <ExpandMoreIcon sx={{ rotate: rotate,width:50,transitionDuration:"1s"}} />
           </Link>
           <Stack direction="column" sx={{ marginTop:"12px",boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)"}}>
-          <Link to="/yoga" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid #FF9933",textAlign:"center",color:"#FF9933",borderBottom:"1px solid #FF9933",boxShadow:"0 0 10px 5px #FF9933"}}>Yoga <img src={yoga}/></Link>
-          <Link to="/gym" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red"}}>Gym <img src={barbell}/></Link>
-          <Link to="/homeworkout" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,textAlign:"center",borderTop:"3px solid blue",borderBottom:"1px solid blue",color:"indigo",boxShadow:"0 0 10px 5px blue"}}>Home <img src={workout} /> </Link>
+          <Link to="/yoga" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid #FF9933",textAlign:"center",color:"#FF9933",borderBottom:"1px solid #FF9933",boxShadow:"0 0 10px 5px #FF9933"}}>Yoga <img src={yoga} alt="Yoga"/></Link>
+          <Link to="/gym" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red"}}>Gym <img src={barbell} alt="Gym"/></Link>
+          <Link to="/homeworkout" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,textAlign:"center",borderTop:"3px solid blue",borderBottom:"1px solid blue",color:"indigo",boxShadow:"0 0 10px 5px blue"}}>Home <img src={workout} alt="Home"/> </Link>
 
           </Stack>
           </Box>
@@ -146,6 +145,7 @@ const Navbar = () => {
         </Stack>
       </Stack>
     </AppBar>
+   
   );
 };
 
