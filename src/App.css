@@ -1,6 +1,7 @@
 body {
   font-family: "Josefin Sans";
   background-color: #fffafb;
+  
 }
 
 * {
@@ -114,7 +115,9 @@ input::placeholder{
   transform: scale(1, 1);
   transition: 0.3s all ease-in-out;
 }
-
+#slider::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
 .exercise-card:hover,
 .bodyPart-card:hover {
   transform: scale(1.1, 1.1);

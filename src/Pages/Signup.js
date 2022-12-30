@@ -2,32 +2,32 @@ import { Link, useNavigate } from "react-router-dom";
 import { Stack, Typography, Box, TextField, Button } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Update } from "../App";
-import {sign,useAuth} from '../lib/init-firebase'
+// import {sign,useAuth} from '../lib/init-firebase'
 import { useForm } from "react-hook-form";
 const Signup = () => {
-  const navigate = useNavigate();
-  const [loading,setLoading]=useState(false)
-  const { textColor } = useContext(Update);
-  const [usernameReg, setUsernameReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const [res, setRes] = useState("");
-const currentUser=useAuth() 
-  const register = async() => 
-  {setLoading(true);
-   await sign(usernameReg,passwordReg)
-  .catch(error=>
-  {
-  if(error=="FirebaseError: Firebase: Error (auth/email-already-in-use)."){setRes("Already Register Try to Login")}
-  else if (error=="FirebaseError: Firebase: Error (auth/internal-error)."){setRes("Missing password")}
-  else if (error=="FirebaseError: Firebase: Error (auth/missing-email)."){setRes("Missing EmailId")} 
-  else { setRes("Try Again")}
-})
+//   const navigate = useNavigate();
+//   const [loading,setLoading]=useState(false)
+//   const { textColor } = useContext(Update);
+//   const [usernameReg, setUsernameReg] = useState("");
+//   const [passwordReg, setPasswordReg] = useState("");
+//   const [res, setRes] = useState("");
+// const currentUser=useAuth() 
+//   const register = async() => 
+//   {setLoading(true);
+//    await sign(usernameReg,passwordReg)
+//   .catch(error=>
+//   {
+//   if(error=="FirebaseError: Firebase: Error (auth/email-already-in-use)."){setRes("Already Register Try to Login")}
+//   else if (error=="FirebaseError: Firebase: Error (auth/internal-error)."){setRes("Missing password")}
+//   else if (error=="FirebaseError: Firebase: Error (auth/missing-email)."){setRes("Missing EmailId")} 
+//   else { setRes("Try Again")}
+// })
   
-  setLoading(false)}
+//   setLoading(false)}
 
   return (
     <Box sx={{ ml: { xs: "380px", lg: "600px" }, mt: "120px" }}>
-      <Stack direction="column">
+      {/* <Stack direction="column">
         <Typography color="error">{res}</Typography>
         <Typography color={textColor} fontSize="23px" fontWeight="100px">
           Username
@@ -81,7 +81,7 @@ const currentUser=useAuth()
         <Link to="/login" style={{ color: "green", textDecoration: "none" }}>
           Login
         </Link>
-      </Button>
+      </Button> */}
     </Box>
   );
 };

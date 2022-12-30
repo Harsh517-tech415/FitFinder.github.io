@@ -15,7 +15,7 @@ import Workout from "./Pages/Workout";
 import Signup from "./Pages/Signup";
 import Login from "./components/Login";
 import Home from "./Pages/Home";
-import Checking from "./lib/Checking";
+// import Checking from "./lib/Checking";
 import Form from "./components/Form";
 import Yoga from "./Pages/Yoga";
 import Gym from "./Pages/Gym";
