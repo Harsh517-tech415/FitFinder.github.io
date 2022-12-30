@@ -14,6 +14,7 @@
     "firebase": "^9.15.0",
     "material-ui": "^0.20.2",
     "react": "^18.0.0",
+    "react-bootstrap": "^2.7.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.41.0",
     "react-horizontal-scrolling-menu": "^2.7.1",
@@ -21,7 +22,9 @@
     "react-loader-spinner": "^6.0.0-0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-typewriter-effect": "^1.1.0",
     "timeline": "^3.4.1",
+    "typewriter-effect": "^2.19.0",
     "url": "^0.11.0"
   },
   "scripts": {

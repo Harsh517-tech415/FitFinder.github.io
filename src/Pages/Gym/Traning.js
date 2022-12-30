@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
 import peakpx from '/home/monster/Documents/MyWealthApp/src/assets/images/peakpx.jpg'
 import { Stack } from '@mui/material';
+import CarouselFadeExample from '../../components/Carousel';
 const Traning = () => {
-
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   useEffect(() => {
@@ -15,24 +15,12 @@ const Traning = () => {
       setDisplayAppBar("none");
      }
   }, []);
-  function slideLeft(){
-    const slider=document.getElementById('slider')
-    slider.scrollLeft=slider.scrollLeft-1760;
-  }
-  function slideRight(){
-    const slider=document.getElementById('slider')
-    slider.scrollLeft=slider.scrollLeft+1760;
-  }
+ 
+
   return (
-    <Stack direction="column">
-    <Stack id="slider" direction ="row" style={{overflowX:"scroll",scrollbar:"hidden"}}>
-      <img src={peakpx} style={{width:"1760px",height:"860px"}}/>
-      <img src={peakpx} style={{width:"1760px",height:"860px"}}/>
-      <img src={peakpx} style={{width:"1760px",height:"860px"}}/>
-      <img src={peakpx} style={{width:"1760px",height:"860px"}}/>
-     </Stack>
-<KeyboardArrowLeftIcon onClick={slideLeft} sx={{backgroundColor:"transparent"}}/><KeyboardArrowRightIcon onClick={slideRight}sx={{backgroundColor:"transparent"}}/>
-     </Stack>
+    <div>
+      <CarouselFadeExample />
+    </div>
   )
 }
 
