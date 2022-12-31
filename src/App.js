@@ -20,7 +20,7 @@ import Form from "./components/Form";
 import Yoga from "./Pages/Yoga";
 import Gym from "./Pages/Gym";
 import HomeWorkout from "./Pages/HomeWorkout";
-import Traning from "./Pages/Gym/Traning";
+// import Traning from "./Pages/Gym/Training";
 import Dashboard from "./Pages/Gym/Dashboard";
 import Discover from "./Pages/Gym/Discover";
 
@@ -78,7 +78,7 @@ function App() {
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym />} >
-            <Route path="traninggym" element={<Traning />}/>
+            {/* <Route path="traninggym" element={<Traning />}/> */}
             <Route path="Discovergym" element={<Discover />}/>
             <Route path="Dashboardgym" element={<Dashboard />}/>
           </Route>
