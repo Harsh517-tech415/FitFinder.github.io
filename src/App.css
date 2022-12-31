@@ -9,7 +9,9 @@ body {
   margin: 0px;
   box-sizing: border-box;
 }
-
+.second{
+  font-size: 70px;
+}
 .nextButton
 {
   display: inline-flex;
