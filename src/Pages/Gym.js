@@ -5,7 +5,6 @@ import { useLocation,Outlet } from "react-router-dom";
 import { Update } from "../App";
 import gym from "../assets/icons/gym.png";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CarouselFadeExample from './../components/Carousel';
 
 const Gym = () => {
   const { setDisplayAppBar } = useContext(Update);
@@ -18,7 +17,7 @@ const Gym = () => {
   return (
     <>
 
-      {/* <div style={{ backgroundColor: "#16181D", height: "50px" }}></div> */}
+      <div style={{ backgroundColor: "#16181D", height: "50px" }}></div>
           
       <AppBar
         sx={{
@@ -26,6 +25,7 @@ const Gym = () => {
           backgroundColor: "#20232a",
         }}
         position="sticky"
+        
       >
         <Stack
           direction="row"
@@ -58,7 +58,7 @@ const Gym = () => {
             </Typography>
           </Link>
           <Link
-          href="/gym"
+          href="/gym/traninggym"
             sx={{
               textDecoration: "none",
               fontSize: { sm: "20px", lg: "25px" },
@@ -69,7 +69,7 @@ const Gym = () => {
             Traning
           </Link>
           <Link
-            href="/discovergym"
+            href="/gym/discovergym"
             sx={{
               textDecoration: "none",
               fontSize: { sm: "20px", lg: "25px" },
@@ -115,8 +115,6 @@ const Gym = () => {
         </Stack>
       </AppBar>
       <Outlet/>
-      <CarouselFadeExample />
-
     </>
   );
 };

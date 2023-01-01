@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { AppBar, Box,Stack } from "@mui/material";
+import { AppBar, Box,Stack, Typography } from "@mui/material";
 import Logo from "../assets/images/Logo.png";
 import { useContext } from "react";
 import { Update } from "../App";
@@ -8,13 +8,29 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import workout from '../assets/images/workout.png'
 import barbell from '../assets/images/barbell.png'
 import yoga from '../assets/images/yoga.png'
+import Collapse from '@mui/material/Collapse';
+import IconButton from '@mui/material/IconButton';
+import { styled } from '@mui/material/styles';
+import CardContent from '@mui/material/CardContent';
+import Card from '@mui/material/Card';
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 const Navbar = () => {
   const location = useLocation();
-  const { Color, textColor, nav, verify,displayAppBar } = useContext(Update);
+  const { Color,setColor, textColor, nav, verify,displayAppBar } = useContext(Update);
   const [boxShadow, setboxShadow] = useState("none");
   const [border, setBorder] = useState(`3px ${Color} solid`);
-  const [rotate, setRotate] = useState("1800deg");
-  const [displayDropMenu,setDisplayDropMenu]=useState("none")
+  const [expanded, setExpanded] = useState(false);
   window.onscroll = () => {
     if (document.documentElement.scrollTop < 10) {
       setboxShadow("none");
@@ -22,6 +38,15 @@ const Navbar = () => {
       setboxShadow("");
     }
   };
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+   if(border===""){
+    setTimeout(()=>{setBorder(`3px ${Color} solid`)},180)
+   }else {
+      setBorder('');
+    }
+  };
+
   return (
  
     <AppBar
@@ -80,39 +105,23 @@ const Navbar = () => {
           >
             Explore
           </Link>
-          <Box position="relative" sx={{}}>
-          <Link
-            to="/workout"
-            style={{
-              
-              textDecoration: "none",
-              color: textColor,
-              borderBottom: location.pathname === "/workout" ? border : "",
-            }}
-            fontSize={20}
-            onClick={() => {
-              if (rotate === "180deg") 
-            {
-              setRotate("0deg");
-              setDisplayDropMenu("block")
-            }
-              else 
-              {
-                setRotate("180deg");
-                setDisplayDropMenu("none")
-              }
-            }}
-          >
-            Workout
-            <ExpandMoreIcon sx={{ rotate: rotate,width:50,transitionDuration:"1s"}} />
-          </Link>
-          <Stack direction="column" sx={{ marginTop:"12px",boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.2)"}}>
-          <Link to="/yoga" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid #FF9933",textAlign:"center",color:"#FF9933",borderBottom:"1px solid #FF9933",boxShadow:"0 0 10px 5px #FF9933"}}>Yoga <img src={yoga} alt="Yoga"/></Link>
-          <Link to="/gym" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red"}}>Gym <img src={barbell} alt="Gym"/></Link>
-          <Link to="/homeworkout" style={{marginTop:"10px",textDecoration:"none",display:displayDropMenu,textAlign:"center",borderTop:"3px solid blue",borderBottom:"1px solid blue",color:"indigo",boxShadow:"0 0 10px 5px blue"}}>Home <img src={workout} alt="Home"/> </Link>
-
-          </Stack>
-          </Box>
+          <Card position="relative">
+          <Stack direction="row"> 
+          <Typography  onClick={handleExpandClick} sx={{userSelect: "none",color:"black",fontSize:"22px",cursor:'pointer'}}> 
+          Workout
+          <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
+          <ExpandMoreIcon/>
+            </ExpandMore> 
+            </Typography>
+            </Stack>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+           <Link to="/yoga" style={{display:"block",marginTop:"10px",textDecoration:"none",borderTop:"3px solid #FF9933",textAlign:"center",color:"#FF9933",borderBottom:"1px solid #FF9933",boxShadow:"0 0 10px 5px #FF9933",borderRadius:"5px"}}>Yoga <img src={yoga} alt="Yoga"/></Link>
+          <Link to="/gym" style={{display:"block",marginTop:"10px",textDecoration:"none",borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red",borderRadius:"5px"}}>Gym <img src={barbell} alt="Gym"/></Link>
+          <Link to="/homeworkout" style={{display:"block",marginTop:"10px",textDecoration:"none",textAlign:"center",borderTop:"3px solid blue",borderBottom:"1px solid blue",color:"indigo",boxShadow:"0 0 10px 5px blue",borderRadius:"5px"}}>Home <img src={workout} alt="Home"/> </Link>
+          </CardContent>
+          </Collapse>
+</Card>
           <Link
             to="/dashboard"
             onClick={() => {

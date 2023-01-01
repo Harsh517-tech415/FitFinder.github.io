@@ -11,7 +11,6 @@ import { useState } from "react";
 import { createContext } from "react";
 import icon from "./assets/icons/gym.png";
 // import Dashboard from './Pages/Dashboard';
-import Workout from "./Pages/Workout";
 import Signup from "./Pages/Signup";
 import Login from "./components/Login";
 import Home from "./Pages/Home";
@@ -20,7 +19,7 @@ import Form from "./components/Form";
 import Yoga from "./Pages/Yoga";
 import Gym from "./Pages/Gym";
 import HomeWorkout from "./Pages/HomeWorkout";
-// import Traning from "./Pages/Gym/Training";
+import Training from "./Pages/Gym/Training";
 import Dashboard from "./Pages/Gym/Dashboard";
 import Discover from "./Pages/Gym/Discover";
 
@@ -61,6 +60,7 @@ function App() {
         leftArrow: leftArrow,
         displayAppBar: displayAppBar,
         setDisplayAppBar: setDisplayAppBar,
+        setColor:setColor
       }}
     >
       <BrowserRouter>
@@ -71,16 +71,15 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/exercise/:id" element={<ExerciseDetail />} />
-            <Route path="/workout" element={<Workout />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/form" element={<Form />} />
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym />} >
-            {/* <Route path="traninggym" element={<Traning />}/> */}
-            <Route path="Discovergym" element={<Discover />}/>
-            <Route path="Dashboardgym" element={<Dashboard />}/>
+            <Route path="traninggym" element={<Training />}/>
+            <Route path="discovergym" element={<Discover />}/>
+            <Route path="dashboardgym" element={<Dashboard />}/>
           </Route>
 
             {/* <Route path="/checking" element={<Checking/>}/> */}
