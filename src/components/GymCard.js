@@ -5,10 +5,11 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 const GymCard = ({ Carddetail }) => {
   //   useEffect(()=>{(props.Carddetail)},[])
   return (
+  
     <Box
       sx={{
         width: "275px",
-        height: "264px",
+        height: "284px",
         margin: {
           sm: "0px 0px 0px 62.286px",
           lg: "0px 0px 0px 260.857px ",
@@ -42,33 +43,33 @@ const GymCard = ({ Carddetail }) => {
         style={{
           backgroundColor: "white",
           width: "275px",
-          height: "64px",
+          height: "84px",
           borderBottomLeftRadius: "16px",
           borderBottomRightRadius: "16px",
-          display:"inline"
+        //   display:"inline"
         }}
       >
               
         <Stack direction="row">
-          <Stack sx={{ ml: "10px" }}>
-            <Typography
-              sx={{ fontSize: "26px", color: "#222222", fontWeight: "500" }}
-            >
-              {" "}
-            </Typography>
+          <Stack sx={{ ml: "10px",padding:"0px 15px" }}>
+            <Typography sx={{textAlign:"center", fontSize: "26px", color: "#222222", fontWeight: "500" }}>
+          0  </Typography>
             <Typography sx={{ fontSize: "12px", color: "grey" }}>
               {Carddetail.label1}
             </Typography>
           </Stack>
-          <Stack>
+          <Stack  sx={{ml: "10px",padding:"0px 15px"}} >
+          <Typography sx={{ textAlign:"center",fontSize: "26px", color: "#222222", fontWeight: "500" }}>
+          0  </Typography>
             <Typography sx={{ fontSize: "12px", color: "grey" }}>
               {Carddetail.label2}
             </Typography>
           </Stack>
         </Stack>
+        </Box>
         <Button
           sx={{
-            margin: "0cm 0px 0cm 0px",
+            margin: "-194px 0px 0px 200px",
             width: "70px",
             height: "70px",
             color: "black",
@@ -77,9 +78,8 @@ const GymCard = ({ Carddetail }) => {
             
           }}
         >
-          <PlayArrowIcon style={{color:"green" }} />
+          <PlayArrowIcon className="playButton" />
         </Button>
-      </Box>
     </Box>
   );
 };

@@ -16,13 +16,13 @@ const Discover = () => {
   }, []);
   const challenge=[
     {
-    label1:"workout",
+    label1:"Workout",
     label2:"KCAL",
     caption:"FULL BODY",
     image:FullBody
   },
   {
-    label1:"workout1",
+    label1:"Workout",
     label2:"KCAL",
     caption:"LWER BODY",
     image:LowerBody
