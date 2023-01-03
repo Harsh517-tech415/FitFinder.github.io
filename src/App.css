@@ -3,8 +3,13 @@ body {
   background-color: #fffafb;
   
 }
-.playButton :hover{
-color:rgb(57, 74, 57)
+.playButton:hover{
+color:green
+}
+.countWorkout:hover .workoutMessage
+{
+ 
+display:inline
 }
 * {
   padding: 0px;

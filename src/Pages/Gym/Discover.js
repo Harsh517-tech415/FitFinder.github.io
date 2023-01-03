@@ -24,7 +24,7 @@ const Discover = () => {
   {
     label1:"Workout",
     label2:"KCAL",
-    caption:"LWER BODY",
+    caption:"LOWER BODY",
     image:LowerBody
   }
 ]

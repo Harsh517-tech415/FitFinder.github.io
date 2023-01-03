@@ -16,29 +16,23 @@ const GymCard = ({ Carddetail }) => {
         },
         boxShadow: "0px 0px 20px 1px grey",
         borderRadius: "16px",
-      }}
+    }}
     >
+    <Typography
+  sx={{color: "red",
+        border: "none",    
+        margin:{sm:"180px 0px 0px 8%",lg:"180px 0px 0px 3.5%"},      
+      //   top: { sm: "49.4%", lg: "18%" },
+      //   left: { sm: "14.8%", lg: "16%" },
+        fontSize: "18px",
+        fontWeight: "1000",position:"absolute"}}>
+      {Carddetail.caption}
+    </Typography>
+    
       <img
         src={Carddetail.image}
         style={{ borderTopRightRadius: "16px", borderTopLeftRadius: "16px" }}
       />
-
-      <Typography
-        sx={{
-          color: "white",
-          border: "none",
-          position: "absolute",
-          
-          top: { sm: "49.4%", lg: "18%" },
-          left: { sm: "14.8%", lg: "16%" },
-          fontSize: "25px",
-          fontWeight: "800",
-        }}
-      >
-        {Carddetail.caption}
-      </Typography>
-
-      
       <Box
         style={{
           backgroundColor: "white",
@@ -51,14 +45,15 @@ const GymCard = ({ Carddetail }) => {
       >
               
         <Stack direction="row">
-          <Stack sx={{ ml: "10px",padding:"0px 15px" }}>
+          <Stack className="countWorkout" sx={{ mt:"17px",ml: {sm:"35px",lg:"28px"},padding:"0px 15px" }}>
             <Typography sx={{textAlign:"center", fontSize: "26px", color: "#222222", fontWeight: "500" }}>
           0  </Typography>
             <Typography sx={{ fontSize: "12px", color: "grey" }}>
               {Carddetail.label1}
             </Typography>
+            {/* <Typography className="workoutMessage" sx={{width:"300px",margin:"10px 0px 0px -35px ",display:"none",backgroundColor:"white",boxShadow:"0px 0px 11px 2px grey",borderRadius:"10px"}}>A single complete round will be counted as one workout session.</Typography> */}
           </Stack>
-          <Stack  sx={{ml: "10px",padding:"0px 15px"}} >
+          <Stack  sx={{mt:"17px",ml: "20px",padding:"0px 15px"}} >
           <Typography sx={{ textAlign:"center",fontSize: "26px", color: "#222222", fontWeight: "500" }}>
           0  </Typography>
             <Typography sx={{ fontSize: "12px", color: "grey" }}>
