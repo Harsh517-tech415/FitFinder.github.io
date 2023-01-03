@@ -1,32 +1,37 @@
 import { Box, Stack, Typography,Button } from "@mui/material";
 import React, { useEffect } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 
 const GymCard = ({ Carddetail }) => {
-  //   useEffect(()=>{(props.Carddetail)},[])
   return (
   
     <Box
       sx={{
         width: "275px",
         height: "284px",
-        margin: {
-          sm: "0px 0px 0px 62.286px",
-          lg: "0px 0px 0px 260.857px ",
-        },
         boxShadow: "0px 0px 20px 1px grey",
         borderRadius: "16px",
+        marginRight:"15px"
     }}
     >
     <Typography
   sx={{color: "red",
         border: "none",    
-        margin:{sm:"180px 0px 0px 8%",lg:"180px 0px 0px 3.5%"},      
+        // justifyContent:"center",
+        ml:[Carddetail.ml],
+        mt:"180px",      
       //   top: { sm: "49.4%", lg: "18%" },
       //   left: { sm: "14.8%", lg: "16%" },
         fontSize: "18px",
-        fontWeight: "1000",position:"absolute"}}>
+        fontWeight: "1000",
+        position:"absolute"
+        }}>
       {Carddetail.caption}
+      <ElectricBoltIcon style={{display:[Carddetail.beginner]}}/>
+      <ElectricBoltIcon style={{display:[Carddetail.intermediate]}} />
+      <ElectricBoltIcon style={{display:[Carddetail.advance]}} />
+
     </Typography>
     
       <img
@@ -63,17 +68,19 @@ const GymCard = ({ Carddetail }) => {
         </Stack>
         </Box>
         <Button
+        className="gymCardButton"
+        variant="contained"
           sx={{
             margin: "-194px 0px 0px 200px",
             width: "70px",
             height: "70px",
-            color: "black",
-            borderRadius: "100px",
-            border: "9px solid #eeeeee",
+            borderRadius: "35px",
+            border: "7px solid #cfd8dc",
+            backgroundColor:"#eddee"
             
           }}
         >
-          <PlayArrowIcon className="playButton" />
+          <PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
         </Button>
     </Box>
   );

@@ -6,11 +6,7 @@ body {
 .playButton:hover{
 color:green
 }
-.countWorkout:hover .workoutMessage
-{
- 
-display:inline
-}
+
 * {
   padding: 0px;
   margin: 0px;
