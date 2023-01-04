@@ -8,7 +8,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 const GymCard = ({ Carddetail }) => {
   return (
-<Card sx={{minWidth:275,ml:"30px",boxShadow:"0px 0px 10px 1px grey"}}>
+<Card sx={{minWidth:275,ml:"15px",
+boxShadow:"0px 4px 8px 1px grey"
+}}>
     <CardMedia 
     component="img"
     alt="Image"
@@ -43,7 +45,7 @@ const GymCard = ({ Carddetail }) => {
        </Button>
        <Typography sx={{color: "red",
        border: "none",   
-       justifyContent:"center",
+    //    justifyContent:"center",
        textAlign:"center",
        ml:[Carddetail.ml],
        fontSize: "18px",

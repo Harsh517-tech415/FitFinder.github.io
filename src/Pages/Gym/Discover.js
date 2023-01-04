@@ -159,7 +159,7 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
-    ml:"0px"
+    // ml:"0px"
   },]
   const challenge=[
     {
@@ -170,7 +170,7 @@ const Discover = () => {
     beginner:"none",
     intermediate:"none",
     advance:"none",
-    ml:"75px"
+    // ml:"75px"
   },
   {
     label1:"Workout",
@@ -180,7 +180,7 @@ const Discover = () => {
     beginner:"none",
     intermediate:"none",
     advance:"none",
-    ml:"60px"
+    // ml:"60px"
   }
 ]
 function slideLeft()
@@ -216,7 +216,7 @@ function slideRight(){
             Beginner
           </Typography>
             
-        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
+        <Stack direction="row" className="DiscoverScrollbar" sx={{p:"10px 0px",ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
           {Beginner.map((item)=>(
             <GymCard Carddetail={item}/>
           ))}
@@ -225,7 +225,7 @@ function slideRight(){
               sm: "100px 0px 20px 62.286px",
               lg: "100px 0px 20px 260.857px ",
             },fontSize:"30px",fontWeight:"600",color:'rgba(0, 0, 0, 0.65)'}}> Intermediate</Typography>
-        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
+        <Stack direction="row" className="DiscoverScrollbar" sx={{p:"10px 0px",ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
           {Intermediate.map((item)=>(
             <GymCard Carddetail={item}/>
           ))}
@@ -235,7 +235,7 @@ function slideRight(){
               sm: "100px 0px 20px 62.286px",
               lg: "100px 0px 20px 260.857px ",
             },fontSize:"30px",fontWeight:"600",color:'rgba(0, 0, 0, 0.65)'}}> Advance</Typography>
-        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
+        <Stack direction="row" className="DiscoverScrollbar" sx={{p:"10px 0px",ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
           {Advance.map((item)=>(
             <GymCard Carddetail={item}/>
           ))}

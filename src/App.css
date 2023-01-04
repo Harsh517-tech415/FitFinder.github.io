@@ -8,8 +8,7 @@ color:green
 }
 .DiscoverScrollbar::-webkit-scrollbar
 {
-  /* margin-top: 10px; */
-  /* display:none; */
+  background-color: transparent;
 }
 
 *
