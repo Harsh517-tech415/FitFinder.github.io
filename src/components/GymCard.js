@@ -2,87 +2,62 @@ import { Box, Stack, Typography,Button } from "@mui/material";
 import React, { useEffect } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
-
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 const GymCard = ({ Carddetail }) => {
   return (
-  
-    <Box
-      sx={{
-        width: "275px",
-        height: "284px",
-        boxShadow: "0px 0px 20px 1px grey",
-        borderRadius: "16px",
-        marginRight:"15px"
-    }}
-    >
-    <Typography
-  sx={{color: "red",
-        border: "none",    
-        // justifyContent:"center",
-        ml:[Carddetail.ml],
-        mt:"180px",      
-      //   top: { sm: "49.4%", lg: "18%" },
-      //   left: { sm: "14.8%", lg: "16%" },
-        fontSize: "18px",
-        fontWeight: "1000",
-        position:"absolute"
-        }}>
-      {Carddetail.caption}
-      <ElectricBoltIcon style={{display:[Carddetail.beginner]}}/>
-      <ElectricBoltIcon style={{display:[Carddetail.intermediate]}} />
-      <ElectricBoltIcon style={{display:[Carddetail.advance]}} />
-
-    </Typography>
+<Card sx={{minWidth:275,ml:"30px",boxShadow:"0px 0px 10px 1px grey"}}>
+    <CardMedia 
+    component="img"
+    alt="Image"
+    minHeight="200"
+    image={Carddetail.image}/>
+    <CardContent sx={{p:"0px 0px"}}>
+   <Stack direction="row" sx={{width:"275px",height:"54px"}}>
+    <span style={{margin:"0px 15px 0px 25px"}}>
+        <Typography sx={{ textAlign:"center",fontSize: "27px", color: "#222222", fontWeight: "800" }}>0</Typography>
+        <Typography sx={{ fontSize: "15px", color: "grey" }}>{Carddetail.label1}</Typography>
+    </span>
+    <span style={{margin:"0px 0px 0px 25px"}}>
+        <Typography sx={{ textAlign:"center",fontSize: "27px", color: "#222222", fontWeight: "800" }}>0</Typography>
+        <Typography sx={{ fontSize: "15px", color: "grey" }}>{Carddetail.label2}</Typography>
+    </span>
+    </Stack>
     
-      <img
-        src={Carddetail.image}
-        style={{ borderTopRightRadius: "16px", borderTopLeftRadius: "16px" }}
-      />
-      <Box
-        style={{
-          backgroundColor: "white",
-          width: "275px",
-          height: "84px",
-          borderBottomLeftRadius: "16px",
-          borderBottomRightRadius: "16px",
-        //   display:"inline"
-        }}
-      >
-              
-        <Stack direction="row">
-          <Stack className="countWorkout" sx={{ mt:"17px",ml: {sm:"35px",lg:"28px"},padding:"0px 15px" }}>
-            <Typography sx={{textAlign:"center", fontSize: "26px", color: "#222222", fontWeight: "500" }}>
-          0  </Typography>
-            <Typography sx={{ fontSize: "12px", color: "grey" }}>
-              {Carddetail.label1}
-            </Typography>
-            {/* <Typography className="workoutMessage" sx={{width:"300px",margin:"10px 0px 0px -35px ",display:"none",backgroundColor:"white",boxShadow:"0px 0px 11px 2px grey",borderRadius:"10px"}}>A single complete round will be counted as one workout session.</Typography> */}
-          </Stack>
-          <Stack  sx={{mt:"17px",ml: "20px",padding:"0px 15px"}} >
-          <Typography sx={{ textAlign:"center",fontSize: "26px", color: "#222222", fontWeight: "500" }}>
-          0  </Typography>
-            <Typography sx={{ fontSize: "12px", color: "grey" }}>
-              {Carddetail.label2}
-            </Typography>
-          </Stack>
-        </Stack>
-        </Box>
-        <Button
-        className="gymCardButton"
-        variant="contained"
-          sx={{
-            margin: "-194px 0px 0px 200px",
-            width: "70px",
-            height: "70px",
-            borderRadius: "35px",
-            border: "7px solid #cfd8dc",
-            backgroundColor:"#eddee"
-            
-          }}
-        >
-          <PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
-        </Button>
-    </Box>
+    <Button
+       className="gymCardButton"
+       variant="contained"
+         sx={{
+           margin: "-140px 0px 0px 200px",
+           width: "70px",
+           height: "70px",
+           borderRadius: "35px",
+           border: "7px solid #cfd8dc",
+           backgroundColor:"#9e9e9e"
+          
+         }}
+       >
+         <PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
+       </Button>
+       <Typography sx={{color: "red",
+       border: "none",   
+       justifyContent:"center",
+       textAlign:"center",
+       ml:[Carddetail.ml],
+       fontSize: "18px",
+       fontWeight: "1000",
+       
+       }}>
+     {Carddetail.caption}
+      <ElectricBoltIcon style={{color:"red",display:[Carddetail.beginner]}}/>
+     <ElectricBoltIcon style={{color:"red",display:[Carddetail.intermediate]}} />
+     <ElectricBoltIcon style={{color:"red",display:[Carddetail.advance]}} />
+</Typography>
+    </CardContent>
+    
+</Card>
   );
 };
 

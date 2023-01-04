@@ -6,8 +6,14 @@ body {
 .playButton:hover{
 color:green
 }
+.DiscoverScrollbar::-webkit-scrollbar
+{
+  /* margin-top: 10px; */
+  /* display:none; */
+}
 
-* {
+*
+{
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;

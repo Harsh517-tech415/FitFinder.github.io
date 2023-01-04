@@ -26,7 +26,7 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"none",
     advance:"none",
-    ml:"100px"
+    // ml:"100px"
   },{
     label1:"Workout",
     label2:"KCAL",
@@ -35,7 +35,7 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"none",
     advance:"none",
-    ml:"100px"
+    // ml:"100px"
   },{
     label1:"Workout",
     label2:"KCAL",
@@ -44,7 +44,7 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"none",
     advance:"none",
-    ml:"100px"
+    // ml:"100px"
   },{
     label1:"Workout",
     label2:"KCAL",
@@ -53,7 +53,7 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"none",
     advance:"none",
-    ml:"100px"
+    // ml:"100px"
   },
   {
     label1:"Workout",
@@ -63,6 +63,102 @@ const Discover = () => {
     beginner:"inline",
     intermediate:"none",
     advance:"none",
+    ml:"0px"
+  },]
+  const Intermediate=
+  [{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"ABS",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"none",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"CHEST",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"none",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"ARM",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"none",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"LEG",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"none",
+    // ml:"100px"
+  },
+  {
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"SHOULDER & BACK",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"none",
+    ml:"0px"
+  },]
+  const Advance=
+  [{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"ABS",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"inline",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"CHEST",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"inline",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"ARM",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"inline",
+    // ml:"100px"
+  },{
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"LEG",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"inline",
+    // ml:"100px"
+  },
+  {
+    label1:"Workout",
+    label2:"KCAL",
+    caption:"SHOULDER & BACK",
+    image:chest1,
+    beginner:"inline",
+    intermediate:"inline",
+    advance:"inline",
     ml:"0px"
   },]
   const challenge=[
@@ -86,7 +182,7 @@ const Discover = () => {
     advance:"none",
     ml:"60px"
   }
-];
+]
 function slideLeft()
 {
   const slider=document.getElementById('slider');
@@ -119,29 +215,43 @@ function slideRight(){
             },fontSize:"30px",fontWeight:"600",color:'rgba(0, 0, 0, 0.65)'}}>
             Beginner
           </Typography>
-          <Stack direction="row">
-            {/* <Button variant="contained" sx={{ml:{lg:"100px"},mr:{lg:"20px"},backgroundColor:"transparent"}}
-            onClick={slideLeft}> */}
-{/* <KeyboardArrowLeftIcon /> */}
-{/* </Button> */}
-        <Stack direction="row" id="slider" sx={{overflowX:"scroll"
-        // ,margin: {
-        //   sm: "0px 0px 0px 62.286px",
-        //   lg: "0px 0px 0px 260.857px ",
-        // }
-      }
-        }>
+            
+        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
           {Beginner.map((item)=>(
             <GymCard Carddetail={item}/>
           ))}
-
         </Stack>
-        {/* <Button variant="contained" sx={{backgroundColor:"transparent"}}
-        onClick={slideRight}>
-        <KeyboardArrowRightIcon /></Button> */}
+<Typography sx={{margin: {
+              sm: "100px 0px 20px 62.286px",
+              lg: "100px 0px 20px 260.857px ",
+            },fontSize:"30px",fontWeight:"600",color:'rgba(0, 0, 0, 0.65)'}}> Intermediate</Typography>
+        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
+          {Intermediate.map((item)=>(
+            <GymCard Carddetail={item}/>
+          ))}
+        </Stack>
+        
+        <Typography sx={{margin: {
+              sm: "100px 0px 20px 62.286px",
+              lg: "100px 0px 20px 260.857px ",
+            },fontSize:"30px",fontWeight:"600",color:'rgba(0, 0, 0, 0.65)'}}> Advance</Typography>
+        <Stack direction="row" className="DiscoverScrollbar" sx={{ml:{sm:"62.286px",lg:"260.857px"},overflowX:"scroll"}}>
+          {Advance.map((item)=>(
+            <GymCard Carddetail={item}/>
+          ))}
         </Stack>
     </div>
   )
 }
 
 export default Discover
+{/* <Button variant="contained" sx={{ml:{lg:"100px"},mr:{lg:"20px"},backgroundColor:"transparent"}}
+            onClick={slideLeft}> */}
+{/* <KeyboardArrowLeftIcon /> */}
+{/* </Button> */}
+
+
+
+  {/* <Button variant="contained" sx={{backgroundColor:"transparent"}}
+        onClick={slideRight}>
+        <KeyboardArrowRightIcon /></Button> */}
