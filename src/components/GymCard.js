@@ -14,7 +14,8 @@ boxShadow:"0px 4px 8px 1px grey"
     <CardMedia 
     component="img"
     alt="Image"
-    minHeight="200"
+    Height="200px"
+    width="275px"
     image={Carddetail.image}/>
     <CardContent sx={{p:"0px 0px"}}>
    <Stack direction="row" sx={{width:"275px",height:"54px"}}>

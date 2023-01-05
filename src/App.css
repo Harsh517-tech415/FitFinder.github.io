@@ -10,7 +10,9 @@ color:green
 {
   background-color: transparent;
 }
-
+.GymCard:hover{
+  transform: scale(1,1);
+}
 *
 {
   padding: 0px;

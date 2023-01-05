@@ -7,8 +7,21 @@ import LowerBody from "../../assets/images/LowerBody.jpg";
 import { Stack } from '@mui/material';
 import GymCard from '../../components/GymCard';
 import chest1 from '../../assets/images/chest1.jpg'
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import chest2 from '../../assets/images/chest2.jpg'
+import chest3 from '../../assets/images/chest3.png'
+import abs1 from '../../assets/images/abs1.jpg'
+import abs2 from '../../assets/images/abs2.jpg'
+import abs3 from '../../assets/images/abs3.webp'
+import arm1 from '../../assets/images/arm1.webp'
+import arm2 from '../../assets/images/arm2.jpg'
+import arm3 from '../../assets/images/arm3.webp'
+import leg1 from '../../assets/images/leg1.jpg'
+import leg2 from '../../assets/images/leg2.jpg'
+import leg3 from '../../assets/images/leg3.webp'
+import back1 from '../../assets/images/back1.jpg'
+import back2 from '../../assets/images/back2.webp'
+import back3 from '../../assets/images/back3.webp'
+
 const Discover = () => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
@@ -22,7 +35,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ABS",
-    image:chest1,
+    image:abs1,
     beginner:"inline",
     intermediate:"none",
     advance:"none",
@@ -40,7 +53,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ARM",
-    image:chest1,
+    image:arm1,
     beginner:"inline",
     intermediate:"none",
     advance:"none",
@@ -49,7 +62,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"LEG",
-    image:chest1,
+    image:leg1,
     beginner:"inline",
     intermediate:"none",
     advance:"none",
@@ -59,7 +72,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"SHOULDER & BACK",
-    image:chest1,
+    image:back1,
     beginner:"inline",
     intermediate:"none",
     advance:"none",
@@ -70,7 +83,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ABS",
-    image:chest1,
+    image:abs2,
     beginner:"inline",
     intermediate:"inline",
     advance:"none",
@@ -79,7 +92,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"CHEST",
-    image:chest1,
+    image:chest2,
     beginner:"inline",
     intermediate:"inline",
     advance:"none",
@@ -88,7 +101,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ARM",
-    image:chest1,
+    image:arm2,
     beginner:"inline",
     intermediate:"inline",
     advance:"none",
@@ -97,7 +110,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"LEG",
-    image:chest1,
+    image:leg2,
     beginner:"inline",
     intermediate:"inline",
     advance:"none",
@@ -107,7 +120,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"SHOULDER & BACK",
-    image:chest1,
+    image:back2,
     beginner:"inline",
     intermediate:"inline",
     advance:"none",
@@ -118,7 +131,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ABS",
-    image:chest1,
+    image:abs3,
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
@@ -127,7 +140,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"CHEST",
-    image:chest1,
+    image:chest3,
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
@@ -136,7 +149,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"ARM",
-    image:chest1,
+    image:arm3,
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
@@ -145,7 +158,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"LEG",
-    image:chest1,
+    image:leg3,
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
@@ -155,7 +168,7 @@ const Discover = () => {
     label1:"Workout",
     label2:"KCAL",
     caption:"SHOULDER & BACK",
-    image:chest1,
+    image:back3,
     beginner:"inline",
     intermediate:"inline",
     advance:"inline",
@@ -201,8 +214,8 @@ function slideRight(){
             7x4 CHALLENGE 
           </Typography>
           <Stack direction="row" sx={{margin: {
-          sm: "0px 0px 0px 62.286px",
-          lg: "0px 0px 0px 260.857px ",
+          sm: "0px 0px 20px 62.286px",
+          lg: "0px 0px 20px 260.857px ",
         }}}>
           {challenge.map((item)=>(
          
