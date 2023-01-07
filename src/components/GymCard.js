@@ -1,14 +1,13 @@
-import { Box, Stack, Typography,Button } from "@mui/material";
+import { Box, Stack,Link, Typography,Button } from "@mui/material";
 import React, { useEffect } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 const GymCard = ({ Carddetail }) => {
   return (
-<Card sx={{minWidth:275,ml:"15px",
+<Card sx={{minWidth:275,maxWidth:"275px",ml:"30px",
 boxShadow:"0px 4px 8px 1px grey"
 }}>
     <CardMedia 
@@ -42,22 +41,23 @@ boxShadow:"0px 4px 8px 1px grey"
           
          }}
        >
-         <PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
-       </Button>
-       <Typography sx={{color: "red",
-       border: "none",   
-    //    justifyContent:"center",
-       textAlign:"center",
-       ml:[Carddetail.ml],
-       fontSize: "18px",
-       fontWeight: "1000",
-       
-       }}>
+       <Link href={[Carddetail.link]}><PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
+       </Link></Button>
+    <Typography 
+        sx=
+        {{
+        color: "red",
+        border: "none",   
+        textAlign:"center",
+        ml:[Carddetail.ml],
+        fontSize: "18px",
+        fontWeight: "1000",
+        }}>
      {Carddetail.caption}
-      <ElectricBoltIcon style={{color:"red",display:[Carddetail.beginner]}}/>
+    <ElectricBoltIcon style={{color:"red",display:[Carddetail.beginner]}}/>
      <ElectricBoltIcon style={{color:"red",display:[Carddetail.intermediate]}} />
      <ElectricBoltIcon style={{color:"red",display:[Carddetail.advance]}} />
-</Typography>
+    </Typography>
     </CardContent>
     
 </Card>

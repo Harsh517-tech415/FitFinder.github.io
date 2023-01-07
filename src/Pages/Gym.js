@@ -4,7 +4,6 @@ import React, { useContext, useEffect } from "react";
 import { useLocation,Outlet } from "react-router-dom";
 import { Update } from "../App";
 import gym from "../assets/icons/gym.png";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const Gym = () => {
   const { setDisplayAppBar } = useContext(Update);
@@ -80,7 +79,7 @@ const Gym = () => {
             Discover
           </Link>
           <Link
-            href="/dashboardgym"
+            href="/gym/dashboardgym"
             sx={{
               textDecoration: "none",
               fontSize: { sm: "20px", lg: "25px" },

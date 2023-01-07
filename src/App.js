@@ -10,11 +10,9 @@ import Toggle from "./components/Toggle";
 import { useState } from "react";
 import { createContext } from "react";
 import icon from "./assets/icons/gym.png";
-// import Dashboard from './Pages/Dashboard';
 import Signup from "./Pages/Signup";
 import Login from "./components/Login";
 import Home from "./Pages/Home";
-// import Checking from "./lib/Checking";
 import Form from "./components/Form";
 import Yoga from "./Pages/Yoga";
 import Gym from "./Pages/Gym";
@@ -22,6 +20,7 @@ import HomeWorkout from "./Pages/HomeWorkout";
 import Training from "./Pages/Gym/Training";
 import Dashboard from "./Pages/Gym/Dashboard";
 import Discover from "./Pages/Gym/Discover";
+import WorkoutRoutine from "./components/WorkoutRoutine";
 
 export const Update = createContext();
 function App() {
@@ -76,10 +75,29 @@ function App() {
             <Route path="/form" element={<Form />} />
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
-            <Route path="/gym" element={<Gym />} >
+            <Route path="/gym" element={<Gym/>} >
             <Route path="traninggym" element={<Training />}/>
             <Route path="discovergym" element={<Discover />}/>
+            <Route path="fullbody" element={<WorkoutRoutine />} />  
+            <Route path="lowerbody" element={<WorkoutRoutine />} />  
+            <Route path="absb" element={<WorkoutRoutine />} />  
+            <Route path="absi" element={<WorkoutRoutine />} />  
+            <Route path="absa" element={<WorkoutRoutine />} />  
+            <Route path="chestb" element={<WorkoutRoutine />} />  
+            <Route path="chesti" element={<WorkoutRoutine />} />  
+            <Route path="chesta" element={<WorkoutRoutine />} />  
+            <Route path="armb" element={<WorkoutRoutine />} />  
+            <Route path="armi" element={<WorkoutRoutine />} />  
+            <Route path="arma" element={<WorkoutRoutine />} />  
+            <Route path="legb" element={<WorkoutRoutine />} />  
+            <Route path="legi" element={<WorkoutRoutine />} />  
+            <Route path="lega" element={<WorkoutRoutine />} />  
+            <Route path="s&bb" element={<WorkoutRoutine />} />  
+            <Route path="s&bi" element={<WorkoutRoutine />} />  
+            <Route path="s&ba" element={<WorkoutRoutine />} />  
+
             <Route path="dashboardgym" element={<Dashboard />}/>
+
           </Route>
 
             {/* <Route path="/checking" element={<Checking/>}/> */}
