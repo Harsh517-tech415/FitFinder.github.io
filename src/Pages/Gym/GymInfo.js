@@ -17,12 +17,10 @@ import back3 from '../../assets/images/back3.webp'
 import FullBody from "../../assets/images/FullBody.jpg";
 import LowerBody from "../../assets/images/LowerBody.jpg";
 import { exerciseOptions, fetchData } from "../../utils/fetchData";
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 const GymInfo = () => {
-const g=["wheel rollerout","cable twist (up-down)","cable kneeling crunch"]
+const g=["bodyweight incline side plank","weighted russian Twist","dumbbell side bend","Cable side crunch","barbell standing Twist","barbell standing ab rollerout"]
 
 const getInfo=async()=>{          
 const a= await fetchData("https://exercisedb.p.rapidapi.com/exercises",
@@ -40,8 +38,12 @@ console.log(g1)
 }
   return (
     <div>
+
       <Button sx={{margin:"0px 0px"}}onClick={getInfo}>ok</Button>
    <Card>
+    {/* <CardContent> */}
+{/* <img src={image[1]} /> */}
+    {/* </CardContent> */}
 {/* {
 g2.map((index)=>(
 <CardMedia component="img" image={index}/>))  
@@ -53,22 +55,28 @@ g2.map((index)=>(
 
 export default GymInfo
 
-
-
 export const exercisebeginner=[
+[],[],
 [
-{bodyPart: 'cardio', equipment: 'body weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/1160.gif', id: '1160', name: 'burpee',                        target:"cardiovascular system"},
-{bodyPart: 'waist', equipment: 'cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0175.gif', id: '0175', name: 'cable kneeling crunch',target:"abs"},
-{bodyPart: 'waist',  equipment: 'body weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0472.gif', id: '0472', name: 'hanging leg raise',             target:"abs"},
-{bodyPart: 'waist', equipment: 'medicine ball', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0014.gif', id: '0014', name: 'assisted motion russian twist',target:"abs"},
-{bodyPart: 'waist', equipment: 'body weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0006.gif', id: '0006', name: 'alternate heel touchers',        target:"abs"},
-{bodyPart: 'waist', equipment: 'cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0862.gif', id: '0862', name: 'cable twist (up-down)', target:"abs"},
-{bodyPart: 'waist',  equipment: 'band',        gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/1014.gif', id: '1014', name: 'band v-up',                     target:"abs"},
-{bodyPart: 'waist', equipment: 'wheel roller', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0857.gif', id: '0857', name: 'wheel rollerout',target:"abs"},
-{bodyPart: 'waist',  equipment: 'body weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/3665.gif', id: '3665', name: 'power point plank',             target:"abs"},    
+{bodyPart: 'Cardio', equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/1160.gif', id: '1160',ml:"10%", reps:"x12",name: 'Burpee',target:"cardiovascular system"},
+{bodyPart: 'Waist', equipment: 'Cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0175.gif', id: '0175',ml:"10%", reps:"x12",name: 'Cable Kneeling Crunch',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0862.gif', id: '0862',ml:"10%", reps:"x12",name: 'Cable Twist (up-down)', target:"abs"},
+{bodyPart: 'Waist',  equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0472.gif', id: '0472',ml:"10%", reps:"x12",name: 'Hanging Leg Raise',target:"abs"},
+{bodyPart: 'Waist', equipment: 'wheel roller', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0857.gif', id: '0857',ml:"10%",reps:"x14", name: 'Wheel Rollerout',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0006.gif', id: '0006',ml:"10%", reps:"x14",name: 'Alternate Heel Touchers',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/3544.gif', id: '3544',ml:"10%",reps:"x12", name: 'Bodyweight Incline Side Plank',target:"abs"},
+{bodyPart: 'Waist',  equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0472.gif', id: '0472',ml:"10%", reps:"x12",name: 'Hanging Leg Raise',target:"abs"},
+{bodyPart: 'Waist',  equipment: 'Body Weight', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/3665.gif', id: '3665',ml:"10%",reps:"00:20" ,name: 'Power Point Plank',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0175.gif', id: '0175',ml:"10%", reps:"x12",name: 'Cable Kneeling Crunch',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Cable', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0223.gif', id: '0223',ml:"10%",reps:"x12", name: 'Cable Side Crunch',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Barbell', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0103.gif', id: '0103',ml:"10%", reps:"x12",name: 'Barbell Standing Ab Rollerout',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Barbell', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0112.gif', id: '0112',ml:"10%",reps:"x12", name: 'Barbell Standing Twist',target:"abs"},
+{bodyPart: 'Waist', equipment: 'Wheel Roller', gifUrl: 'http://d205bpvrqc9yn1.cloudfront.net/0857.gif', id: '0857',ml:"10%",reps:"x14", name: 'Wheel Rollerout',target:"abs"},
 ],
-[]
+[],[],[],[],[],[],[],[],[],[],[],[],[],[]
 ]
+export const exercises = ["fullbody","lowerbody","absb","absi","absa","chestb","chesti","chesta","armb","armi","arma","legb","legi","lega","s&bb","s&bi","s&ba"];
+export const time=[0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 
 export const Beginner=

@@ -153,8 +153,13 @@ input::placeholder{
   .detail-image {
     width: 300px;
     height: 300px;
+    
   }
-
+.HorizontalRuleIcon{
+  rotate:90deg;
+  color:rgb(197, 29, 29);
+  display: inline;
+}
   .react-horizontal-scrolling-menu--scroll-container {
     width: 500px;
   }
