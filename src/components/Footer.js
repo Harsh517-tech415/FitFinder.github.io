@@ -11,7 +11,7 @@ const Footer = () => {
         color={bColor}
         bgcolor={Color}
         paddingRight={3}
-        mt={18.5}
+        mt={5.5}
         paddingBottom={1}
         variant="h5"
         pt={1}

@@ -1,11 +1,12 @@
-import { Stack, Link, Typography } from "@mui/material";
+import { Stack, Button, Typography } from "@mui/material";
 import { AppBar } from "@mui/material";
 import React, { useContext, useEffect } from "react";
-import { useLocation,Outlet } from "react-router-dom";
+import { useLocation,Outlet, useNavigate } from "react-router-dom";
 import { Update } from "../App";
 import gym from "../assets/icons/gym.png";
 
 const Gym = () => {
+  const navigate=useNavigate();
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   useEffect(() => {
@@ -36,12 +37,12 @@ const Gym = () => {
             padding: "0px 20px 0px 20px",
           }}
         >
-          <Link
-          href="/gym"
+          <Button
+          onClick={()=>{navigate("/gym")}}
             sx={{
-              width: "calc(100% / 6)",
+              width: "calc(100%/6)",
               margin: { sm: "10px 10px 0px 0px", lg: "15px 10px 0px 0px" },
-              textDecoration: "none",
+              // textDecoration: "none",
             }}
           >
             <img src={gym} style={{ width: "28px", height: "28px" }} />
@@ -55,62 +56,58 @@ const Gym = () => {
             >
               Gym
             </Typography>
-          </Link>
-          <Link
-          href="/gym/traninggym"
+          </Button>
+          <Button
+          
+          onClick={()=>{navigate('/gym/traninggym')}}
             sx={{
-              textDecoration: "none",
-              fontSize: { sm: "20px", lg: "25px" },
+              fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
               padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
             }}
           >
             Traning
-          </Link>
-          <Link
-            href="/gym/discovergym"
+          </Button>
+          <Button
+            onClick={()=>{navigate("/gym/discovergym")}}
             sx={{
-              textDecoration: "none",
-              fontSize: { sm: "20px", lg: "25px" },
+              fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
               padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
             }}
           >
             Discover
-          </Link>
-          <Link
-            href="/gym/dashboardgym"
+          </Button>
+          <Button
+            onClick={()=>{navigate("/gym/dashboardgym")}}
             sx={{
-              textDecoration: "none",
-              fontSize: { sm: "20px", lg: "25px" },
+              fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
               padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
             }}
           >
             Dashboard
-          </Link>
-          <Link
-            href="/music"
+          </Button>
+          <Button
+            onClick={()=>{navigate("/music")}}
             sx={{
-              textDecoration: "none",
-              fontSize: { sm: "20px", lg: "25px" },
+              fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
               padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
             }}
           >
             Music
-          </Link>
-          <Link
-            href="/dietgym"
+          </Button>
+          <Button
+            onClick={()=>{navigate("/dietgym")}}
             sx={{
-              textDecoration: "none",
-              fontSize: { sm: "20px", lg: "25px" },
+              fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
               padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
             }}
           >
             Diet
-          </Link>
+          </Button>
         </Stack>
       </AppBar>
       <Outlet/>

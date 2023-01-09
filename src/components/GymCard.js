@@ -1,11 +1,13 @@
 import { Box, Stack,Link, Typography,Button } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 const GymCard = ({ Carddetail }) => {
+  const navigate=useNavigate()
   return (
 <Card sx={{minWidth:"275px",maxWidth:"275px",ml:"30px",
 boxShadow:"0px 4px 8px 1px grey"
@@ -40,9 +42,10 @@ boxShadow:"0px 4px 8px 1px grey"
            backgroundColor:"#9e9e9e"
           
          }}
+         onClick={()=>{navigate(`${[Carddetail.link]}`)}}
        >
-       <Link href={[Carddetail.link]}><PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
-       </Link></Button>
+       <PlayArrowIcon sx={{color:"black",size:"large"}}className="playButton" />
+       </Button>
     <Typography 
         sx=
         {{

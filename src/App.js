@@ -21,7 +21,7 @@ import Training from "./Pages/Gym/Training";
 import Dashboard from "./Pages/Gym/Dashboard";
 import Discover from "./Pages/Gym/Discover";
 import WorkoutRoutine from "./components/WorkoutRoutine";
-
+import GymExercise from "./Pages/Gym/GymExercise";
 export const Update = createContext();
 function App() {
   const [Color, setColor] = useState("#FF2625");
@@ -33,7 +33,7 @@ function App() {
   const [nav, setNav] = useState("./signup");
   const [verify, setVerify] = useState("Sign");
   const [displayAppBar, setDisplayAppBar] = useState("ok");
-
+const[pathIndex,setPathIndex]=useState(0)
   const getColor = (item1, item2, item3, item4, item5, item6) => {
     setColor(item1);
     seTextColor(item2);
@@ -76,26 +76,26 @@ function App() {
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym/>} >
+              <Route path="gymexercise" element={<GymExercise pathIndex={pathIndex}/>}/>
             <Route path="traninggym" element={<Training />}/>
             <Route path="discovergym" element={<Discover />}/>
-            <Route path="fullbody" element={<WorkoutRoutine />} />  
-            <Route path="lowerbody" element={<WorkoutRoutine />} />  
-            <Route path="absb" element={<WorkoutRoutine />} />  
-            <Route path="absi" element={<WorkoutRoutine />} />  
-            <Route path="absa" element={<WorkoutRoutine />} />  
-            <Route path="chestb" element={<WorkoutRoutine />} />  
-            <Route path="chesti" element={<WorkoutRoutine />} />  
-            <Route path="chesta" element={<WorkoutRoutine />} />  
-            <Route path="armb" element={<WorkoutRoutine />} />  
-            <Route path="armi" element={<WorkoutRoutine />} />  
-            <Route path="arma" element={<WorkoutRoutine />} />  
-            <Route path="legb" element={<WorkoutRoutine />} />  
-            <Route path="legi" element={<WorkoutRoutine />} />  
-            <Route path="lega" element={<WorkoutRoutine />} />  
-            <Route path="s&bb" element={<WorkoutRoutine />} />  
-            <Route path="s&bi" element={<WorkoutRoutine />} />  
-            <Route path="s&ba" element={<WorkoutRoutine />} />  
-
+            <Route path="fullbody" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="lowerbody" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="absb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="absi" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="absa" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="chestb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="chesti" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="chesta" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="armb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="armi" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="arma" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="legb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="legi" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="lega" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="s&bb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="s&bi" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
+            <Route path="s&ba" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
             <Route path="dashboardgym" element={<Dashboard />}/>
 
           </Route>

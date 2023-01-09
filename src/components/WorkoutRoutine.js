@@ -1,13 +1,13 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Update } from "../App";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import GymInfo, {exercisebeginner} from "../Pages/Gym/GymInfo";
 import {exercises} from "../Pages/Gym/GymInfo";
 import {time} from "../Pages/Gym/GymInfo";
-
+import GymExercise from "../Pages/Gym/GymExercise";
 import image from '../Pages/Gym/GymInfo'
 import WorkoutCollection from "../Pages/Gym/WorkoutCollection";
-import { Typography,Box,TextField, Stack, Button } from "@mui/material";
+import { Typography,Box,TextField, Stack, Button, Link } from "@mui/material";
 import chest1 from '../assets/images/chest1.jpg'
 import chest2 from '../assets/images/chest2.jpg'
 import chest3 from '../assets/images/chest3.png'
@@ -29,20 +29,21 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-const WorkoutRoutine = () => {
-  
+
+const WorkoutRoutine = ({pathIndex,setPathIndex}) => {
   const [rest,setRest]=useState(10)
   const workouts=[0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   const image=[FullBody,LowerBody,absb,abs2,abs3,chest1,chest2,chest3,arm1,arm2,arm3,leg1,leg2,leg3,back1,back2,back3];
-  const [pathIndex, setPathIndex] = useState(0);
+  // const [pathIndex, setPathIndex] = useState(0);
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
-
+const navigate=useNavigate()
   useEffect(() => {
     exercises.map((value, index) => {
       if (location.pathname === `/gym/${value}`) {
         setDisplayAppBar("none");
         setPathIndex(index);
+        // path=pathIndex
       }
     });
   }, []);
@@ -70,7 +71,7 @@ const WorkoutRoutine = () => {
     {exercisebeginner[pathIndex].map((item)=>(
 <WorkoutCollection pathexercise={item} />
       ))} 
-      <Button variant="contained" sx={{position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"70%",lg:"36%"}}}>Start</Button>
+      <Button onClick={()=>{navigate('/gym/gymexercise')}} variant="contained" sx={{backgroundColor:"black",position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"69.2%",lg:"36%"},color:"white"}}>Start</Button>
     </Stack>
   </Box>
 

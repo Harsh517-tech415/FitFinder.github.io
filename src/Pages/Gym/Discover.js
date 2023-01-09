@@ -72,13 +72,3 @@ const Discover = () => {
 }
 
 export default Discover
-{/* <Button variant="contained" sx={{ml:{lg:"100px"},mr:{lg:"20px"},backgroundColor:"transparent"}}
-            onClick={slideLeft}> */}
-{/* <KeyboardArrowLeftIcon /> */}
-{/* </Button> */}
-
-
-
-  {/* <Button variant="contained" sx={{backgroundColor:"transparent"}}
-        onClick={slideRight}>
-        <KeyboardArrowRightIcon /></Button> */}

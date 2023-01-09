@@ -6,6 +6,7 @@ body {
 .playButton:hover{
 color:green
 }
+
 .DiscoverScrollbar::-webkit-scrollbar
 {
   background-color: transparent;
