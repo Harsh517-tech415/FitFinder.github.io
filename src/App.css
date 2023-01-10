@@ -20,6 +20,10 @@ color:green
   margin: 0px;
   box-sizing: border-box;
 }
+.gymexercisebackground{
+  background: linear-gradient(to Top left,rgba(255, 0, 0, 0.826),#e65147)
+
+}
 .second{
   font-size: 70px;
 }
