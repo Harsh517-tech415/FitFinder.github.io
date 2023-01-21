@@ -1,13 +1,25 @@
 import { Box, Stack,Link, Typography,Button } from "@mui/material";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import FitFinder from "./FitFinderInfo";
 const GymCard = ({ Carddetail }) => {
   const navigate=useNavigate()
+  useEffect(()=>{
+    async function  call(){try{
+    console.log(await FitFinder.deleteDocsData())
+    
+    }catch(err)
+    {
+      console.log("Warning")
+    }
+  };
+  call();},[])
+  const [workout,setWorkout]=useState(0)
   return (
 <Card sx={{minWidth:"275px",maxWidth:"275px",ml:"30px",
 boxShadow:"0px 4px 8px 1px grey"
@@ -21,7 +33,7 @@ boxShadow:"0px 4px 8px 1px grey"
     <CardContent sx={{p:"0px 0px"}}>
    <Stack direction="row" sx={{width:"275px",height:"54px"}}>
     <span style={{margin:"0px 15px 0px 25px"}}>
-        <Typography sx={{ textAlign:"center",fontSize: "27px", color: "#222222", fontWeight: "800" }}>0</Typography>
+        <Typography sx={{ textAlign:"center",fontSize: "27px", color: "#222222", fontWeight: "800" }}>{workout}</Typography>
         <Typography sx={{ fontSize: "15px", color: "grey" }}>{Carddetail.label1}</Typography>
     </span>
     <span style={{margin:"0px 0px 0px 25px"}}>

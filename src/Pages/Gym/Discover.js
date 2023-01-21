@@ -8,15 +8,17 @@ import {Beginner} from './GymInfo'
 import {Intermediate} from './GymInfo'
 import {Advance} from './GymInfo'
 import {challenge} from './GymInfo'
-
+  
 const Discover = () => {
+  
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/gym/discovergym") {
       setDisplayAppBar("none");
      }
-  }, []);
+    
+    }, []);
   
 
   return (

@@ -24,6 +24,9 @@ color:green
   background: linear-gradient(to Top left,rgba(255, 0, 0, 0.826),#e65147)
 
 }
+.GymResultButton{
+  background: linear-gradient(to Top left,rgb(160, 94, 89),rgb(94, 144, 89),rgb(74, 80, 181));
+}
 .second{
   font-size: 70px;
 }

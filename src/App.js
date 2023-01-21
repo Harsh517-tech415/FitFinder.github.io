@@ -22,6 +22,8 @@ import Dashboard from "./Pages/Gym/Dashboard";
 import Discover from "./Pages/Gym/Discover";
 import WorkoutRoutine from "./components/WorkoutRoutine";
 import GymExercise from "./Pages/Gym/GymExercise";
+import GymResult from "./Pages/Gym/GymResult";
+
 export const Update = createContext();
 function App() {
   const [Color, setColor] = useState("#FF2625");
@@ -76,6 +78,7 @@ const[pathIndex,setPathIndex]=useState(0)
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym/>} >
+              <Route path="gymresult" element={<GymResult pathIndex={pathIndex}/>}/>
               <Route path="gymexercise" element={<GymExercise pathIndex={pathIndex}/>}/>
             <Route path="traninggym" element={<Training />}/>
             <Route path="discovergym" element={<Discover />}/>
