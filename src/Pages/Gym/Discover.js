@@ -4,10 +4,7 @@ import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
 import { Stack } from "@mui/material";
 import GymCard from "../../components/GymCard";
-// import { Beginner } from "./GymInfo";
-// import { Intermediate } from "./GymInfo";
-// import { Advance } from "./GymInfo";
-// import { challenge } from "./GymInfo";
+
 import chest1 from "../../assets/images/chest1.jpg";
 import chest2 from "../../assets/images/chest2.jpg";
 import chest3 from "../../assets/images/chest3.png";

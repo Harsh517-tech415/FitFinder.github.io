@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Box } from "@mui/material";
 import Explore from "./Pages/Explore";
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import Toggle from "./components/Toggle";
@@ -23,6 +23,13 @@ import Discover from "./Pages/Gym/Discover";
 import WorkoutRoutine from "./components/WorkoutRoutine";
 import GymExercise from "./Pages/Gym/GymExercise";
 import GymResult from "./Pages/Gym/GymResult";
+import Music from "./Pages/Gym/Music";
+import Search from "./Pages/Gym/Audio/Search";
+import Feed from "./Pages/Gym/Audio/Feed";
+import Trending from "./Pages/Gym/Audio/Trending";
+import Player from "./Pages/Gym/Audio/Player";
+import Library from "./Pages/Gym/Audio/Library";
+import Favourites from "./Pages/Gym/Audio/Favourites";
 
 export const Update = createContext();
 function App() {
@@ -32,7 +39,7 @@ function App() {
   const [Icon, setIcon] = useState(icon);
   const [rightArrow, setrightArrow] = useState();
   const [leftArrow, setleftArrow] = useState();
-  const [nav, setNav] = useState("./signup");
+  const [nav, setNav] = useState(0);
   const [verify, setVerify] = useState("Sign");
   const [displayAppBar, setDisplayAppBar] = useState("ok");
 const[pathIndex,setPathIndex]=useState(0)
@@ -44,7 +51,15 @@ const[pathIndex,setPathIndex]=useState(0)
     setrightArrow(item5);
     setleftArrow(item6);
   };
-  
+  useEffect(()=>{  
+  let a=document.cookie;
+  if(a){
+ let [name,idValue]=(a.split("="));
+  if(idValue!=="b229jjcWX9sczZSgE3hL" && idValue!==""){setNav(1)}
+  else if(idValue==="b229jjcWX9sczZSgE3hL"){}// else {document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
+  }
+  else{document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
+},[])
   return (
     <Update.Provider
       value={{
@@ -78,6 +93,16 @@ const[pathIndex,setPathIndex]=useState(0)
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym/>} >
+              <Route path="music" element={<Music/>} >
+                <Route path="feed" element={<Feed/>}/>
+                <Route path="search" element={<Search/>}/>
+                <Route path="trending" element={<Trending/>}/>
+                <Route path="player" element={<Player/>}/>
+                <Route path="library" element={<Library/>}/>
+                <Route path="favourites" element={<Favourites/>}/>
+
+                </Route>
+                
               <Route path="gymresult" element={<GymResult pathIndex={pathIndex}/>}/>
               <Route path="gymexercise" element={<GymExercise pathIndex={pathIndex}/>}/>
             <Route path="traninggym" element={<Training />}/>
@@ -105,7 +130,7 @@ const[pathIndex,setPathIndex]=useState(0)
 
             {/* <Route path="/checking" element={<Checking/>}/> */}
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </Box>
       </BrowserRouter>
     </Update.Provider>

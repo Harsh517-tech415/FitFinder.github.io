@@ -89,7 +89,7 @@ const Gym = () => {
             Dashboard
           </Button>
           <Button
-            onClick={()=>{navigate("/music")}}
+            onClick={()=>{navigate("/gym/music")}}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },

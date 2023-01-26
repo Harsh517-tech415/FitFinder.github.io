@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { AppBar, Box,Stack, Typography } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AppBar, Box,Button,Stack, Typography } from "@mui/material";
 import Logo from "../assets/images/Logo.png";
 import { useContext } from "react";
 import { Update } from "../App";
@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,7 +28,8 @@ const ExpandMore = styled((props) => {
 
 const Navbar = () => {
   const location = useLocation();
-  const { Color,setColor, textColor, nav, verify,displayAppBar } = useContext(Update);
+  const navigate=useNavigate();
+  const { Color,setColor, textColor,setNav, nav, verify,displayAppBar } = useContext(Update);
   const [boxShadow, setboxShadow] = useState("none");
   const [border, setBorder] = useState(`3px ${Color} solid`);
   const [expanded, setExpanded] = useState(false);
@@ -136,8 +138,8 @@ const Navbar = () => {
             Dashboard
           </Link>
           <Stack sx={{ ml: { sm: "35px", lg: "700px" } }}>
-            <Link
-              to={nav}
+            {nav===0?<Link
+              to={'/signup'}
               onClick={() => {
                 setBorder(`3px ${textColor} solid`);
               }}
@@ -148,8 +150,8 @@ const Navbar = () => {
                 marginTop: 2,
               }}
             >
-              {verify}
-            </Link>
+              Sign
+            </Link>:<Button color="error" variant="outlined" onClick={()=>{document.cookie="_hash=b229jjcWX9sczZSgE3hL";navigate("/");setNav(0)}}>LogOut <LogoutIcon fontSize="verysmall" sx={{ml:"5%",mb:"4%"}}/> </Button>}
           </Stack>
         </Stack>
       </Stack>
