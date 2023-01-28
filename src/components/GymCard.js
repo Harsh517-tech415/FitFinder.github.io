@@ -1,14 +1,15 @@
-import { Box, Stack, Link, Typography, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Stack, Typography, Button } from "@mui/material";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import FitFinder from "./FitFinderInfo";
-const GymCard = ({ Carddetail }) => {
+import { Update } from "../App";
+const GymCard = ({ Carddetail, data1 }) => {
   const navigate = useNavigate();
+  const { setUrl } = useContext(Update);
   useEffect(() => {
     // async function call() {
     //   try {
@@ -21,7 +22,6 @@ const GymCard = ({ Carddetail }) => {
     // }
     // call();
   }, []);
-  const [workout, setWorkout] = useState(0);
   return (
     <Card
       sx={{
@@ -49,7 +49,7 @@ const GymCard = ({ Carddetail }) => {
                 fontWeight: "800",
               }}
             >
-              {workout}
+              {data1[Carddetail.workout][0]}
             </Typography>
             <Typography sx={{ fontSize: "15px", color: "grey" }}>
               {Carddetail.label1}
@@ -64,7 +64,7 @@ const GymCard = ({ Carddetail }) => {
                 fontWeight: "800",
               }}
             >
-              0
+              {data1[Carddetail.workout][1]}
             </Typography>
             <Typography sx={{ fontSize: "15px", color: "grey" }}>
               {Carddetail.label2}
@@ -84,6 +84,7 @@ const GymCard = ({ Carddetail }) => {
             backgroundColor: "#9e9e9e",
           }}
           onClick={() => {
+            setUrl(Carddetail.workout);
             navigate(`${[Carddetail.link]}`);
           }}
         >

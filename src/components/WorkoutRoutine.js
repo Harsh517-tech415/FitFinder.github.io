@@ -71,7 +71,8 @@ const navigate=useNavigate()
     {exercisebeginner[pathIndex].map((item)=>(
 <WorkoutCollection pathexercise={item} />
       ))} 
-      <Button onClick={()=>{navigate('/gym/gymexercise')}} variant="contained" sx={{backgroundColor:"black",position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"69.2%",lg:"36%"},color:"white"}}>Start</Button>
+      <Button onClick={()=>{
+        if(document.cookie.split("=")[1]==="b229jjcWX9sczZSgE3hL"){navigate("/signup")}else{navigate('/gym/gymexercise')}}} variant="contained" sx={{backgroundColor:"black",position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"69.2%",lg:"36%"},color:"white"}}>Start</Button>
     </Stack>
   </Box>
 

@@ -9,13 +9,14 @@ import { exercisebeginner } from "./GymInfo";
 import SkipPreviousRoundedIcon from "@mui/icons-material/SkipPreviousRounded";
 import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
-// import Timer from "./Timer";
-
+import { UserC } from "../../components/FitFinderInfo";
 let Cookies = require("js-cookie");
 const GymExercise = ({ pathIndex }) => {
+  let a1;
   const navigate = useNavigate();
+  let userc = new UserC();
   const exerciseDetail = exercisebeginner[pathIndex];
-  const { setDisplayAppBar } = useContext(Update);
+  const { setDisplayAppBar, url } = useContext(Update);
   const [option, setOption] = useState();
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState("");
@@ -27,9 +28,8 @@ const GymExercise = ({ pathIndex }) => {
   const time = useRef(0);
 
   // let time = 30,
-  let d,a;
+  let d, a;
   let t = 0,
-  
     c = 0;
 
   useEffect(() => {
@@ -39,19 +39,18 @@ const GymExercise = ({ pathIndex }) => {
     Cookies.get("time") === "NaN" || "NAN"
       ? (t = 0)
       : (t = Cookies.get("time"));
-  // a = setInterval(()=>{setTime()}, 1000);
-    
+    // a = setInterval(()=>{setTime()}, 1000);
+
     // document.cookie="time=22;expires=Thu, 20 Jan 2023 12:00:00 UTC;path=/gym/gymexercise"
     // document.cookie="time=0;expires=Thu, 20 Jan 2023 12:00:00 UTC;path=/gym/gymexercise"
-//  setTimeout(()=>{document.cookie="time=0;expires=Thu, 20 Jan 2023 12:00:00 UTC;path=/gym/gymexercise"},2000)
+    //  setTimeout(()=>{document.cookie="time=0;expires=Thu, 20 Jan 2023 12:00:00 UTC;path=/gym/gymexercise"},2000)
     setOption(0);
   }, []);
   useEffect(() => {
     exerciseDetail[index].side === 0 ? setDisplay("none") : setDisplay("block");
     index === 0 ? setDisable(true) : setDisable(false);
     // console.log(index);
-    if (index === (exercisebeginner[pathIndex].length )) {
-      
+    if (index === exercisebeginner[pathIndex].length) {
       clearInterval(a);
     }
   }, [index]);
@@ -83,15 +82,19 @@ const GymExercise = ({ pathIndex }) => {
     d = window.setInterval(handleTime, 1000);
   }, [option]);
 
-//   function setTime() {
-//   document.cookie = `time =${(+(performance.now() / 60000) + +t).toFixed(2)}; expires=Thu, 23 Jan 2023 12:00:00 UTC;path=/gym/gymexercise`;
-// console.log(document.cookie)
-// }
-return (
-  <Stack direction="row">
+  //   function setTime() {
+  //   document.cookie = `time =${(+(performance.now() / 60000) + +t).toFixed(2)}; expires=Thu, 23 Jan 2023 12:00:00 UTC;path=/gym/gymexercise`;
+  // console.log(document.cookie)
+  // }
+  return (
+    <Stack direction="row">
       <Button
         onClick={() => {
-          if (window.confirm("Proceed with caution, returning may delete workout data. Continue?")) {
+          if (
+            window.confirm(
+              "Proceed with caution, returning may delete workout data. Continue?"
+            )
+          ) {
             // document.cookie = `time=0;expires=Thu,21 Jan 2023 00:00:00 UTC;path=/gym/gymexercise`;
             // clearInterval(a);
             // console.log(document.cookie)
@@ -175,24 +178,42 @@ return (
               color="error"
               disabled={disable}
               onClick={() => {
-                setIndex(index=>index-1)
+                setIndex((index) => index - 1);
                 setOption(1);
               }}
               sx={{ fontSize: "18px", m: { sm: "0% 10% 0% 30%" } }}
-           
-           >
+            >
               <SkipPreviousRoundedIcon fontSize="large" />
               Previous
             </Button>
             <Button
               color="error"
               onClick={() => {
-               if(index!==exerciseDetail.length-1){ setOption(1);
-                setIndex(index + 1);
-              }
-            else{
-              navigate("/gym/gymresult")
-            }}}
+                if (index !== exerciseDetail.length - 1) {
+                  setOption(1);
+                  setIndex(index + 1);
+
+                  async function fun1() {
+                   try{
+                    a1 = await userc.updateDocData(document.cookie.split("=")[1],{absb:[0,0,0]});
+                    // a1=a1.data()[url][1];
+                    // console.log(a1)
+                  }
+                    catch(err){console.log(err)}
+                  }
+                  // fun1();
+                
+                } else {
+                  async function fun() {
+                    let data;
+                    try{data=await userc.getDocData(document.cookie.split("=")[1])
+                  data=data.data()[url]}catch(err){console.log(err)}
+                   try{ await userc.updateDocData(document.cookie.split("=")[1],{[url]:[data[0]+1,data[1],data[2]]});
+                   }catch(err){console.log(err)}}
+                  fun();
+                  navigate("/gym/gymresult");
+                }
+              }}
               sx={{ fontSize: "18px" }}
             >
               Skip
@@ -290,25 +311,19 @@ return (
 
 export default GymExercise;
 
-// useEffect(()=>{
-// function  handleTime(){
-
-// if(option===1)
-// {
-//   if(second>0){
-
-//   c= setTimeout(()=>{setSecond((second)=>{return(--second)});handleTime()},1000)
-
-//   }
-// }
-// }
-// handleTime()},[option])
-// useEffect(()=>{
-//   if(second <= 0)
-//   {
-//     // alert(2)
-//     setOption(0)
-//     // setSecond(30)
-//     // window.clearTimeout(c)
-
-//   }},[second])
+//  useEffect(()=>{
+//  function  handleTime(){
+//  if(option===1)
+//  {
+//  if(second>0){
+//  c= setTimeout(()=>{setSecond((second)=>{return(--second)});handleTime()},1000)
+//  }}}
+//  handleTime()},[option])
+//  useEffect(()=>{
+//  if(second <= 0)
+//  {
+//  alert(2)
+//  setOption(0)
+//  setSecond(30)
+//  window.clearTimeout(c)
+//  }},[second])

@@ -2,11 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Stack, Typography, Box, TextField, Button } from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import { Update } from "../App";
-// import {sign,useAuth} from '../lib/init-firebase'
-import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/firebase";
-import { VolunteerActivismSharp } from "@mui/icons-material";
 const Signup = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

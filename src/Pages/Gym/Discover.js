@@ -1,50 +1,46 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useContext,useRef, useEffect, useState } from "react";
+import { Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
 import { Stack } from "@mui/material";
 import GymCard from "../../components/GymCard";
-
-import chest1 from "../../assets/images/chest1.jpg";
-import chest2 from "../../assets/images/chest2.jpg";
-import chest3 from "../../assets/images/chest3.png";
-import abs1 from "../../assets/images/abs1.jpg";
-import abs2 from "../../assets/images/abs2.jpg";
-import abs3 from "../../assets/images/abs3.webp";
-import arm1 from "../../assets/images/arm1.webp";
-import arm2 from "../../assets/images/arm2.jpg";
-import arm3 from "../../assets/images/arm3.webp";
-import leg1 from "../../assets/images/leg1.jpg";
-import leg2 from "../../assets/images/leg2.jpg";
-import leg3 from "../../assets/images/leg3.webp";
-import back1 from "../../assets/images/back1.jpg";
-import back2 from "../../assets/images/back2.webp";
-import back3 from "../../assets/images/back3.webp";
-import FullBody from "../../assets/images/FullBody.jpg";
-import LowerBody from "../../assets/images/LowerBody.jpg";
-// import db from '../../components/firebase'
 import {ChallengeC} from "../../components/FitFinderInfo";
 import {BeginnerC} from "../../components/FitFinderInfo";
 import {IntermediateC} from "../../components/FitFinderInfo";
 import {AdvanceC} from "../../components/FitFinderInfo";
+import { UserC } from "../../components/FitFinderInfo";
 
 const Discover = () => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
-  const beginnerc=new BeginnerC;
-  const intermediatec=new IntermediateC;
-  const advancec=new AdvanceC;
-  const challengec=new ChallengeC;
+  const beginnerc=new BeginnerC();
+  const intermediatec=new IntermediateC();
+  const advancec=new AdvanceC();
+  const challengec=new ChallengeC();
+  const userc=new UserC();
   const [challenge,setChallenge]=useState([])
   const [Beginner,setBeginner]=useState([])
   const [Intermediate,setIntermediate]=useState([])
   const [Advance,setAdvance]=useState([])
-
+  const [data1,setData]=useState([])
+  let data;
 
   useEffect(() => {
     if (location.pathname === "/gym/discovergym") {
       setDisplayAppBar("none");
     }
+    async function storeData()
+    {
+try{
+  let a=document.cookie;
+  const [name,idValue]=a.split("=");
+  data=await userc.getDocData(idValue);
+setData(data.data());
+// console.log(data1)
+}
+catch(err){console.log(err)}
+    }
+    storeData()
 async function getData1()
 {
   try{
@@ -106,7 +102,8 @@ getData4();
         }}
       >
       {challenge.map((item)=>(
-         <GymCard  Carddetail={item.data()} />
+        
+         <GymCard  Carddetail={item.data()} data1={data1}/>
           ))} 
       </Stack>
       <Typography
@@ -133,7 +130,7 @@ getData4();
         }}
       >
         {Beginner.map((item) => (
-          <GymCard Carddetail={item.data()} />
+          <GymCard Carddetail={item.data()} data1={data1}/>
         ))}
       </Stack>
       <Typography
@@ -160,7 +157,7 @@ getData4();
         }}
       >
         {Intermediate.map((item) => (
-          <GymCard Carddetail={item.data()} />
+          <GymCard Carddetail={item.data()} data1={data1} />
         ))}
       </Stack>
 
@@ -188,7 +185,7 @@ getData4();
         }}
       >
         {Advance.map((item) => (
-          <GymCard Carddetail={item.data()} />
+          <GymCard Carddetail={item.data()} data1={data1}/>
         ))}
       </Stack>
     </div>

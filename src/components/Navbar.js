@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AppBar, Box,Button,Stack, Typography } from "@mui/material";
+import { AppBar,Button,Stack, Typography } from "@mui/material";
 import Logo from "../assets/images/Logo.png";
 import { useContext } from "react";
 import { Update } from "../App";
@@ -29,7 +29,7 @@ const ExpandMore = styled((props) => {
 const Navbar = () => {
   const location = useLocation();
   const navigate=useNavigate();
-  const { Color,setColor, textColor,setNav, nav, verify,displayAppBar } = useContext(Update);
+  const { Color, textColor,setNav, nav,displayAppBar } = useContext(Update);
   const [boxShadow, setboxShadow] = useState("none");
   const [border, setBorder] = useState(`3px ${Color} solid`);
   const [expanded, setExpanded] = useState(false);

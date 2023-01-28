@@ -5,8 +5,8 @@ import { Box } from "@mui/material";
 import Explore from "./Pages/Explore";
 import React, { useEffect } from "react";
 import "./App.css";
-import Footer from "./components/Footer";
-import Toggle from "./components/Toggle";
+// import Footer from "./components/Footer";
+// import Toggle from "./components/Toggle";
 import { useState } from "react";
 import { createContext } from "react";
 import icon from "./assets/icons/gym.png";
@@ -42,7 +42,8 @@ function App() {
   const [nav, setNav] = useState(0);
   const [verify, setVerify] = useState("Sign");
   const [displayAppBar, setDisplayAppBar] = useState("ok");
-const[pathIndex,setPathIndex]=useState(0)
+const[pathIndex,setPathIndex]=useState(0);
+const [url,setUrl]=useState()
   const getColor = (item1, item2, item3, item4, item5, item6) => {
     setColor(item1);
     seTextColor(item2);
@@ -76,7 +77,9 @@ const[pathIndex,setPathIndex]=useState(0)
         leftArrow: leftArrow,
         displayAppBar: displayAppBar,
         setDisplayAppBar: setDisplayAppBar,
-        setColor:setColor
+        setColor:setColor,
+        url:url,
+        setUrl:setUrl
       }}
     >
       <BrowserRouter>
