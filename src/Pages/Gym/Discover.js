@@ -4,77 +4,80 @@ import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
 import { Stack } from "@mui/material";
 import GymCard from "../../components/GymCard";
-import {ChallengeC} from "../../components/FitFinderInfo";
-import {BeginnerC} from "../../components/FitFinderInfo";
-import {IntermediateC} from "../../components/FitFinderInfo";
-import {AdvanceC} from "../../components/FitFinderInfo";
+import { ChallengeC } from "../../components/FitFinderInfo";
+import { BeginnerC } from "../../components/FitFinderInfo";
+import { IntermediateC } from "../../components/FitFinderInfo";
+import { AdvanceC } from "../../components/FitFinderInfo";
 import { UserC } from "../../components/FitFinderInfo";
+import Cookies from "js-cookie";
 
 const Discover = () => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
-  const beginnerc=new BeginnerC();
-  const intermediatec=new IntermediateC();
-  const advancec=new AdvanceC();
-  const challengec=new ChallengeC();
-  const userc=new UserC();
-  const [challenge,setChallenge]=useState([])
-  const [Beginner,setBeginner]=useState([])
-  const [Intermediate,setIntermediate]=useState([])
-  const [Advance,setAdvance]=useState([])
-  const [data1,setData]=useState([])
+  const beginnerc = new BeginnerC();
+  const intermediatec = new IntermediateC();
+  const advancec = new AdvanceC();
+  const challengec = new ChallengeC();
+  const userc = new UserC();
+  const [challenge, setChallenge] = useState([]);
+  const [Beginner, setBeginner] = useState([]);
+  const [Intermediate, setIntermediate] = useState([]);
+  const [Advance, setAdvance] = useState([]);
+  const [data1, setData] = useState(0);
   let data;
 
   useEffect(() => {
     if (location.pathname === "/gym/discovergym") {
       setDisplayAppBar("none");
     }
-    async function storeData()
-    {
-try{
-  let a=document.cookie;
-  const [name,idValue]=a.split("=");
-  data=await userc.getDocData(idValue);
-setData(data.data());
-// console.log(data1)
-}
-catch(err){console.log(err)}
+    async function storeData() {
+      try {
+        let hash=Cookies.get("_hash")
+        data = await userc.getDocData(hash);
+        setData(data.data());
+        console.log(data.data())
+      } catch (err) {
+        console.log(err);
+      }
     }
-    storeData()
-async function getData1()
-{
-  try{
-const c=await challengec.getDocsData();
-setChallenge(c.docs)
-}catch(error){console.log("error")}}
-async function getData2()
-{
-try{
-  const b=await beginnerc.getDocsData();
-  setBeginner(b.docs)
-  
-}
-catch(err){console.log("error")}}
-async function getData3()
-{
-try{
-  const i=await intermediatec.getDocsData();
-  setIntermediate(i.docs)
+    storeData();
+    async function getData1() {
+      try {
+        const c = await challengec.getDocsData();
+        setChallenge(c.docs);
+      } catch (error) {
+        console.log("error");
+      }
+    }
 
-}
-catch(err){console.log("error")}
-}
-async function getData4()
-{try{
-  const a=await advancec.getDocsData();
-  setAdvance(a.docs)
-
-}
-catch(err){console.log("error")}}
-getData1();
-getData2();
-getData3();
-getData4();
+    async function getData2() {
+      try {
+        const b = await beginnerc.getDocsData();
+        setBeginner(b.docs);
+      } catch (err) {
+        console.log("error");
+      }
+    }
+    async function getData3() {
+      try {
+        const i = await intermediatec.getDocsData();
+        setIntermediate(i.docs);
+      } catch (err) {
+        console.log("error");
+      }
+    }
+    async function getData4() {
+      try {
+        const a = await advancec.getDocsData();
+        setAdvance(a.docs);
+      } catch (err) {
+        console.log("error");
+      }
+    }
+    getData1();
+    getData2();
+    getData3();
+    getData4();
   }, []);
 
   return (
@@ -101,10 +104,9 @@ getData4();
           },
         }}
       >
-      {challenge.map((item)=>(
-        
-         <GymCard  Carddetail={item.data()} data1={data1}/>
-          ))} 
+          {challenge.map((item) => (
+          <GymCard Carddetail={item.data()} data1={data1} />
+        ))}
       </Stack>
       <Typography
         sx={{
@@ -130,7 +132,7 @@ getData4();
         }}
       >
         {Beginner.map((item) => (
-          <GymCard Carddetail={item.data()} data1={data1}/>
+          <GymCard Carddetail={item.data()} data1={data1} />
         ))}
       </Stack>
       <Typography
@@ -185,7 +187,7 @@ getData4();
         }}
       >
         {Advance.map((item) => (
-          <GymCard Carddetail={item.data()} data1={data1}/>
+          <GymCard Carddetail={item.data()} data1={data1} />
         ))}
       </Stack>
     </div>

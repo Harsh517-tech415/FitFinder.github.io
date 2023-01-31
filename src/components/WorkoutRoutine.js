@@ -29,12 +29,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-
+import { ExerciseC } from "./FitFinderInfo";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { db } from "./firebase";
+import Cookies from "js-cookie";
 const WorkoutRoutine = ({pathIndex,setPathIndex}) => {
+  const exercisec=new ExerciseC();
   const [rest,setRest]=useState(10)
   const workouts=[0,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   const image=[FullBody,LowerBody,absb,abs2,abs3,chest1,chest2,chest3,arm1,arm2,arm3,leg1,leg2,leg3,back1,back2,back3];
-  // const [pathIndex, setPathIndex] = useState(0);
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
 const navigate=useNavigate()
@@ -43,9 +46,26 @@ const navigate=useNavigate()
       if (location.pathname === `/gym/${value}`) {
         setDisplayAppBar("none");
         setPathIndex(index);
-        // path=pathIndex
       }
     });
+ 
+    // async function addData()
+    // {
+    //   try{
+    //    const a3= await updateDoc(doc(db,"exercises","absb"),[absb]={
+    //     bodyPart: "Cardio",
+    //     equipment: "Body Weight",
+    //     gifUrl: "http://d205bpvrqc9yn1.cloudfront.net/1160.gif",
+    //     id: "1160",
+    //     ml: "10%",
+    //     reps: "x14",
+    //     side: 0,
+    //     name: "Burpee",
+    //     target: "cardiovascular system",
+    //   })
+    //   }catch(err){console.log(err)}
+    // }
+    // addData()
   }, []);
   return (<>
   <GymInfo />
@@ -72,7 +92,8 @@ const navigate=useNavigate()
 <WorkoutCollection pathexercise={item} />
       ))} 
       <Button onClick={()=>{
-        if(document.cookie.split("=")[1]==="b229jjcWX9sczZSgE3hL"){navigate("/signup")}else{navigate('/gym/gymexercise')}}} variant="contained" sx={{backgroundColor:"black",position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"69.2%",lg:"36%"},color:"white"}}>Start</Button>
+        let hash=Cookies.get("_hash")
+        if(hash==="b229jjcWX9sczZSgE3hL"){navigate("/signup")}else{navigate('/gym/gymexercise')}}} variant="contained" sx={{backgroundColor:"black",position:"absolute",ml:{sm:"38%",lg:"27%"},mt:{sm:"69.2%",lg:"36%"},color:"white"}}>Start</Button>
     </Stack>
   </Box>
 

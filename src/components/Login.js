@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Update } from "../App";
 import { auth } from "./firebase";
 import { UserC } from "../components/FitFinderInfo";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Login = () => {
         setRes("SuccesFully Logined");
         document.cookie = `_hash=${response.user.uid}`;
         setNav(1);
+        let hash=Cookies.get("_hash")
         async function fun() {
           let a = {
             absb: [0, 0, 0],
@@ -37,9 +39,12 @@ const Login = () => {
             backb: [0, 0, 0],
             backi: [0, 0, 0],
             backa: [0, 0, 0],
+            fullbody:[0,0,0],
+            lowerbody:[0,0,0]
           };
+          
           try {
-            await userc.setDocData(document.cookie.split("=")[1],a);
+            await userc.setDocData(hash,a);
           } catch (err) {
             console.log(err);
           }
@@ -47,13 +52,13 @@ const Login = () => {
         async function verify()
         {
           try{
-            const a=await userc.getDocData(document.cookie.split("=")[1]);
+            const a=await userc.getDocData(hash);
             if(a.data()){console.log(a.data())}
-            else{console.log("yes"); fun()}
+            else{console.log(hash); fun()}
           }catch(err){console.log(err)}
         }
         verify()
-        navigate("/");
+       setTimeout(()=>{navigate("/")},1000)
       })
       .catch((err) => {
         setRes(err.message);

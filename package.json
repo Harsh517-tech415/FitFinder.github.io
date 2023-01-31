@@ -21,6 +21,7 @@
     "react-hook-form": "^7.41.0",
     "react-horizontal-scrolling-menu": "^2.7.1",
     "react-icons": "^4.7.1",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-loader-spinner": "^6.0.0-0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -60,6 +61,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
-    "eslint-plugin-react-hooks": "^4.4.0"
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "tailwindcss": "^3.2.4"
   }
 }

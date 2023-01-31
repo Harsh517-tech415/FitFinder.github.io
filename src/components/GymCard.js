@@ -85,6 +85,7 @@ const GymCard = ({ Carddetail, data1 }) => {
           }}
           onClick={() => {
             setUrl(Carddetail.workout);
+            document.cookie=`_adu=${Carddetail.workout}`;
             navigate(`${[Carddetail.link]}`);
           }}
         >

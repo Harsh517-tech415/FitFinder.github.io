@@ -30,6 +30,9 @@ import Trending from "./Pages/Gym/Audio/Trending";
 import Player from "./Pages/Gym/Audio/Player";
 import Library from "./Pages/Gym/Audio/Library";
 import Favourites from "./Pages/Gym/Audio/Favourites";
+import Customize from "./Pages/Gym/Customize";
+import Cookies from "js-cookie";
+import AddExercise from "./Pages/Gym/AddExercise";
 
 export const Update = createContext();
 function App() {
@@ -53,18 +56,19 @@ const [url,setUrl]=useState()
     setleftArrow(item6);
   };
   useEffect(()=>{  
-  let a=document.cookie;
-  if(a){
- let [name,idValue]=(a.split("="));
-  if(idValue!=="b229jjcWX9sczZSgE3hL" && idValue!==""){setNav(1)}
-  else if(idValue==="b229jjcWX9sczZSgE3hL"){}// else {document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
-  }
-  else{document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
-},[])
+    let hash=Cookies.get("_hash");
+    if(hash){
+      // let [name,idValue]=(hash.split("="));
+      if(hash!=="b229jjcWX9sczZSgE3hL" && hash!==""){setNav(1)}
+      else if(hash==="b229jjcWX9sczZSgE3hL"){}// else {document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
+    }
+    else{document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
+    document.cookie=`_adu=`;
+  },[])
   return (
     <Update.Provider
-      value={{
-        verify: verify,
+    value={{
+      verify: verify,
         setVerify: setVerify,
         setNav: setNav,
         nav: nav,
@@ -103,9 +107,9 @@ const [url,setUrl]=useState()
                 <Route path="player" element={<Player/>}/>
                 <Route path="library" element={<Library/>}/>
                 <Route path="favourites" element={<Favourites/>}/>
-
                 </Route>
-                
+               <Route path="customize" element={<Customize/>}/>
+                <Route path="addexercise" element={<AddExercise/>}/>
               <Route path="gymresult" element={<GymResult pathIndex={pathIndex}/>}/>
               <Route path="gymexercise" element={<GymExercise pathIndex={pathIndex}/>}/>
             <Route path="traninggym" element={<Training />}/>

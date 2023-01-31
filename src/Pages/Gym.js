@@ -1,31 +1,29 @@
 import { Stack, Button, Typography } from "@mui/material";
 import { AppBar } from "@mui/material";
 import React, { useContext, useEffect } from "react";
-import { useLocation,Outlet, useNavigate } from "react-router-dom";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import { Update } from "../App";
 import gym from "../assets/icons/gym.png";
 
 const Gym = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/gym") {
       setDisplayAppBar("none");
-     }
+    }
   }, []);
   return (
     <>
-
       <div style={{ backgroundColor: "#16181D", height: "50px" }}></div>
-          
+
       <AppBar
         sx={{
           height: { sm: "50px", lg: "60px" },
           backgroundColor: "#20232a",
         }}
         position="sticky"
-        
       >
         <Stack
           direction="row"
@@ -38,7 +36,9 @@ const Gym = () => {
           }}
         >
           <Button
-          onClick={()=>{navigate("/gym")}}
+            onClick={() => {
+              navigate("/gym");
+            }}
             sx={{
               width: "calc(100%/6)",
               margin: { sm: "10px 10px 0px 0px", lg: "15px 10px 0px 0px" },
@@ -58,8 +58,9 @@ const Gym = () => {
             </Typography>
           </Button>
           <Button
-          
-          onClick={()=>{navigate('/gym/traninggym')}}
+            onClick={() => {
+              navigate("/gym/traninggym");
+            }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
@@ -69,7 +70,9 @@ const Gym = () => {
             Traning
           </Button>
           <Button
-            onClick={()=>{navigate("/gym/discovergym")}}
+            onClick={() => {
+              navigate("/gym/discovergym");
+            }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
@@ -79,7 +82,21 @@ const Gym = () => {
             Discover
           </Button>
           <Button
-            onClick={()=>{navigate("/gym/dashboardgym")}}
+            sx={{
+              fontSize: { sm: "17px", lg: "20px" },
+              height: { sm: "50px", lg: "60px" },
+              padding: { sm: "10px 10px", lg: "20px 20px", color: "#FF073A" },
+            }}
+            onClick={() => {
+              navigate("/gym/customize");
+            }}
+          >
+            Customize
+          </Button>
+          <Button
+            onClick={() => {
+              navigate("/gym/dashboardgym");
+            }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
@@ -89,7 +106,9 @@ const Gym = () => {
             Dashboard
           </Button>
           <Button
-            onClick={()=>{navigate("/gym/music")}}
+            onClick={() => {
+              navigate("/gym/music");
+            }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
@@ -99,7 +118,9 @@ const Gym = () => {
             Music
           </Button>
           <Button
-            onClick={()=>{navigate("/dietgym")}}
+            onClick={() => {
+              navigate("/dietgym");
+            }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },
               height: { sm: "50px", lg: "60px" },
@@ -110,7 +131,7 @@ const Gym = () => {
           </Button>
         </Stack>
       </AppBar>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };

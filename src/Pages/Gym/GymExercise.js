@@ -16,7 +16,7 @@ const GymExercise = ({ pathIndex }) => {
   const navigate = useNavigate();
   let userc = new UserC();
   const exerciseDetail = exercisebeginner[pathIndex];
-  const { setDisplayAppBar, url } = useContext(Update);
+  const { setDisplayAppBar, url,setUrl } = useContext(Update);
   const [option, setOption] = useState();
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState("");
@@ -193,22 +193,22 @@ const GymExercise = ({ pathIndex }) => {
                   setOption(1);
                   setIndex(index + 1);
 
-                  async function fun1() {
-                   try{
-                    a1 = await userc.updateDocData(document.cookie.split("=")[1],{absb:[0,0,0]});
+                  // async function fun1() {
+                  //  try{
+                  //   a1 = await userc.updateDocData(document.cookie.split("=")[1],{absb:[0,0,0]});
                     // a1=a1.data()[url][1];
                     // console.log(a1)
-                  }
-                    catch(err){console.log(err)}
-                  }
+                  // }
+                  //   catch(err){console.log(err)}
+                  // }
                   // fun1();
                 
                 } else {
                   async function fun() {
-                    let data;
-                    try{data=await userc.getDocData(document.cookie.split("=")[1])
+                    let data,hash=Cookies.get("_hash")
+                    try{data=await userc.getDocData(hash.split("=")[1])
                   data=data.data()[url]}catch(err){console.log(err)}
-                   try{ await userc.updateDocData(document.cookie.split("=")[1],{[url]:[data[0]+1,data[1],data[2]]});
+                   try{ await userc.updateDocData(hash.split("=")[1],{[url]:[data[0]+1,data[1],data[2]]});
                    }catch(err){console.log(err)}}
                   fun();
                   navigate("/gym/gymresult");
