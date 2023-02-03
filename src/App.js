@@ -62,8 +62,6 @@ const [url,setUrl]=useState()
       if(hash!=="b229jjcWX9sczZSgE3hL" && hash!==""){setNav(1)}
       else if(hash==="b229jjcWX9sczZSgE3hL"){}// else {document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
     }
-    else{document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
-    document.cookie=`_adu=`;
   },[])
   return (
     <Update.Provider

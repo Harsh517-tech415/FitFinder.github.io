@@ -40,7 +40,8 @@ const Login = () => {
             backi: [0, 0, 0],
             backa: [0, 0, 0],
             fullbody:[0,0,0],
-            lowerbody:[0,0,0]
+            lowerbody:[0,0,0],
+            name:[]
           };
           
           try {

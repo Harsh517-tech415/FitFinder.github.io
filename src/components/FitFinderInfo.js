@@ -134,16 +134,7 @@ class UserC {
     return getDocs(usercollectionRef);
   }
 }
-class ExerciseC
-{
-  setDocData(id,newDoc)
-  {
- return setDoc(doc(db,"exercises",id),newDoc)
-  }
-  updateDocData(id,newDoc){
-updateDoc(doc(id,"exercises",id),newDoc)
-  }
-}
-export {ExerciseC, ChallengeC, BeginnerC, IntermediateC, AdvanceC, UserC };
+
+export { ChallengeC, BeginnerC, IntermediateC, AdvanceC, UserC };
 
 // export default new FitFinder;
