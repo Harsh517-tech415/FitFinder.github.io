@@ -10,6 +10,9 @@ import SkipPreviousRoundedIcon from "@mui/icons-material/SkipPreviousRounded";
 import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 import { UserC } from "../../components/FitFinderInfo";
+import { getDateRangePickerDayUtilityClass } from "@mui/lab";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../components/firebase";
 let Cookies = require("js-cookie");
 const GymExercise = ({ pathIndex }) => {
   let a1;
@@ -18,6 +21,7 @@ const GymExercise = ({ pathIndex }) => {
   const exerciseDetail = exercisebeginner[pathIndex];
   const { setDisplayAppBar, url,setUrl } = useContext(Update);
   const [option, setOption] = useState();
+  const [fetch,seFetch]=useState(0)
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState("");
   const [disable, setDisable] = useState(true);
@@ -26,8 +30,13 @@ const GymExercise = ({ pathIndex }) => {
   const minute = useRef(0);
   const [value, setValue] = useState(0);
   const time = useRef(0);
-
-  // let time = 30,
+async function getData()
+{
+try{
+  const aa=await getDoc(doc(db,"Exercise",Cookies.get("_adu")));
+  
+}catch(err){console.log(err)}
+}
   let d, a;
   let t = 0,
     c = 0;
@@ -35,6 +44,10 @@ const GymExercise = ({ pathIndex }) => {
   useEffect(() => {
     if (location.pathname === "/gym/gymexercise") {
       setDisplayAppBar("none");
+    }
+    if(fetch===0)
+    {
+      getData()
     }
     Cookies.get("time") === "NaN" || "NAN"
       ? (t = 0)

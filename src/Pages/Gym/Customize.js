@@ -18,9 +18,9 @@ import CheckIcon from "@mui/icons-material/Check";
 import { UserC } from "../../components/FitFinderInfo";
 import Cookies from "js-cookie";
 import AddIcon from "@mui/icons-material/Add";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, addDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
-import { motion } from "framer-motion";
+import { addPointerEvent, motion } from "framer-motion";
 const Customize = () => {
   const { setDisplayAppBar } = useContext(Update);
   let d = useRef(),
@@ -41,7 +41,6 @@ const Customize = () => {
     let r = 255 - Math.floor(Math.random() * a);
     let b = 255 - Math.floor(Math.random() * a);
     let g = 255 - Math.floor(Math.random() * a);
-    console.log(`rbg(${r},${b},${g})`);
     return `rgb(${r},${b},${g})`;
   }
   async function getData() {
@@ -63,17 +62,24 @@ const Customize = () => {
           { name: data.current },
           { merge: true }
         );
+        await setDoc(
+          doc(db, `${Cookies.get("_hash")}`, `${workoutname.current.value}`),
+          { name: "asa" }
+        );
       } catch (err) {
         console.log(err);
       }
     } else {
+      // console.log(workoutname.current)
       data.current = [...d.current.name, workoutname.current.value];
       try {
         await updateDoc(
           doc(db, "UserData", a),
           { name: data.current },
           { merge: true }
-        );
+        )
+       await setDoc(doc(db, Cookies.get("_hash"),`${workoutname.current.value}`),{})
+
       } catch (err) {
         console.log(err);
       }
@@ -149,11 +155,12 @@ const Customize = () => {
               setDisable(false);
             } else {
               setHelperText("");
-              workoutname.current.value = "";
-              createWorkout();
+            async  function fetchData(){
+              await createWorkout();
               setDisplay2("none");
               setDisplay1("ok");
-            }
+              workoutname.current.value = "";
+            }fetchData()}
           }}
           disabled={disable}
           sx={{ display: display2, mt: "1%" }}
@@ -193,18 +200,29 @@ const Customize = () => {
             <Grid item>
               <Card
                 component={motion.div}
-                whileHover={{ scale: 1.06, boxShadow: "0px 0px 1px 1px grey" }}
+                whileHover={{
+                  scale: 1.06,
+                  boxShadow: "0px 0px 1px 1px grey",
+                  cursor: "pointer",
+                }}
+                whileTap={{}}
+                Initial={{ y: -100 }}
+                animate={{ translateY: 30 }}
                 transition={{ duration: 0.3 }}
-                animate={{type:"spring"}}
+                onClick={() => {
+                  navigate(`/gym/:${item}`);
+                }}
               >
                 <Box
                   sx={{
-                    background: `linear-gradient(to right bottom,${getRandomColor(70)},${getRandomColor(150)})`,
+                    background: `linear-gradient(to right bottom,${getRandomColor(
+                      70
+                    )},${getRandomColor(150)})`,
                     width: "275px",
                     height: "200px",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   {/* <AddIcon sx={{}}/> */}

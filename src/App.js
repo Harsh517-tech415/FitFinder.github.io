@@ -33,6 +33,7 @@ import Favourites from "./Pages/Gym/Audio/Favourites";
 import Customize from "./Pages/Gym/Customize";
 import Cookies from "js-cookie";
 import AddExercise from "./Pages/Gym/AddExercise";
+import CustomizeExercise from "./Pages/Gym/CustomizeExercise";
 
 export const Update = createContext();
 function App() {
@@ -47,6 +48,7 @@ function App() {
   const [displayAppBar, setDisplayAppBar] = useState("ok");
 const[pathIndex,setPathIndex]=useState(0);
 const [url,setUrl]=useState()
+const [frame ,setFrame]=useState(0)
   const getColor = (item1, item2, item3, item4, item5, item6) => {
     setColor(item1);
     seTextColor(item2);
@@ -81,7 +83,9 @@ const [url,setUrl]=useState()
         setDisplayAppBar: setDisplayAppBar,
         setColor:setColor,
         url:url,
-        setUrl:setUrl
+        setUrl:setUrl,
+        frame:frame,
+        setFrame:setFrame
       }}
     >
       <BrowserRouter>
@@ -98,6 +102,7 @@ const [url,setUrl]=useState()
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym/>} >
+              <Route path="/gym/:name" element={<CustomizeExercise/>}/>
               <Route path="music" element={<Music/>} >
                 <Route path="feed" element={<Feed/>}/>
                 <Route path="search" element={<Search/>}/>

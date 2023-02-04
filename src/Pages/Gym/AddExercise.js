@@ -18,34 +18,28 @@ import {
   import CheckIcon from "@mui/icons-material/Check";
   import ClearIcon from "@mui/icons-material/Clear";
   import { SubdirectoryArrowLeft } from "@mui/icons-material";
+import { motion } from "framer-motion";
   const AddExercise = () => {
     const { setDisplayAppBar } = useContext(Update);
     const location = useLocation();
-    const [value, setValue] = useState(0);
-    const [searchValue, setSearchValue] = useState();
-    const [option, setOption] = useState(1);
+    const [render,setRender]=useState(0)
     const [stop, setStop] = useState(0);
-    const [left,setLeft]=useState("none");
-    const [right,setRight]=useState("ok")
-    let a = useRef([0, 0]),
-      data = useRef([0, 0]);
-    function handleSearch(e) {
-      setSearchValue(e.target.value.toLowerCase());
-    }
-    useEffect(() => {
-      // setOption(0);
-         if(option===0){
+    const [color,setColor]=useState(false)
+    let a = useRef([]),
+      data = useRef([]),workoutname=useRef();
+  
+  function fetch(){
       data.current = a.current.filter((item) => {
         return (
-          item.target.toLowerCase().includes(searchValue) ||
-          item.name.toLowerCase().includes(searchValue) ||
-          item.bodyPart.toLowerCase().includes(searchValue) ||
-          item.equipment.toLowerCase().includes(searchValue)
+          item.target.toLowerCase().includes(workoutname.current.value) ||
+          item.name.toLowerCase().includes(workoutname.current.value) ||
+          item.bodyPart.toLowerCase().includes(workoutname.current.value) ||
+          item.equipment.toLowerCase().includes(workoutname.current.value)
         );
-      });}
-      setOption(0)
+      })
+      setRender(render+1)
       console.log(data.current)
-    }, [searchValue]);
+    }
     useEffect(() => {
       if (location.pathname === "/gym/addexercise") {
         setDisplayAppBar("none");
@@ -66,10 +60,8 @@ import {
       <div>
         
         <TextField
-          value={searchValue}
-          onChange={(e) => {
-            handleSearch(e);
-          }}
+          inputRef={workoutname}
+          onChange={fetch}
           placeholder="Search Exercise"
           sx={{
             width: { sm: "700px" },
@@ -84,7 +76,7 @@ import {
             ),
           }}
         />
-        {option === 0 ? (
+        
           <Box
             id="slider"
             sx={{
@@ -102,29 +94,17 @@ import {
             >
               {data.current.map((item) => {
                 return (
-                  <Box sx={{ borderBottomColor: "1px solid black" }}>
-                    <Button>
-                    <Stack direction="row" sx={{backgroundColor:"white"}}>
-                    <CardMedia
-                      sx={{ width: "80px", height: "80px", display: "inline" }}
-                      component="img"
-                      src={item.gifUrl}
-                    />
-                    <Box sx={{width:"500px"}}>
-                      <Button sx={{color:"black",fontWeight:600}}>
+
+                      <Button  component={motion.button} id={item.name} onClick={()=>{setColor(true)}} animate={color?{scale:1,document.getElementById()backgroundColor:"lightgreen"}:{}} whileHover={{scale:1.1}}variant="outlined"sx={{m:"1% 1% 1% 1%",color:"black",dispaly:"block",fontWeight:600}}>
                       {item.name}
-                    </Button></Box>
-                  </Stack>
-                  </Button>
-                  </Box>
+                      <AddIcon  sx={{width:"15px",height:"15px",ml:"6px"}}/>
+                    </Button>
                 );
               })}
             </InfiniteScroll>
           </Box>
-        ) : (
-          <span></span>
-        )}
-        {value === 0 ? (
+        
+        {/* {value === 0 ? (
           <div>
             <CreateIcon
               sx={{
@@ -141,7 +121,7 @@ import {
           </div>
         ) : (
           <Box></Box>
-        )}
+        )} */}
       </div>
     );
   };

@@ -3,9 +3,10 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Update } from "../App";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import { UserC } from "../components/FitFinderInfo";
 import Cookies from "js-cookie";
+import { collection,addDoc, doc,updateDoc, setDoc } from "firebase/firestore";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -54,11 +55,19 @@ const Login = () => {
         {
           try{
             const a=await userc.getDocData(hash);
-            if(a.data()){console.log(a.data())}
+            if(a.data()){}
             else{console.log(hash); fun()}
           }catch(err){console.log(err)}
         }
         verify()
+        async function add()
+        {
+          try{
+            await setDoc(doc(db,hash,"xbzmczcbckasdcsxzcsdjlcnz,"),{name:"nb"})
+          }
+          catch(err){console.log(err)}
+        }
+      add()
        setTimeout(()=>{navigate("/")},1000)
       })
       .catch((err) => {
