@@ -1,4 +1,4 @@
-import {Box,Button,Stack,TextField,Typography,} from "@mui/material";
+import {Box,Button,Input,Stack,TextField,Typography,} from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
@@ -13,13 +13,17 @@ import ClearIcon from "@mui/icons-material/Clear";
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import { motion } from "framer-motion";
-const AddExercise = () => {
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../components/firebase";
+import Cookies from "js-cookie";
+const AddExercise = ({display,setDisplay}) => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   const [render, setRender] = useState(0);
   const [stop, setStop] = useState(0);
-  const [option, setOption] = useState(0);
+  const [disable,setDisable]=useState(true)
   const [recentlyAddedList,setRcentlyAddedList] = useState([]);
+
   let a = useRef([]),
     data = useRef([]),
     workoutname = useRef();
@@ -50,11 +54,13 @@ const AddExercise = () => {
       getData();
     }
   }, []);
+  useEffect(()=>{if(recentlyAddedList.length>0){setDisable(false)}},[recentlyAddedList])
   return (
-    <div>
+    <Box sx={{position:"absolute",ml:{lg:"18%"}}}>
       <TextField
+   variant="standard"
         inputRef={workoutname}
-        onChange={fetch}
+        onChange={()=>{fetch();setDisplay("ok")}}
         placeholder="Search Exercise"
         sx={{
           width: { sm: "700px" },
@@ -67,18 +73,34 @@ const AddExercise = () => {
               <SearchIcon />
             </InputAdornment>
           ),
+          endAdornment:(
+            <InputAdornment>
+           <Button disabled={disable}> <CheckIcon onClick={
+             async function addItem(){
+              setRcentlyAddedList([])
+              setDisplay("none");
+              workoutname.current.value=""
+            try{
+              await setDoc(doc(db,Cookies.get("_hash"),`${location.pathname.split(":")[1]}`),{recentlyAddedList},{merge:true})
+            }catch(err){console.log(err)}
+           }}/></Button>
+            </InputAdornment>
+          )
         }}
       />
 
       <Box
         id="slider"
+        className="exercisedata"
         sx={{
           borderRadius: "4px",
-          height: "250px",
+          minHeight: "100px",
+          height:{sm:"203px",lg:"250px"},
           width: "700px",
           ml: { sm: "10%", lg: "25%" },
           overflowY: "scroll",
-          border: "1px solid grey",
+          borderTop:"0px",
+          display:display,
         }}
       >
         <Stack>
@@ -86,16 +108,13 @@ const AddExercise = () => {
             Recently Added
             <SettingsOutlinedIcon sx={{ml:"5px",mb:"4px",fontSize:"medium"}}/>
           </Typography>
-          {option === 0 ? (
-            <Box></Box>
-          ) : (
+          {
             <Stack direction="row" id="slider" sx={{display:"flex",flexWrap:"wrap ",width:"680px",height:"50px",overflowX:"scroll"}}>
               {recentlyAddedList.map((item,index) => (
-                <Button variant="outlined"  sx={{color:"black",backgroundColor:"lightgreen",ml:"7px",mt:"5px"}}>{item}<DeleteOutlineOutlinedIcon key={index}  onClick={()=>{
-  console.log(this.index,this.id) }}/></Button>
+                <Button variant="outlined"  sx={{color:"black",backgroundColor:"lightgreen",ml:"7px",mt:"5px"}}>{item.name}<DeleteOutlineOutlinedIcon /> </Button>
               ))}
             </Stack>
-          )}
+          }
           <InfiniteScroll
             dataLength={data.current.length}
             loader={<h4>Loading...</h4>}
@@ -117,10 +136,8 @@ const AddExercise = () => {
                     document.getElementById(
                       `${item.name}`
                     ).style.backgroundColor = "lightgreen";
-                    setRcentlyAddedList([...recentlyAddedList,item.name])
-                    setOption(1);
-                    console.log(recentlyAddedList)
-                  }}
+                    setRcentlyAddedList([...recentlyAddedList,item])
+                     }}
                 >
                   {item.name}
                   <AddIcon sx={{ width: "15px", height: "15px", ml: "6px" }} />
@@ -132,7 +149,7 @@ const AddExercise = () => {
       </Box>
 
       {/* {value === 0 ? (
-          <div>
+          <Box>
             <CreateIcon
               sx={{
                 color: "grey",
@@ -145,11 +162,11 @@ const AddExercise = () => {
             >
               No customized workout
             </Typography>
-          </div>
+          </Box>
         ) : (
           <Box></Box>
         )} */}
-    </div>
+    </Box>
   );
 };
 
