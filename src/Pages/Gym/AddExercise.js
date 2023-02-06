@@ -1,4 +1,4 @@
-import {Box,Button,Input,Stack,TextField,Typography,} from "@mui/material";
+import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Update } from "../../App";
@@ -10,20 +10,40 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import AddIcon from "@mui/icons-material/Add";
 import CheckIcon from "@mui/icons-material/Check";
 import ClearIcon from "@mui/icons-material/Clear";
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { motion } from "framer-motion";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
 import Cookies from "js-cookie";
-const AddExercise = ({display,setDisplay}) => {
+const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList }) => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   const [render, setRender] = useState(0);
   const [stop, setStop] = useState(0);
-  const [disable,setDisable]=useState(true)
-  const [recentlyAddedList,setRcentlyAddedList] = useState([]);
+  const [disable, setDisable] = useState(true);
+  const [temporary, setTemporary] = useState(0);
+  const [check, setCheck] = useState(0);
 
+  useEffect(() => {
+    async function setData() {
+      try {
+        await updateDoc(
+          doc(db, Cookies.get("_hash"), `${location.pathname.split(":")[1]}`),
+          { recentlyAddedList },
+          { merge: true }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+      setDisplay("none");
+      setDisable(true);
+      workoutname.current.value = "";
+    }
+    if(temporary===1){
+      setData();}
+    
+  }, [temporary]);
   let a = useRef([]),
     data = useRef([]),
     workoutname = useRef();
@@ -54,18 +74,36 @@ const AddExercise = ({display,setDisplay}) => {
       getData();
     }
   }, []);
-  useEffect(()=>{if(recentlyAddedList.length>0){setDisable(false)}},[recentlyAddedList])
+  useEffect(() => {
+    if (recentlyAddedList.length > 0) {
+      setDisable(false);
+    }
+  }, [recentlyAddedList]);
   return (
-    <Box sx={{position:"absolute",ml:{lg:"18%"}}}>
+    <Box
+      id="slider"
+      sx={{
+        position: "absolute",
+        // border:"1px solid black",
+        overflowY: "scroll",
+        mt: { sm: "2%", lg: "1%" },
+        ml: { sm: "10%", lg: "28%" },
+        borderRadius: "10px",
+        boxShadow: "0px 0px 5px 1px grey",
+      }}
+    >
       <TextField
-   variant="standard"
+        variant="standard"
+        autoComplete="on"
         inputRef={workoutname}
-        onChange={()=>{fetch();setDisplay("ok")}}
+        onChange={() => {
+          fetch();
+          setDisplay("ok");
+        }}
         placeholder="Search Exercise"
         sx={{
           width: { sm: "700px" },
-          mt: { sm: "10%", lg: "5%" },
-          ml: { sm: "10%", lg: "25%" },
+          ml: { sm: "1%", lg: "2%" },
         }}
         InputProps={{
           startAdornment: (
@@ -73,19 +111,19 @@ const AddExercise = ({display,setDisplay}) => {
               <SearchIcon />
             </InputAdornment>
           ),
-          endAdornment:(
+          endAdornment: (
             <InputAdornment>
-           <Button disabled={disable}> <CheckIcon onClick={
-             async function addItem(){
-              setRcentlyAddedList([])
-              setDisplay("none");
-              workoutname.current.value=""
-            try{
-              await setDoc(doc(db,Cookies.get("_hash"),`${location.pathname.split(":")[1]}`),{recentlyAddedList},{merge:true})
-            }catch(err){console.log(err)}
-           }}/></Button>
+              <Button disabled={disable}>
+                {" "}
+                <CheckIcon
+                  onClick={() => {
+                    
+                        setTemporary(1);
+                  }}
+                />
+              </Button>
             </InputAdornment>
-          )
+          ),
         }}
       />
 
@@ -95,23 +133,49 @@ const AddExercise = ({display,setDisplay}) => {
         sx={{
           borderRadius: "4px",
           minHeight: "100px",
-          height:{sm:"203px",lg:"250px"},
+          height: { sm: "233px", lg: "228px" },
           width: "700px",
-          ml: { sm: "10%", lg: "25%" },
-          overflowY: "scroll",
-          borderTop:"0px",
-          display:display,
+          ml: { sm: "1%", lg: "1%" },
+          display: display,
         }}
       >
         <Stack>
+          
           <Typography sx={{ fontWeight: "600", ml: "10px" }}>
-            Recently Added
-            <SettingsOutlinedIcon sx={{ml:"5px",mb:"4px",fontSize:"medium"}}/>
+            Exercise Added
+            <SettingsOutlinedIcon
+              sx={{ ml: "5px", mb: "4px", fontSize: "medium" }}
+            />
           </Typography>
           {
-            <Stack direction="row" id="slider" sx={{display:"flex",flexWrap:"wrap ",width:"680px",height:"50px",overflowX:"scroll"}}>
-              {recentlyAddedList.map((item,index) => (
-                <Button variant="outlined"  sx={{color:"black",backgroundColor:"lightgreen",ml:"7px",mt:"5px"}}>{item.name}<DeleteOutlineOutlinedIcon /> </Button>
+            <Stack
+              direction="row"
+              id="slider"
+              sx={{
+                display: "flex",
+                flexWrap: "wrap ",
+                width: "680px",
+                minHeight:"2px",
+                maxHeight:"45px",
+                overflowY: "scroll",
+                borderBottom:"1px solid black"
+              }}
+            >
+              {recentlyAddedList.map((item, index) => (
+                <Button
+                  variant="outlined"
+                  sx={{
+                    color: "black",
+                    backgroundColor: "lightgreen",
+                    ml: "7px",
+                    mt: "5px",
+                    mb:"1px",
+                    boxShadow:"0px 0px 5px 2px grey"
+                  }}
+                >
+                  {item.name}
+                  <DeleteOutlineOutlinedIcon />{" "}
+                </Button>
               ))}
             </Stack>
           }
@@ -136,8 +200,12 @@ const AddExercise = ({display,setDisplay}) => {
                     document.getElementById(
                       `${item.name}`
                     ).style.backgroundColor = "lightgreen";
-                    setRcentlyAddedList([...recentlyAddedList,item])
-                     }}
+                    item.workout = 0;
+                    item.kcal = 0;
+                    item.reps = 0;
+                    setRcentlyAddedList([...recentlyAddedList, item]);
+                    console.log(recentlyAddedList)
+                  }}
                 >
                   {item.name}
                   <AddIcon sx={{ width: "15px", height: "15px", ml: "6px" }} />
@@ -149,19 +217,7 @@ const AddExercise = ({display,setDisplay}) => {
       </Box>
 
       {/* {value === 0 ? (
-          <Box>
-            <CreateIcon
-              sx={{
-                color: "grey",
-                mt: { sm: "400px", lg: "390px" },
-                ml: { sm: "53%", lg: "40%" },
-              }}
-            />
-            <Typography
-              sx={{ color: "grey", mt: "1%", ml: { sm: "45%", lg: "36.3%" } }}
-            >
-              No customized workout
-            </Typography>
+          
           </Box>
         ) : (
           <Box></Box>
