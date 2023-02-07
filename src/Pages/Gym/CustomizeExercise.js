@@ -8,6 +8,7 @@ import { db } from "../../components/firebase";
 import AddExercise from "./AddExercise";
 import CreateIcon from "@mui/icons-material/Create";
 import { motion } from "framer-motion";
+import { DragDropContext, Draggable } from "react-beautiful-dnd";
 const CustomizeExercise = () => {
   const location = useLocation();
   const [display, setDisplay] = useState("none");
@@ -41,6 +42,7 @@ const CustomizeExercise = () => {
     return `rgb(${r},${b},${g})`;
   }
   return (
+    <DragDropContext onDragEnd={()=>{}}>
     <Box>
       <AddExercise recentlyAddedList={recentlyAddedList} setRcentlyAddedList={setRcentlyAddedList} display={display} setDisplay={setDisplay} />
       <Box
@@ -63,7 +65,7 @@ const CustomizeExercise = () => {
               mt: { sm: "400px", lg: "390px" },
               ml: { sm: "53%", lg: "40%" },
             }}
-          />
+            />
           <Typography sx={{ color: "grey", ml: { sm: "45%", lg: "36.3%" } }}>
             No customized workout
           </Typography>{" "}
@@ -71,17 +73,17 @@ const CustomizeExercise = () => {
       ) : (
         <Box
         onClick={()=>{setDisplay("none")}}
-          id="slider"
-          sx={{
-            height: "700px",
-            overflowY: "scroll",
-            mb: "1%",
-            ml: { sm: "7%", lg: "16%" },
-            mr: { sm: "10%", lg: "10%" },
-            width:{sm:"750px",lg:"1100px"}
+        id="slider"
+        sx={{
+          height: "700px",
+          overflowY: "scroll",
+          mb: "1%",
+          ml: { sm: "7%", lg: "16%" },
+          mr: { sm: "10%", lg: "10%" },
+          width:{sm:"750px",lg:"1100px"}
           }}
-        >
-          {recentlyAddedList.map((item) => (
+          >       
+           {recentlyAddedList.map((item) => (
             <Card
             component={motion.div}
             initial={{x:-10,duration:"1sec"}}
@@ -99,10 +101,11 @@ const CustomizeExercise = () => {
                 sx={{ width: "150px" }}
               />
             </Card>
-          ))}
+))}
         </Box>
       )}
     </Box>
+    </DragDropContext>
   );
 };
 

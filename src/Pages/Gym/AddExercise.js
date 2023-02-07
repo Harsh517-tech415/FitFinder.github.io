@@ -16,14 +16,19 @@ import { motion } from "framer-motion";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
 import Cookies from "js-cookie";
-const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList }) => {
+const AddExercise = ({
+  recentlyAddedList,
+  display,
+  setDisplay,
+  setRcentlyAddedList,
+}) => {
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
   const [render, setRender] = useState(0);
   const [stop, setStop] = useState(0);
   const [disable, setDisable] = useState(true);
   const [temporary, setTemporary] = useState(0);
-  const [check, setCheck] = useState(0);
+  const [check, setCheck] = useState();
 
   useEffect(() => {
     async function setData() {
@@ -40,9 +45,9 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
       setDisable(true);
       workoutname.current.value = "";
     }
-    if(temporary===1){
-      setData();}
-    
+    if (temporary === 1) {
+      setData();
+    }
   }, [temporary]);
   let a = useRef([]),
     data = useRef([]),
@@ -76,9 +81,24 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
   }, []);
   useEffect(() => {
     if (recentlyAddedList.length > 0) {
-      setDisable(false);
-    }
+      setDisable(false);}
+      async function update() {
+        try {
+          await setDoc(
+            doc(db, Cookies.get("_hash"), `${location.pathname.split(":")[1]}`),
+            { recentlyAddedList }
+            );
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        if (check === 1) {
+        console.log(recentlyAddedList)
+        update();
+      setCheck(0)}
+    
   }, [recentlyAddedList]);
+ 
   return (
     <Box
       id="slider"
@@ -117,8 +137,7 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
                 {" "}
                 <CheckIcon
                   onClick={() => {
-                    
-                        setTemporary(1);
+                    setTemporary(1);
                   }}
                 />
               </Button>
@@ -140,7 +159,6 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
         }}
       >
         <Stack>
-          
           <Typography sx={{ fontWeight: "600", ml: "10px" }}>
             Exercise Added
             <SettingsOutlinedIcon
@@ -155,10 +173,10 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
                 display: "flex",
                 flexWrap: "wrap ",
                 width: "680px",
-                minHeight:"2px",
-                maxHeight:"45px",
+                minHeight: "2px",
+                maxHeight: "45px",
                 overflowY: "scroll",
-                borderBottom:"1px solid black"
+                borderBottom: "1px solid black",
               }}
             >
               {recentlyAddedList.map((item, index) => (
@@ -169,50 +187,75 @@ const AddExercise = ({ recentlyAddedList,display, setDisplay,setRcentlyAddedList
                     backgroundColor: "lightgreen",
                     ml: "7px",
                     mt: "5px",
-                    mb:"1px",
-                    boxShadow:"0px 0px 5px 2px grey"
+                    mb: "1px",
+                    boxShadow: "0px 0px 5px 2px grey",
                   }}
                 >
                   {item.name}
-                  <DeleteOutlineOutlinedIcon />{" "}
+                  <DeleteOutlineOutlinedIcon
+                    onClick={() => {
+                      function deleteItem() {
+                        let a = recentlyAddedList.filter((item1) => {
+                          if (item1 != item) {
+                            return item1;
+                          }
+                        });
+                        setCheck(1);
+                        setRcentlyAddedList(a);
+                        
+                      }
+                      deleteItem();
+                    }}
+                  />{" "}
                 </Button>
               ))}
             </Stack>
           }
-          <InfiniteScroll
-            dataLength={data.current.length}
-            loader={<h4>Loading...</h4>}
+          <Box
+            id="slider"
+            sx={{
+              minHeight: "0px",
+              height: { sm: "165px", lg: "165px" },
+              overflowY: "scroll",
+            }}
           >
-            {data.current.map((item) => {
-              return (
-                <Button
-                  component={motion.button}
-                  id={item.name}
-                  whileHover={{ scale: 1.1 }}
-                  variant="outlined"
-                  sx={{
-                    m: "1% 1% 1% 1%",
-                    color: "black",
-                    dispaly: "block",
-                    fontWeight: 600,
-                  }}
-                  onClick={() => {
-                    document.getElementById(
-                      `${item.name}`
-                    ).style.backgroundColor = "lightgreen";
-                    item.workout = 0;
-                    item.kcal = 0;
-                    item.reps = 0;
-                    setRcentlyAddedList([...recentlyAddedList, item]);
-                    console.log(recentlyAddedList)
-                  }}
-                >
-                  {item.name}
-                  <AddIcon sx={{ width: "15px", height: "15px", ml: "6px" }} />
-                </Button>
-              );
-            })}
-          </InfiniteScroll>
+            <InfiniteScroll
+              dataLength={data.current.length}
+              loader={<h4>Loading...</h4>}
+            >
+              {data.current.map((item) => {
+                return (
+                  <Button
+                    component={motion.button}
+                    id={item.name}
+                    whileHover={{ scale: 1.1 }}
+                    variant="outlined"
+                    sx={{
+                      m: "1% 1% 1% 1%",
+                      color: "black",
+                      dispaly: "block",
+                      fontWeight: 600,
+                    }}
+                    onClick={() => {
+                      document.getElementById(
+                        `${item.name}`
+                      ).style.backgroundColor = "lightgreen";
+                      item.workout = 0;
+                      item.kcal = 0;
+                      item.reps = 0;
+                      setRcentlyAddedList([...recentlyAddedList, item]);
+                      console.log(recentlyAddedList);
+                    }}
+                  >
+                    {item.name}
+                    {/* <AddIcon
+                      sx={{ width: "15px", height: "15px", ml: "6px" }}
+                    /> */}
+                  </Button>
+                );
+              })}
+            </InfiniteScroll>
+          </Box>
         </Stack>
       </Box>
 
