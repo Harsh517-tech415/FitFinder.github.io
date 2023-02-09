@@ -7,24 +7,60 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Update } from "../../App";
-import {  images, time } from "./GymInfo";
+import { images, time } from "./GymInfo";
 import SentimentVeryDissatisfiedTwoToneIcon from "@mui/icons-material/SentimentVeryDissatisfiedTwoTone";
 import MoodTwoToneIcon from "@mui/icons-material/MoodTwoTone";
 import SentimentVerySatisfiedTwoToneIcon from "@mui/icons-material/SentimentVerySatisfiedTwoTone";
 import { UserC } from "../../components/FitFinderInfo";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../components/firebase";
+import Cookies from "js-cookie";
 const GymResult = ({ pathIndex }) => {
   let userc = new UserC();
   const navigate = useNavigate();
+  const date = new Date();
   const [value, setValue] = useState();
   const { setDisplayAppBar } = useContext(Update);
   const location = useLocation();
+  const height = useRef();
+  const weight = useRef();
+  const data = useRef();
+  const d=useRef()
   useEffect(() => {
     if (location.pathname === "/gym/gymresult") {
       setDisplayAppBar("none");
     }
+    async function getData() {
+      let a;
+      try {
+        a = await getDoc(doc(db, Cookies.get("_hash"), "_dash"));
+        a = a.data();
+        
+        if (a[`${date.getFullYear()}` +[date.getMonth() + 1] +[date.getDate() + 1]])
+         {
+          
+          data.current =
+            a[
+              `${date.getFullYear()}` +
+                [date.getMonth() + 1] +
+                [date.getDate() + 1]
+            ]["exercise"];
+            console.log(1)
+            
+        }
+        else{
+
+          data.current=["2"];
+          console.log(2)
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getData();
   }, []);
   return (
     <Box
@@ -82,7 +118,36 @@ const GymResult = ({ pathIndex }) => {
           backgroundColor: "white",
           boxShadow: "0px 0px 14px 1px grey",
           borderRadius: "7px",
-          mt: { sm: "16%", lg: "11%" },
+          mt: { sm: "13%", lg: "10%" },
+          ml: { sm: "4.2%", lg: "5.7%" },
+          width: { sm: "600px", lg: "800px" },
+        }}
+      >
+        <Typography sx={{ display: "inline" }}>Weight:</Typography>
+        <TextField
+          type="number"
+          variant="filled"
+          inputRef={weight}
+          placeholder="Weight in Kg"
+          size="small"
+          sx={{ width: "150px" }}
+        />
+        <Typography sx={{ display: "inline", ml: "15%" }}>Height:</Typography>
+        <TextField
+          type="number"
+          variant="filled"
+          inputRef={height}
+          placeholder="Height in Ft"
+          size="small"
+          sx={{ ml: "5%", width: "150px" }}
+        />
+      </CardContent>
+      <CardContent
+        sx={{
+          backgroundColor: "white",
+          boxShadow: "0px 0px 14px 1px grey",
+          borderRadius: "7px",
+          mt: { sm: "5%", lg: "4%" },
           ml: { sm: "4.2%", lg: "5.7%" },
           width: { sm: "600px", lg: "800px" },
         }}
@@ -107,7 +172,30 @@ const GymResult = ({ pathIndex }) => {
         </Stack>
       </CardContent>
       <Button
-        onClick={navigate("/gym/discovergym")}
+        onClick={() => {
+          async function setData() {
+            try {
+               d.current=`${`${date.getFullYear()}` +
+              [date.getMonth() + 1] +
+              [date.getDate() ]}`;
+              // d.current=d.current.stringify()
+              await setDoc(doc(db, Cookies.get("_hash"), "_dash"), {
+                d: {
+                  year: date.getFullYear(),
+                  month: date.getMonth() + 1,
+                  date: date.getDate() + 1,
+                  weight: weight.current.value,
+                  height: height.current.value,
+                  // exercise: [Cookies.get("_#*_")]
+                },
+              },{merge:"true"});
+            } catch (err) {
+              console.log(err);
+            }
+          }
+          setData();
+          // navigate("/gym/discovergym");
+        }}
         variant="contained"
         className="GymResultButton"
         sx={{ ml: { sm: "42%", lg: "44%" }, mt: "3%" }}

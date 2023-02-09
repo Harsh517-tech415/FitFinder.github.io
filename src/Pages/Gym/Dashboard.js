@@ -22,12 +22,17 @@ const Dashboard = () => {
     if (location.pathname === "/gym/dashboardgym") {
       setDisplayAppBar("none");
     }
+    // console.log()
   }, []);
   const [userdata,setUserData]=useState({
     labels:data.map((item)=>(item.year)),
 datasets:[{
   label:"Users Gained",
   data:data.map((item)=>(item.userGain))
+}],
+datasets:[{
+  label:"Users Lose",
+  data:data.map((item)=>(item.userLost))
 }]
 })
   return (

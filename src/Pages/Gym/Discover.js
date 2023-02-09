@@ -35,7 +35,6 @@ const Discover = () => {
         let hash=Cookies.get("_hash")
         data = await userc.getDocData(hash);
         setData(data.data());
-        console.log(data.data())
       } catch (err) {
         console.log(err);
       }
@@ -132,7 +131,7 @@ const Discover = () => {
         }}
       >
         {Beginner.map((item) => (
-          <GymCard Carddetail={item.data()} data1={data1} />
+          <GymCard Carddetail={item.data()} data1={data1} level={" BEGINNER"}/>
         ))}
       </Stack>
       <Typography
@@ -159,7 +158,7 @@ const Discover = () => {
         }}
       >
         {Intermediate.map((item) => (
-          <GymCard Carddetail={item.data()} data1={data1} />
+          <GymCard Carddetail={item.data()} data1={data1} level=" INTERMEDIATE"/>
         ))}
       </Stack>
 
@@ -187,7 +186,7 @@ const Discover = () => {
         }}
       >
         {Advance.map((item) => (
-          <GymCard Carddetail={item.data()} data1={data1} />
+          <GymCard Carddetail={item.data()} data1={data1} level=" ADVANCE"/>
         ))}
       </Stack>
     </div>

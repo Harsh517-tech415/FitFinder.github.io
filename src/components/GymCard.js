@@ -7,7 +7,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { Update } from "../App";
-const GymCard = ({ Carddetail, data1 }) => {
+const GymCard = ({ Carddetail, data1,level }) => {
   const navigate = useNavigate();
   const { setUrl } = useContext(Update);
   useEffect(() => {
@@ -86,6 +86,7 @@ const GymCard = ({ Carddetail, data1 }) => {
           onClick={() => {
             setUrl(Carddetail.workout);
             document.cookie=`_adu=${Carddetail.workout}`;
+            document.cookie=`_#*_=${Carddetail.caption+level}`
             navigate(`${[Carddetail.link]}`);
           }}
         >
