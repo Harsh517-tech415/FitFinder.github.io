@@ -1,8 +1,9 @@
-import { Box, Typography, Stack, Button } from "@mui/material";
+import { Box, Typography, Stack, Button, Grid, duration } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import React, { useContext, useRef, useEffect, useState } from "react";
+import { Camera } from "react-camera-pro";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Update } from "../../App";
 import { exercisebeginner } from "./GymInfo";
@@ -13,41 +14,47 @@ import { UserC } from "../../components/FitFinderInfo";
 import { getDateRangePickerDayUtilityClass } from "@mui/lab";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
+import { motion } from "framer-motion";
+import { ArrowLeft, CameraAlt } from "@mui/icons-material";
+
 let Cookies = require("js-cookie");
 const GymExercise = ({ pathIndex }) => {
   let a1;
   const navigate = useNavigate();
+  const [animationActive, setAnimationActive] = useState(null);
   let userc = new UserC();
   const exerciseDetail = exercisebeginner[pathIndex];
-  const { setDisplayAppBar, url,setUrl } = useContext(Update);
+  const { setDisplayAppBar, url, setUrl } = useContext(Update);
   const [option, setOption] = useState();
-  const [fetch,seFetch]=useState(0)
+  const [fetch, seFetch] = useState(0);
   const [index, setIndex] = useState(0);
   const [display, setDisplay] = useState("");
+  const [displayCamera, setDisplayCamera] = useState("none");
   const [disable, setDisable] = useState(true);
   const location = useLocation();
   const second = useRef(0);
   const minute = useRef(0);
   const [value, setValue] = useState(0);
   const time = useRef(0);
-async function getData()
-{
-try{
-  const aa=await getDoc(doc(db,"Exercise",Cookies.get("_adu")));
-  
-}catch(err){console.log(err)}
-}
+  const [NumberOfBlock,setNumberOfBlock]=useState(12)
+  async function getData() {
+    try {
+      const aa = await getDoc(doc(db, "Exercise", Cookies.get("_adu")));
+    } catch (err) {
+      console.log(err);
+    }
+  }
   let d, a;
   let t = 0,
     c = 0;
-
+  const camera = useRef(null);
+  const [image, setImage] = useState(null);
   useEffect(() => {
     if (location.pathname === "/gym/gymexercise") {
       setDisplayAppBar("none");
     }
-    if(fetch===0)
-    {
-      getData()
+    if (fetch === 0) {
+      getData();
     }
     Cookies.get("time") === "NaN" || "NAN"
       ? (t = 0)
@@ -99,9 +106,30 @@ try{
   //   document.cookie = `time =${(+(performance.now() / 60000) + +t).toFixed(2)}; expires=Thu, 23 Jan 2023 12:00:00 UTC;path=/gym/gymexercise`;
   // console.log(document.cookie)
   // }
+  const variants = {
+    open: { x: -150,minWidth:"650px",maxWidth:"660px"},
+    close: {
+      x: 12,
+       minWidth:"650px",
+      maxWidth:"900px",
+    },
+    decreaseCameraIcon: { width: "300px" },
+    increageCameraIcon: { width: "480px" },
+    openCamera: { y: .5,opacity:1},
+    closeCamera: { y: -150 },
+  };
+  useEffect(() => {
+    if (animationActive === true) {
+      setDisplayCamera("ok");
+      setNumberOfBlock(6)
+    } else {
+      setDisplayCamera("none");
+      setNumberOfBlock(12)
+    }
+  }, [animationActive]);
   return (
     <Stack direction="row">
-      <Button
+      {/* <Button
         onClick={() => {
           if (
             window.confirm(
@@ -124,116 +152,186 @@ try{
         }}
       >
         <ArrowCircleLeftRoundedIcon fontSize="large" color="error" />{" "}
-      </Button>
+      </Button> */}
       {option === 0 ? (
-        <Box
-          sx={{
-            display: "inline-block",
-            backgroundColor: "white",
-            m: { sm: "5px 0% 0px 0.5%", lg: "5px 20% 0% 0.5%" },
-            width: { sm: "650px", lg: "900px" },
-            height: { sm: "770px", lg: "750px" },
-            boxShadow: "0px 0px 50px 2px grey",
-          }}
-        >
-          <CardMedia
+        <Stack direction="row">
+          {/* <Box
             sx={{
-              display: "inline",
-              m: { sm: "2% 25% 0% 25%", lg: "1.5% 20% 0% 22%" },
-              width: { sm: "300px", lg: "500px" },
-              height: { sm: "360px", lg: "450px" },
+              ml: { sm: "13%", lg: "17%" },
+              backgroundColor: "blue",
+              width: { sm: "700px", lg: "1000px" },
+              height: { sm: "800px", lg: "800px" },
             }}
-            component="img"
-            src={exerciseDetail[index].gifUrl}
-          />
-          <CardContent>
-            <Typography
+            > */}
+            <Box sx={{m:{sm:"1% 0% 0% 13%",lg:"1% 0% 0% 14%"},width:{sm:"660px",lg:"1600px"},height:{sm:"760px",lg:"750px"}}}>
+            <Box 
               sx={{
-                m: { sm: "10px 0px 0px 0px", lg: "10px 0px 0px 0px" },
-                textAlign: "center",
-                fontSize: "24px",
-                fontWeight: "800",
+                display: "block",
+                position: "absolute",
+                backgroundColor: "white",
+                m:{sm:"0% 0% 0% 0%",lg:"0% 0% 0% 7%"},
+                width: { sm: "650px", lg: "900px" },
+                height: { sm: "750px", lg: "750px" },
+                boxShadow: "0px 0px 50px 2px grey",
               }}
+              component={motion.div}
+              animate={
+                animationActive === true
+                  ? "open"
+                  : animationActive === false
+                  ? "close"
+                  : ""
+              }
+              variants={variants}
             >
-              {exerciseDetail[index].name}
-            </Typography>
-            <Typography
-              sx={{
-                display: { display },
-                color: "grey",
-                m: { sm: "5% 0% 0% 43.2%", lg: "2% 0% 0% 45%" },
-              }}
-            >
-              Each Side x{exerciseDetail[index].side}
-            </Typography>
-            <Typography
-              sx={{
-                fontWeight: "600",
-                fontSize: "34px",
-                m: { sm: "5% 0% 0% 46%", lg: "2% 0% 0% 47%" },
-              }}
-            >
-              {exerciseDetail[index].reps}
-            </Typography>
-            <Button
-              variant="contained"
-              color="error"
-              sx={{
-                width: "200px",
-                height: "50px",
-                borderRadius: "30px",
-                m: { sm: "3% 36%", lg: "3% 39.5%" },
-              }}
-            >
-              Done
-            </Button>
-            <Button
-              color="error"
-              disabled={disable}
-              onClick={() => {
-                setIndex((index) => index - 1);
-                setOption(1);
-              }}
-              sx={{ fontSize: "18px", m: { sm: "0% 10% 0% 30%" } }}
-            >
-              <SkipPreviousRoundedIcon fontSize="large" />
-              Previous
-            </Button>
-            <Button
-              color="error"
-              onClick={() => {
-                if (index !== exerciseDetail.length - 1) {
-                  setOption(1);
-                  setIndex(index + 1);
-
-                  // async function fun1() {
-                  //  try{
-                  //   a1 = await userc.updateDocData(document.cookie.split("=")[1],{absb:[0,0,0]});
-                    // a1=a1.data()[url][1];
-                    // console.log(a1)
-                  // }
-                  //   catch(err){console.log(err)}
-                  // }
-                  // fun1();
-                
-                } else {
-                  async function fun() {
-                    let data,hash=Cookies.get("_hash")
-                    try{data=await userc.getDocData(hash.split("=")[1])
-                  data=data.data()[url]}catch(err){console.log(err)}
-                   try{ await userc.updateDocData(hash.split("=")[1],{[url]:[data[0]+1,data[1],data[2]]});
-                   }catch(err){console.log(err)}}
-                  fun();
-                  navigate("/gym/gymresult");
+              <Button
+                sx={{ position: "absolute", m: "6% 0% 0% 90%" }}
+                onClick={() => {
+                  if ((animationActive === false || animationActive === null)&&window.innerWidth>=1600)
+                    setAnimationActive(true);
+                  else {
+                    setAnimationActive(false);
+                  }
+                }}
+              >
+                <CameraAlt sx={{ color: "grey" }} />
+              </Button>
+              <Box
+                variants={variants}
+                animate={
+                  animationActive === true
+                    ? "decreaseCameraIcon"
+                    : animationActive === false
+                    ? "increageCameraIcon"
+                    : ""
                 }
-              }}
-              sx={{ fontSize: "18px" }}
-            >
-              Skip
-              <SkipNextRoundedIcon fontSize="large" />
-            </Button>
-          </CardContent>
-        </Box>
+                sx={{
+                  width: { sm: "300px", lg: "480px" },
+                  height: { sm: "360px", lg: "450px" },
+                  m: "auto",
+                }}
+              >
+                <CardMedia component="img" src={exerciseDetail[index].gifUrl} />
+              </Box>
+              <CardContent>
+                <Typography
+                  sx={{
+                    m: { sm: "10px 0px 0px 0px", lg: "10px 0px 0px 0px" },
+                    textAlign: "center",
+                    fontSize: "24px",
+                    fontWeight: "800",
+                  }}
+                >
+                  {exerciseDetail[index].name}
+                </Typography>
+                <Typography
+                  sx={{
+                    display: { display },
+                    color: "grey",
+                    m: { sm: "5% 0% 0% 43.2%", lg: "2% 0% 0% 45%" },
+                  }}
+                >
+                  Each Side x{exerciseDetail[index].side}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: "600",
+                    fontSize: "34px",
+                    m: { sm: "5% 0% 0% 46%", lg: "2% 0% 0% 47%" },
+                  }}
+                >
+                  {exerciseDetail[index].reps}
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="error"
+                  sx={{
+                    width: "200px",
+                    height: "50px",
+                    borderRadius: "30px",
+                    m: { sm: "3% 36%", lg: "3% 39.5%" },
+                  }}
+                >
+                  Done
+                </Button>
+                <Button
+                  color="error"
+                  disabled={disable}
+                  onClick={() => {
+                    setIndex((index) => index - 1);
+                    setOption(1);
+                  }}
+                  sx={{ fontSize: "18px", m: { sm: "0% 10% 0% 30%" } }}
+                >
+                  <SkipPreviousRoundedIcon fontSize="large" />
+                  Previous
+                </Button>
+                <Button
+                  color="error"
+                  onClick={() => {
+                    if (index !== exerciseDetail.length - 1) {
+                      setOption(1);
+                      setIndex(index + 1);
+
+                      // async function fun1() {
+                      //  try{
+                      //   a1 = await userc.updateDocData(document.cookie.split("=")[1],{absb:[0,0,0]});
+                      // a1=a1.data()[url][1];
+                      // console.log(a1)
+                      // }
+                      //   catch(err){console.log(err)}
+                      // }
+                      // fun1();
+                    } else {
+                      async function fun() {
+                        let data,
+                          hash = Cookies.get("_hash");
+                        try {
+                          data = await userc.getDocData(hash.split("=")[1]);
+                          data = data.data()[url];
+                        } catch (err) {
+                          console.log(err);
+                        }
+                        try {
+                          await userc.updateDocData(hash.split("=")[1], {
+                            [url]: [data[0] + 1, data[1], data[2]],
+                          });
+                        } catch (err) {
+                          console.log(err);
+                        }
+                      }
+                      fun();
+                      navigate("/gym/gymresult");
+                    }
+                  }}
+                  sx={{ fontSize: "18px" }}
+                >
+                  Skip
+                  <SkipNextRoundedIcon fontSize="large" />
+                </Button>
+              </CardContent>
+            {/* </Box> */}
+            </Box>
+          {/* </Box> */}
+          <Box
+            component={motion.div}
+            variants={variants}
+            intial={{ y: -200,opacity:0 }}
+            animate={animationActive ? "openCamera" : "closeCamera"}
+            transition={{duration:.3}}
+            sx={{
+              display: displayCamera,
+              position: "absolute",
+              m: { md:"5px 0% 0px 5%",lg: "5px 0% 0px 40%"},
+              width: { sm: "", lg: "600px" },
+              height: { sm: "", lg: "750px" },
+              boxShadow: "0px 0px 11px 1px grey",
+            }}
+          >
+            <Camera ref={camera} />
+          </Box>
+          </Box>
+        </Stack>
       ) : (
         <Box
           className="gymexercisebackground"

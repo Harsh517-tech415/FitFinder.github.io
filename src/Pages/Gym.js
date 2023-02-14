@@ -119,7 +119,7 @@ const Gym = () => {
           </Button>
           <Button
             onClick={() => {
-              navigate("/dietgym");
+              navigate("/gym/gymdiet");
             }}
             sx={{
               fontSize: { sm: "17px", lg: "20px" },

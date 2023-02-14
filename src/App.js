@@ -18,7 +18,7 @@ import Yoga from "./Pages/Yoga";
 import Gym from "./Pages/Gym";
 import HomeWorkout from "./Pages/HomeWorkout";
 import Training from "./Pages/Gym/Training";
-import Dashboard from "./Pages/Gym/Dashboard";
+import DashboardGym from "./Pages/Gym/DashboardGym";
 import Discover from "./Pages/Gym/Discover";
 import WorkoutRoutine from "./components/WorkoutRoutine";
 import GymExercise from "./Pages/Gym/GymExercise";
@@ -34,7 +34,8 @@ import Customize from "./Pages/Gym/Customize";
 import Cookies from "js-cookie";
 import AddExercise from "./Pages/Gym/AddExercise";
 import CustomizeExercise from "./Pages/Gym/CustomizeExercise";
-
+import Dashboard from "./Pages/Dashboard";
+import Diet from "./Pages/Gym/Diet";
 export const Update = createContext();
 function App() {
   const [Color, setColor] = useState("#FF2625");
@@ -94,6 +95,7 @@ const [frame ,setFrame]=useState(0)
           {/* <Toggle/> */}
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/explore" element={<Explore />} />
             <Route path="/exercise/:id" element={<ExerciseDetail />} />
             <Route path="/signup" element={<Signup />} />
@@ -134,7 +136,8 @@ const [frame ,setFrame]=useState(0)
             <Route path="s&bb" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
             <Route path="s&bi" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
             <Route path="s&ba" element={<WorkoutRoutine pathIndex={pathIndex} setPathIndex={setPathIndex}/>} />  
-            <Route path="dashboardgym" element={<Dashboard />}/>
+            <Route path="dashboardgym" element={<DashboardGym />}/>
+            <Route path="gymdiet" element={<Diet />}/>
 
           </Route>
 
