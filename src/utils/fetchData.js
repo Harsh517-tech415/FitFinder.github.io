@@ -13,6 +13,13 @@ export const youtubeOptions = {
     'X-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com'
   },
 };
+const options = {
+  method: 'POST',
+  headers: {
+    'X-RapidAPI-Key': '7fc1cbc07cmsh511c3c1a01420b2p1cb76djsn5bfff3000472',
+    'X-RapidAPI-Host': 'visio2.p.rapidapi.com'
+  }
+};
 export const fetchData = async (url, options) => {
   const response = await fetch(url, options);
   const data = await response.json();
