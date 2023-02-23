@@ -1,10 +1,9 @@
-import { Stack, Button, Typography } from "@mui/material";
+import { Stack, Button, Typography, Card, CardMedia } from "@mui/material";
 import { AppBar } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import { Update } from "../App";
 import gym from "../assets/icons/gym.png";
-
 const Gym = () => {
   const navigate = useNavigate();
   const { setDisplayAppBar } = useContext(Update);
@@ -17,7 +16,6 @@ const Gym = () => {
   return (
     <>
       <div style={{ backgroundColor: "#16181D", height: "50px" }}></div>
-
       <AppBar
         sx={{
           height: { sm: "50px", lg: "60px" },
@@ -37,7 +35,7 @@ const Gym = () => {
         >
           <Button
             onClick={() => {
-              navigate("/gym");
+              navigate("/gym/homegym");
             }}
             sx={{
               width: "calc(100%/6)",
@@ -132,6 +130,8 @@ const Gym = () => {
         </Stack>
       </AppBar>
       <Outlet />
+      
+        
     </>
   );
 };

@@ -119,7 +119,7 @@ const Navbar = () => {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
            <Link to="/yoga" style={{display:"block",marginTop:"10px",textDecoration:"none",borderTop:"3px solid #FF9933",textAlign:"center",color:"#FF9933",borderBottom:"1px solid #FF9933",boxShadow:"0 0 10px 5px #FF9933",borderRadius:"5px"}}>Yoga <img src={yoga} alt="Yoga"/></Link>
-          <Link to="/gym" style={{display:"block",marginTop:"10px",textDecoration:"none",borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red",borderRadius:"5px"}}>Gym <img src={barbell} alt="Gym"/></Link>
+          <Link to="/gym/homegym" style={{display:"block",marginTop:"10px",textDecoration:"none",borderTop:"3px solid red",color:"red",textAlign:"center",borderBottom:"1px solid red",boxShadow:"0 0 10px 5px red",borderRadius:"5px"}}>Gym <img src={barbell} alt="Gym"/></Link>
           <Link to="/homeworkout" style={{display:"block",marginTop:"10px",textDecoration:"none",textAlign:"center",borderTop:"3px solid blue",borderBottom:"1px solid blue",color:"indigo",boxShadow:"0 0 10px 5px blue",borderRadius:"5px"}}>Home <img src={workout} alt="Home"/> </Link>
           </CardContent>
           </Collapse>

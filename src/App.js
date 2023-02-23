@@ -36,6 +36,7 @@ import AddExercise from "./Pages/Gym/AddExercise";
 import CustomizeExercise from "./Pages/Gym/CustomizeExercise";
 import Dashboard from "./Pages/Dashboard";
 import Diet from "./Pages/Gym/Diet";
+import GymHome from "./Pages/Gym/GymHome";
 export const Update = createContext();
 function App() {
   const [Color, setColor] = useState("#FF2625");
@@ -104,6 +105,7 @@ const [frame ,setFrame]=useState(0)
             <Route path="/yoga" element={<Yoga />} />
             <Route path="/homeworkout" element={<HomeWorkout />} /> 
             <Route path="/gym" element={<Gym/>} >
+              <Route path="homegym" element={<GymHome/>}/>
               <Route path="/gym/:name" element={<CustomizeExercise/>}/>
               <Route path="music" element={<Music/>} >
                 <Route path="feed" element={<Feed/>}/>
