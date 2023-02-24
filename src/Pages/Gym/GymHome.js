@@ -13,6 +13,11 @@ import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Update } from "../../App";
 import Tranning from "../../assets/images/tranning.webp";
+import Training from "../../assets/images/Training.jpg";
+import Discover from "../../assets/images/Discover.jpg";
+import Custom from "../../assets/images/Custom.jpg";
+import Dashboard from "../../assets/images/Dashboard.jpg";
+
 const GymHome = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,7 +29,18 @@ const GymHome = () => {
   }, []);
   return (
     <div>
-        <Typography color="error" sx={{opacity:.9,position:"absolute",m:{sm:"39% 32%",lg:"29.3% 38%"},fontSize:{sm:"24px",lg:"34px"},fontWeight:"bold"}}>Sweat now. Shine later.</Typography>
+      <Typography
+        color="error"
+        sx={{
+          opacity: 0.9,
+          position: "absolute",
+          m: { sm: "39% 32%", lg: "29.3% 38%" },
+          fontSize: { sm: "24px", lg: "34px" },
+          fontWeight: "bold",
+        }}
+      >
+        Sweat now. Shine later.
+      </Typography>
       <CardMedia
         sx={{
           height: { lg: "500px" },
@@ -32,24 +48,23 @@ const GymHome = () => {
         component="img"
         src={Tranning}
       />
+
       <Box
         sx={{
-          width: { sm: "641px", lg: "1014px" },
+          width: { lg: "890px" },
           m: { sm: "10% 0px 0px 65px", lg: "5% 0px 0px 300px" },
         }}
       >
         <Button
+        
           onClick={() => {
-            navigate("/gym/traninggym");
+            navigate("/gym/discovergym");
           }}
         >
           <Typography
             sx={{
               fontSize: "24px",
               fontWeight: "600",
-              display: "flex",
-              alignItems: "left",
-              justifyContent: "left",
               background: "linear-gradient(to Top Left,black,grey)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -60,23 +75,19 @@ const GymHome = () => {
           <ArrowForward fontSize="small" />
         </Button>
 
-        <Stack direction="row" sx={{}}>
-          <Typography paragraph={true}sx={{ textAlign:"left",width: { sm: "641px", lg: "500px" } }}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-            officiis deserunt porro quas magni? Maxime perspiciatis assumenda
-            tempore dolore sapiente, quo ipsum provident, laudantium,
-            praesentium odio ullam quam similique dolorum.
-          </Typography>
-          <Card
-            component={motion.div}
-            initial={{ x: +100 }}
-            animate={{ x: -10, delay: 2 }}
-            sx={{ width: { sm: "", lg: "300px" },ml:"2%"}}
+        <Stack direction="row" >
+          <Stack direction="column">
+          <Typography
+            paragraph={true}
+            sx={{ textAlign: "left", width: { sm: "641px", lg: "500px" } }}
           >
-            <CardMedia component="img" sx={{width:"300px"}}src={Tranning} />
-          </Card>
-        </Stack>
-        <Card sx={{ width: { sm: "500px", lg: "500px" } }}>
+            This page offers a range of features for individuals seeking to
+            improve their health and fitness. With a fitness tracker and calorie
+            tracker, users can monitor their progress and adjust their routines
+            accordingly. Additionally, the ability to select a personalized plan
+            provides an added level of customization to achieve specific goals.
+          </Typography>
+          <Card sx={{ width: { sm: "500px", lg: "480px" },mt:"1.1%"}}>
           <CardContent
             sx={{
               fontSize: "32px",
@@ -92,7 +103,7 @@ const GymHome = () => {
               fontSize="small"
               color="success"
               sx={{ ml: "5%", mr: "5px" }}
-            />{" "}
+            />
             Calorie Tracker
           </CardContent>
           <CardContent>
@@ -112,106 +123,124 @@ const GymHome = () => {
             Selected plan
           </CardContent>
         </Card>
-      </Box>
-      <Box
-        sx={{
-            background:"white"
-        }}
-      >
-        <Box
-
-          sx={{m: { sm: "10% 0px 0px 65px", lg: "5% 0px 0px 300px" }}}
-          >
-
-        <Button
-          onClick={() => {
-            navigate("/gym/discovergym");
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "24px",
-              fontWeight: "600",
-              background: "linear-gradient(to Top Left,black,grey)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Discover
-          </Typography>
-          <ArrowForward fontSize="small" />
-        </Button>
-
-        <Stack direction="row">
-          <Typography sx={{ width: { sm: "641px", lg: "500px" },textAlign:"left" }}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-            officiis deserunt porro quas magni? Maxime perspiciatis assumenda
-            tempore dolore sapiente, quo ipsum provident, laudantium,
-            praesentium odio ullam quam similique dolorum.
-          </Typography>
+          </Stack>
           <Card
             component={motion.div}
             initial={{ x: +100 }}
             animate={{ x: -10, delay: 2 }}
-            sx={{ width: { sm: "", lg: "300px"},ml:"2%" }}
+            sx={{width:{sm:"",lg:"380px"},ml:"2%"}}
+
           >
-            <CardMedia component="img" src={Tranning} />
+            <CardMedia sx={{height:"400px"}} component="img" src={Training} />
           </Card>
-          
         </Stack>
-        <Card sx={{ width: { sm: "500px", lg: "500px" } }}>
-          <CardContent
+    
+      </Box>
+      <Box container sx={{ height: {sm:"600px", lg: "680px" }, background: "#ECEEF4" }}>
+        <Box
+          sx={{
+            width: { lg: "870px" },
+            m: { sm: "10% 0px 0px 65px", lg: "5% 0px 0px 300px" },
+          }}
+        >
+          <Button
             sx={{
-              fontSize: "32px",
-              color: "#3b3d50",
-              fontWeight: "bold",
-              ml: "10%",
+              mt: "5%",
+            }}
+            onClick={() => {
+              navigate("/gym/discovergym");
             }}
           >
-            Features
-          </CardContent>
-          <CardContent sx={{ fontSize: "16px" }}>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />{" "}
-            Full Body Exercise
-          </CardContent>
-          <CardContent>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />
-            Lower Body Exercise
-          </CardContent>
-          <CardContent>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />
-            Beginner Exercises
-          </CardContent>
-          <CardContent>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />
-            Intermediate Exercises
-          </CardContent>{" "}
-          <CardContent>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />
-            Advance Exercises
-          </CardContent>
-        </Card>
-      </Box>
+            <Typography
+              sx={{
+                fontSize: "24px",
+                fontWeight: "600",
+                background: "linear-gradient(to Top Left,black,grey)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Discover
+            </Typography>
+            <ArrowForward fontSize="small" />
+          </Button>
+
+          <Stack direction="row">
+            <Stack>
+            <Typography
+              sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
+            >
+              This page offers exercise plans for people of all levels, from
+              beginner to advanced. Whether you are just starting out or looking
+              to take your workouts to the next level, you can find the perfect
+              plan to help you achieve your goals. With a variety of options to
+              choose from, you can tailor your workout to your individual needs
+              and preferences.
+            </Typography>
+            <Card sx={{ width: { sm: "500px", lg: "500px" },mt:"2%" }}>
+            <CardContent
+              sx={{
+                fontSize: "32px",
+                color: "#3b3d50",
+                fontWeight: "bold",
+                ml: "10%",
+              }}
+            >
+              Features
+            </CardContent>
+            <CardContent sx={{ fontSize: "16px" }}>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />{" "}
+              Full Body Exercise
+            </CardContent>
+            <CardContent>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />
+              Lower Body Exercise
+            </CardContent>
+            <CardContent>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />
+              Beginner Exercises
+            </CardContent>
+            <CardContent>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />
+              Intermediate Exercises
+            </CardContent>{" "}
+            <CardContent>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />
+              Advance Exercises
+            </CardContent>
+          </Card>
+            </Stack>
+            <Card
+              component={motion.div}
+              initial={{ x: +100 }}
+              animate={{ x: -10, delay: 2 }}
+              sx={{ width: { sm: "", lg: "380px" }, ml: "4%" }}
+            >
+              <CardMedia sx={{height:"500px"}}component="img" src={Discover} />
+            </Card>
+          </Stack>
+          
+        </Box>
       </Box>
 
       <Box
@@ -243,22 +272,17 @@ const GymHome = () => {
         </Button>
 
         <Stack direction="row">
-          <Typography sx={{ width: { sm: "641px", lg: "500px" },textAlign:"left" }}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-            officiis deserunt porro quas magni? Maxime perspiciatis assumenda
-            tempore dolore sapiente, quo ipsum provident, laudantium,
-            praesentium odio ullam quam similique dolorum.
-          </Typography>
-          <Card
-            component={motion.div}
-            initial={{ x: +100 }}
-            animate={{ x: -10, delay: 2 }}
-            sx={{ width: { sm: "", lg: "300px" },ml:"2%" }}
+          <Stack>
+          <Typography
+            sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
           >
-            <CardMedia component="img" src={Tranning} />
-          </Card>
-        </Stack>
-        <Card sx={{ width: { sm: "500px", lg: "500px" } }}>
+            This page provides you with the ability to create customized
+            exercises tailored to your fitness level and preferences. With a
+            wide range of options and features, you can design a workout plan
+            that is both challenging and enjoyable. Start building your
+            personalized exercise routine today and achieve your fitness goals!
+          </Typography>
+          <Card sx={{ width: { sm: "500px", lg: "500px" }, mt: {sm:"4%"} }}>
           <CardContent
             sx={{
               fontSize: "32px",
@@ -286,77 +310,90 @@ const GymHome = () => {
             Remove Plan
           </CardContent>
         </Card>
-      </Box>
-      <Box
-      sx={{backgroundColor:"white"}}>
-
-      <Box
-        sx={{
-          m: { sm: "10% 0px 0px 65px", lg: "5% 0px 0px 300px" },
-        }}
-      >
-        <Button
-          onClick={() => {
-            navigate("/gym/dashboardgym");
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "24px",
-              fontWeight: "600",
-              display: "flex",
-              alignItems: "left",
-              justifyContent: "left",
-              background: "linear-gradient(to Top Left,black,grey)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Dashboard
-          </Typography>
-          <ArrowForward fontSize="small" />
-        </Button>
-
-        <Stack direction="row">
-          <Typography sx={{ width: { sm: "641px", lg: "500px" },textAlign:"left" }}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eaque
-            officiis deserunt porro quas magni? Maxime perspiciatis assumenda
-            tempore dolore sapiente, quo ipsum provident, laudantium,
-            praesentium odio ullam quam similique dolorum.
-          </Typography>
+          </Stack>
           <Card
             component={motion.div}
             initial={{ x: +100 }}
             animate={{ x: -10, delay: 2 }}
-            sx={{ width: { sm: "", lg: "300px" },ml:"2%" }}
+            sx={{ width: { sm: "", lg: "380px" },height:"344px", ml: "3%" }}
           >
-            <CardMedia component="img" src={Tranning} />
+            <CardMedia component="img" src={Custom} />
           </Card>
         </Stack>
-        <Card sx={{ width: { sm: "500px", lg: "500px" } }}>
-          <CardContent
-            sx={{
-              fontSize: "32px",
-              color: "#3b3d50",
-              fontWeight: "bold",
-              ml: "10%",
+       
+      </Box>
+      <Box sx={{ height: { lg: "440px" }, background: "#ECEEF4" }}>
+        <Box
+          sx={{
+            m: { sm: "10% 0px 0px 65px", lg: "5% 0px 0px 300px" },
+          }}
+        >
+          <Button
+            sx={{ mt: "5%" }}
+            onClick={() => {
+              navigate("/gym/dashboardgym");
             }}
           >
-            Features
-          </CardContent>
-          <CardContent sx={{ fontSize: "16px" }}>
-            <Check
-              fontSize="small"
-              color="success"
-              sx={{ ml: "5%", mr: "5px" }}
-            />{" "}
-            Track progress.
-          </CardContent>
+            <Typography
+              sx={{
+                fontSize: "24px",
+                fontWeight: "600",
+                background: "linear-gradient(to Top Left,black,grey)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              Dashboard
+            </Typography>
+            <ArrowForward fontSize="small" />
+          </Button>
 
-        </Card>
+          <Stack direction="row">
+            <Stack>
+            <Typography
+              sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
+            >
+              This page is designed to track and display your workout progress
+              using a graph. The graph will provide you with a visual
+              representation of your progress, allowing you to track your
+              fitness journey more easily. You can use this information to
+              adjust your workouts, set new goals, and continue to improve your
+              overall fitness level.
+            </Typography>
+            <Card sx={{ width: { sm: "500px", lg: "500px" },mt:"6%" }}>
+            <CardContent
+              sx={{
+                fontSize: "32px",
+                color: "#3b3d50",
+                fontWeight: "bold",
+                ml: "15%",
+                
+              }}
+            >
+              Features
+            </CardContent>
+            <CardContent sx={{ fontSize: "16px" }}>
+              <Check
+                fontSize="small"
+                color="success"
+                sx={{ ml: "5%", mr: "5px" }}
+              />{" "}
+              Track progress.
+            </CardContent>
+          </Card>
+            </Stack>
+            <Card
+              component={motion.div}
+              initial={{ x: +100 }}
+              animate={{ x: -10, delay: 2 }}
+              sx={{ width: { sm: "", lg: "380px" }, ml: "3%" }}
+            >
+              <CardMedia component="img" sx={{height:"300px"}}src={Dashboard} />
+            </Card>
+          </Stack>
+          
+        </Box>
       </Box>
-      </Box>
-
     </div>
   );
 };
