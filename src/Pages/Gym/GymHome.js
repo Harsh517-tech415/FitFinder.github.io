@@ -58,7 +58,7 @@ const GymHome = () => {
         <Button
         
           onClick={() => {
-            navigate("/gym/discovergym");
+            navigate("/gym/traninggym");
           }}
         >
           <Typography
