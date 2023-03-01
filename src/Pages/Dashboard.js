@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react';
-import test from '/home/monster/Documents/MyWealthApp/src/assets/images/test.gif'
 // import { TransparentCanvas } from 'react-remove-green-background'
 
 // import * as imaging from "@asposecloud/aspose-imaging-cloud";
