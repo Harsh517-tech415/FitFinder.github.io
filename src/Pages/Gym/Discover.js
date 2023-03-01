@@ -73,6 +73,7 @@ const Discover = () => {
         console.log("error");
       }
     }
+    
     getData1();
     getData2();
     getData3();

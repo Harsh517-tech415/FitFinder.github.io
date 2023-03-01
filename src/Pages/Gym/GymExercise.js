@@ -328,7 +328,7 @@ const GymExercise = ({ pathIndex }) => {
               boxShadow: "0px 0px 11px 1px grey",
             }}
           >
-            <Camera ref={camera} />
+            <Camera inputRef={camera}/>
           </Box>
           </Box>
         </Stack>

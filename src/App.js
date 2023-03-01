@@ -66,6 +66,10 @@ const [frame ,setFrame]=useState(0)
       if(hash!=="b229jjcWX9sczZSgE3hL" && hash!==""){setNav(1)}
       else if(hash==="b229jjcWX9sczZSgE3hL"){}// else {document.cookie="_hash=b229jjcWX9sczZSgE3hL"}
     }
+    else
+    {
+      document.cookie="_hash=b229jjcWX9sczZSgE3hL"
+    }
   },[])
   return (
     <Update.Provider
