@@ -9,22 +9,23 @@ import { Update } from "../../App";
 import { exercisebeginner } from "./GymInfo";
 import SkipPreviousRoundedIcon from "@mui/icons-material/SkipPreviousRounded";
 import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
-import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 import { UserC } from "../../components/FitFinderInfo";
-import { getDateRangePickerDayUtilityClass } from "@mui/lab";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
 import { motion } from "framer-motion";
-import { ArrowLeft, CameraAlt } from "@mui/icons-material";
+import { CameraAlt } from "@mui/icons-material";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import { usePython } from 'react-py'
+// import { PythonShell } from "python-shell";
 
 let Cookies = require("js-cookie");
 const GymExercise = ({ pathIndex }) => {
-  let a1;
   const navigate = useNavigate();
+  const {runPython}=usePython()
   const [animationActive, setAnimationActive] = useState(null);
   let userc = new UserC();
   const exerciseDetail = exercisebeginner[pathIndex];
-  const { setDisplayAppBar, url, setUrl } = useContext(Update);
+  const { setDisplayAppBar, url } = useContext(Update);
   const [option, setOption] = useState();
   const [fetch, seFetch] = useState(0);
   const [index, setIndex] = useState(0);
@@ -34,9 +35,7 @@ const GymExercise = ({ pathIndex }) => {
   const location = useLocation();
   const second = useRef(0);
   const minute = useRef(0);
-  const [value, setValue] = useState(0);
   const time = useRef(0);
-  const [NumberOfBlock,setNumberOfBlock]=useState(12)
   async function getData() {
     try {
       const aa = await getDoc(doc(db, "Exercise", Cookies.get("_adu")));
@@ -45,10 +44,8 @@ const GymExercise = ({ pathIndex }) => {
     }
   }
   let d, a;
-  let t = 0,
-    c = 0;
+  let t = 0;
   const camera = useRef(null);
-  const [image, setImage] = useState(null);
   useEffect(() => {
     if (location.pathname === "/gym/gymexercise") {
       setDisplayAppBar("none");
@@ -101,30 +98,45 @@ const GymExercise = ({ pathIndex }) => {
     time.current = 5;
     d = window.setInterval(handleTime, 1000);
   }, [option]);
+  
+function displayGif()
+{console.log(3)
+  runPython(`print(Heelo)`)
+// from PIL import Image
+// img = Image.open("/home/monster/Downloads/02571301-Circles-Knee-Stretch_Calves_360.gif")
+// img = img.convert("RGBA")
+// pixel_data = img.load()
+// background = (255, 255, 255, 255) # White background color
+// for y in range(img.size[1]):
+//     for x in range(img.size[0]):
+//         if pixel_data[x, y] == background:
+//             pixel_data[x, y] = (255, 255, 255, 0)
+// img.save("/home/monster/Downloads/02571301-Circles-Knee-Stretch_Calves_360.gif"))
 
+}
   //   function setTime() {
   //   document.cookie = `time =${(+(performance.now() / 60000) + +t).toFixed(2)}; expires=Thu, 23 Jan 2023 12:00:00 UTC;path=/gym/gymexercise`;
   // console.log(document.cookie)
   // }
   const variants = {
-    open: { x: -150,minWidth:"650px",maxWidth:"660px"},
+    displayButton: { opacity: 1 },
+    closeButton: { opacity: 0 },
+    open: { x: +450, minWidth: "650px", maxWidth: "660px" },
     close: {
       x: 12,
-       minWidth:"650px",
-      maxWidth:"900px",
+      minWidth: "650px",
+      maxWidth: "900px",
     },
     decreaseCameraIcon: { width: "300px" },
     increageCameraIcon: { width: "480px" },
-    openCamera: { y: .5,opacity:1},
+    openCamera: { y: 0.5, opacity: 1 },
     closeCamera: { y: -150 },
   };
   useEffect(() => {
     if (animationActive === true) {
       setDisplayCamera("ok");
-      setNumberOfBlock(6)
     } else {
       setDisplayCamera("none");
-      setNumberOfBlock(12)
     }
   }, [animationActive]);
   return (
@@ -154,22 +166,56 @@ const GymExercise = ({ pathIndex }) => {
         <ArrowCircleLeftRoundedIcon fontSize="large" color="error" />{" "}
       </Button> */}
       {option === 0 ? (
-        <Stack direction="row">
-          {/* <Box
-            sx={{
-              ml: { sm: "13%", lg: "17%" },
-              backgroundColor: "blue",
-              width: { sm: "700px", lg: "1000px" },
-              height: { sm: "800px", lg: "800px" },
-            }}
-            > */}
-            <Box sx={{m:{sm:"1% 0% 0% 13%",lg:"1% 0% 0% 14%"},width:{sm:"660px",lg:"1600px"},height:{sm:"760px",lg:"750px"}}}>
-            <Box 
+        <Stack
+          direction="row"
+          sx={{
+            m: { sm: "1% 0% 0% 13%", lg: "1% 0% 0% 7%" },
+            width: { sm: "660px", lg: "1300px" },
+            height: { sm: "760px", lg: "750px" },
+          }}
+        >
+          <Button
+            component={motion.button}
+            variants={variants}
+            initial={{ opacity: 0 }}
+            animate={animationActive ? "displayButton" : "hideButton"}
+            sx={{ m: "0% 0% 40% 0%" }}
+            onClick={displayGif}
+          >
+            <AccessibilityNewIcon
+              fontSize="large"
+              color="error"
+              sx={{
+                m: "0% 0% 0% 0%",
+                borderRadius: "10px",
+                backgroundColor: "grey",
+              }}
+            />
+          </Button>
+          <Box>
+            <Card
+              component={motion.div}
+              variants={variants}
+              intial={{ y: -200, opacity: 0 }}
+              animate={animationActive ? "openCamera" : "closeCamera"}
+              transition={{ duration: 0.3 }}
+              sx={{
+                display: displayCamera,
+                position: "absolute",
+                m: { md: "5px 0% 0px 0%", lg: "5px 0% 0px 0%" },
+                width: { sm: "", lg: "550px" },
+                height: { sm: "", lg: "744px" },
+                boxShadow: "0px 0px 11px 2px grey",
+              }}
+            >
+              <Camera inputRef={camera} />
+            </Card>
+            <Card
               sx={{
                 display: "block",
                 position: "absolute",
                 backgroundColor: "white",
-                m:{sm:"0% 0% 0% 0%",lg:"0% 0% 0% 7%"},
+                m: { sm: "0% 0% 0% 0%", lg: "0% 0% 0% 7%" },
                 width: { sm: "650px", lg: "900px" },
                 height: { sm: "750px", lg: "750px" },
                 boxShadow: "0px 0px 50px 2px grey",
@@ -187,7 +233,10 @@ const GymExercise = ({ pathIndex }) => {
               <Button
                 sx={{ position: "absolute", m: "6% 0% 0% 90%" }}
                 onClick={() => {
-                  if ((animationActive === false || animationActive === null)&&window.innerWidth>=1600)
+                  if (
+                    (animationActive === false || animationActive === null) &&
+                    window.innerWidth >= 1530
+                  )
                     setAnimationActive(true);
                   else {
                     setAnimationActive(false);
@@ -310,30 +359,13 @@ const GymExercise = ({ pathIndex }) => {
                   <SkipNextRoundedIcon fontSize="large" />
                 </Button>
               </CardContent>
-            {/* </Box> */}
-            </Box>
-          {/* </Box> */}
-          <Box
-            component={motion.div}
-            variants={variants}
-            intial={{ y: -200,opacity:0 }}
-            animate={animationActive ? "openCamera" : "closeCamera"}
-            transition={{duration:.3}}
-            sx={{
-              display: displayCamera,
-              position: "absolute",
-              m: { md:"5px 0% 0px 5%",lg: "5px 0% 0px 40%"},
-              width: { sm: "", lg: "600px" },
-              height: { sm: "", lg: "750px" },
-              boxShadow: "0px 0px 11px 1px grey",
-            }}
-          >
-            <Camera inputRef={camera}/>
-          </Box>
+              {/* </Card> */}
+            </Card>
+            {/* </Card> */}
           </Box>
         </Stack>
       ) : (
-        <Box
+        <Card
           className="gymexercisebackground"
           sx={{
             display: "inline-block",
@@ -414,7 +446,7 @@ const GymExercise = ({ pathIndex }) => {
               src={exerciseDetail[index].gifUrl}
             />
           </Card>
-        </Box>
+        </Card>
       )}
     </Stack>
   );

@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import GymInfo from "../Pages/Gym/GymInfo";
 import { exercises } from "../Pages/Gym/GymInfo";
 import { time } from "../Pages/Gym/GymInfo";
-import GymExercise from "../Pages/Gym/GymExercise";
-import image from "../Pages/Gym/GymInfo";
 import WorkoutCollection from "../Pages/Gym/WorkoutCollection";
 import { Typography, Box, TextField, Stack, Button, Link } from "@mui/material";
 import chestb from "../assets/images/chest1.jpg";
@@ -29,10 +27,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import Cookies from "js-cookie";
-let sizeof = require("object-sizeof");
 
 const WorkoutRoutine = ({ pathIndex, setPathIndex }) => {
   const [rest, setRest] = useState(10);

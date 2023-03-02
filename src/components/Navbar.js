@@ -60,11 +60,11 @@ const Navbar = () => {
       <Stack
         position="fixed"
         direction="row"
-        justifyContent="space-around"
+        // justifyContent="space-around"
         sx={{
           gap: { sm: "122px", xs: "40px" },
           mt: { sm: "20px", lg: "20px" },
-          justifyContent: "none",
+          // justifyContent: "none",
         }}
       >
         <Link to="/">

@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import { Box } from "@mui/material";
 import Explore from "./Pages/Explore";
 import React, { useEffect } from "react";
+import { PythonProvider } from 'react-py'
 import "./App.css";
 // import Footer from "./components/Footer";
 // import Toggle from "./components/Toggle";
@@ -72,6 +73,7 @@ const [frame ,setFrame]=useState(0)
     }
   },[])
   return (
+    <PythonProvider>
     <Update.Provider
     value={{
       verify: verify,
@@ -153,6 +155,7 @@ const [frame ,setFrame]=useState(0)
         </Box>
       </BrowserRouter>
     </Update.Provider>
+    </PythonProvider>
   );
 }
 
