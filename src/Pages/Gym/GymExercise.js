@@ -1,27 +1,27 @@
-import { Box, Typography, Stack, Button, Grid, duration } from "@mui/material";
+import { Box, Typography, Stack, Button} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import React, { useContext, useRef, useEffect, useState } from "react";
-import { Camera } from "react-camera-pro";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Update } from "../../App";
 import { exercisebeginner } from "./GymInfo";
 import SkipPreviousRoundedIcon from "@mui/icons-material/SkipPreviousRounded";
 import SkipNextRoundedIcon from "@mui/icons-material/SkipNextRounded";
 import { UserC } from "../../components/FitFinderInfo";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../components/firebase";
-import { motion } from "framer-motion";
+import { motion,useDragControls } from "framer-motion";
 import { CameraAlt } from "@mui/icons-material";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
-import { usePython } from 'react-py'
-// import { PythonShell } from "python-shell";
+import { getDownloadURL, ref } from "firebase/storage";
+import {storage} from '../../components/firebase'
+import Webcam from "react-webcam";
 
 let Cookies = require("js-cookie");
 const GymExercise = ({ pathIndex }) => {
+  const controls=useDragControls()
   const navigate = useNavigate();
-  const {runPython}=usePython()
   const [animationActive, setAnimationActive] = useState(null);
   let userc = new UserC();
   const exerciseDetail = exercisebeginner[pathIndex];
@@ -36,6 +36,7 @@ const GymExercise = ({ pathIndex }) => {
   const second = useRef(0);
   const minute = useRef(0);
   const time = useRef(0);
+  const [gif,setGif]=useState()
   async function getData() {
     try {
       const aa = await getDoc(doc(db, "Exercise", Cookies.get("_adu")));
@@ -98,26 +99,19 @@ const GymExercise = ({ pathIndex }) => {
     time.current = 5;
     d = window.setInterval(handleTime, 1000);
   }, [option]);
-  
-function displayGif()
-{console.log(3)
-  runPython(`print(Heelo)`)
-// from PIL import Image
-// img = Image.open("/home/monster/Downloads/02571301-Circles-Knee-Stretch_Calves_360.gif")
-// img = img.convert("RGBA")
-// pixel_data = img.load()
-// background = (255, 255, 255, 255) # White background color
-// for y in range(img.size[1]):
-//     for x in range(img.size[0]):
-//         if pixel_data[x, y] == background:
-//             pixel_data[x, y] = (255, 255, 255, 0)
-// img.save("/home/monster/Downloads/02571301-Circles-Knee-Stretch_Calves_360.gif"))
 
-}
-  //   function setTime() {
-  //   document.cookie = `time =${(+(performance.now() / 60000) + +t).toFixed(2)}; expires=Thu, 23 Jan 2023 12:00:00 UTC;path=/gym/gymexercise`;
-  // console.log(document.cookie)
-  // }
+  async function displayGif() {
+    try{
+      await setDoc(doc(db,"Gif","Orignal"),{gifUrl:exerciseDetail[index].gifUrl})
+      setTimeout(()=>{
+        const starsRef=ref(storage,'Output')
+   getDownloadURL(starsRef).then((url)=>{setGif(url)}).catch((err)=>{console.log(err)})
+      },5000)
+
+    }catch(err){console.log(err)}
+   
+    }
+   
   const variants = {
     displayButton: { opacity: 1 },
     closeButton: { opacity: 0 },
@@ -139,6 +133,10 @@ function displayGif()
       setDisplayCamera("none");
     }
   }, [animationActive]);
+  function startDrag(event)
+  {
+    controls.start(event)
+  }
   return (
     <Stack direction="row">
       {/* <Button
@@ -167,13 +165,14 @@ function displayGif()
       </Button> */}
       {option === 0 ? (
         <Stack
-          direction="row"
-          sx={{
-            m: { sm: "1% 0% 0% 13%", lg: "1% 0% 0% 7%" },
-            width: { sm: "660px", lg: "1300px" },
-            height: { sm: "760px", lg: "750px" },
-          }}
+        direction="row"
+        sx={{
+          m: { sm: "1% 0% 0% 13%", lg: "1% 0% 0% 7%" },
+          width: { sm: "660px", lg: "1300px" },
+          height: { sm: "760px", lg: "750px" },
+        }}
         >
+
           <Button
             component={motion.button}
             variants={variants}
@@ -208,7 +207,11 @@ function displayGif()
                 boxShadow: "0px 0px 11px 2px grey",
               }}
             >
-              <Camera inputRef={camera} />
+              <Webcam ref={camera} style={{position:"absolute",zIndex:9,height:"100%"}} mirrored={true} imageSmoothing={true} screenshotFormat='image/webp' />
+              <div onPointerDown={startDrag}/>
+              {/* <Box drag component={motion.div}> */}
+              <CardMedia  sx={{position:"absolute",zIndex:10,width:"600px"}} component="img" src={gif}/>
+              {/* </Box> */}
             </Card>
             <Card
               sx={{
