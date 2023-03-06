@@ -103,10 +103,11 @@ const GymExercise = ({ pathIndex }) => {
   async function displayGif() {
     try{
       await setDoc(doc(db,"Gif","Orignal"),{gifUrl:exerciseDetail[index].gifUrl})
+      await setDoc(doc(db,"Gif","User"),{User:Cookies.get("_hash")})
       setTimeout(()=>{
-        const starsRef=ref(storage,'Output')
+        const starsRef=ref(storage,`${Cookies.get("_hash")}`)
    getDownloadURL(starsRef).then((url)=>{setGif(url)}).catch((err)=>{console.log(err)})
-      },25000)
+      },21000)
 
     }catch(err){console.log(err)}
    
