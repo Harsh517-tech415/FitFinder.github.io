@@ -106,7 +106,7 @@ const GymExercise = ({ pathIndex }) => {
       setTimeout(()=>{
         const starsRef=ref(storage,'Output')
    getDownloadURL(starsRef).then((url)=>{setGif(url)}).catch((err)=>{console.log(err)})
-      },5000)
+      },25000)
 
     }catch(err){console.log(err)}
    
