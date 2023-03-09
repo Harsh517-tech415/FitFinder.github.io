@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.10.5",
     "@google-cloud/storage": "^6.9.4",
     "@mui/icons-material": "^5.11.0",
+    "@mui/joy": "^5.0.0-alpha.70",
     "@mui/lab": "^5.0.0-alpha.113",
     "@mui/material": "^5.11.1",
     "@mui/x-date-pickers": "^5.0.11",

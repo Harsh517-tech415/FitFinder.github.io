@@ -12,6 +12,11 @@ const Gym = () => {
     if (location.pathname === "/gym") {
       setDisplayAppBar("none");
     }
+    if(location.pathname!=='/gym/gymexercise')
+    {
+      document.cookie="StarTime=0;"
+    }
+    
   }, []);
   return (
     <>
