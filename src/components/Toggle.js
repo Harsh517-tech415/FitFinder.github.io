@@ -24,7 +24,6 @@ const ToggleSwitch = () => {
     toggle ? setrightArrow(BlueRightArrow) : setrightArrow(RedRightArrow);
     toggle ? setleftArrow(BlueLeftArrow) : setleftArrow(RedLeftArrow);
     getColor(Color, text, boxColor, Icon, rightArrow, leftArrow);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toggle]);
   const toggler = () => {
     toggle === true ? seToggle(false) : seToggle(true);

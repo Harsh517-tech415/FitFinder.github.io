@@ -25,7 +25,7 @@ const GymExercise = ({ pathIndex }) => {
   const navigate = useNavigate();
   const [animationActive, setAnimationActive] = useState(null);
   const exerciseDetail = exercisebeginner[pathIndex];
-  const { setDisplayAppBar,setGymresultArgs } = useContext(Update);
+  const { setDisplayAppBar, setGymresultArgs } = useContext(Update);
   const [option, setOption] = useState(0);
   const [fetch, seFetch] = useState(0);
   const [index, setIndex] = useState(0);
@@ -41,6 +41,8 @@ const GymExercise = ({ pathIndex }) => {
   const [gifWidth, setGifWidth] = useState(600);
   const [anchorEl, setAnchorEl] = useState(0);
   const interval = useRef();
+  const stopwatch = useRef();
+  const [timer, setTimer] = useState();
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -48,23 +50,23 @@ const GymExercise = ({ pathIndex }) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  async function getData() {
-    try {
-      const aa = await getDoc(doc(db, "Exercise", Cookies.get("_adu")));
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  let d, a;
+  // async function getData() {
+  //   try {
+  //     const aa = await getDoc(doc(db, "Exercise", Cookies.get("_adu")));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+  let  a;
   const camera = useRef(null);
 
   useEffect(() => {
     if (location.pathname === "/gym/gymexercise") {
       setDisplayAppBar("none");
     }
-    if (fetch === 0) {
-      getData();
-    }
+    // if (fetch === 0) {
+    //   getData();
+    // }
     Cookies.get("StarTime") === "NaN" || "NAN" || undefined
       ? (document.cookie = `StarTime=${[
           new Date().getHours(),
@@ -101,9 +103,9 @@ const GymExercise = ({ pathIndex }) => {
       path = Cookies.get("_adu");
       data = data[path];
       data[0] = data[0] + 1;
-      data[2] =data[2] + (currentTimeSecond - getTimeSecond) / 60
-      data[2]=1*(data[2].toFixed(2))
-      console.log(data)
+      data[2] = data[2] + (currentTimeSecond - getTimeSecond) / 60;
+      data[2] = 1 * data[2].toFixed(2);
+      console.log(data);
       try {
         await setDoc(
           doc(db, "UserData", `${Cookies.get("_hash")}`),
@@ -113,7 +115,13 @@ const GymExercise = ({ pathIndex }) => {
       } catch (err) {
         console.log(err);
       }
-setGymresultArgs([exerciseDetail.length+1,0,Math.floor((currentTimeSecond - getTimeSecond) / 60)+":"+(currentTimeSecond - getTimeSecond) %60])
+      setGymresultArgs([
+        exerciseDetail.length + 1,
+        0,
+        Math.floor((currentTimeSecond - getTimeSecond) / 60) +
+          ":" +
+          ((currentTimeSecond - getTimeSecond) % 60),
+      ]);
       navigate("/gym/gymresult");
     }
   }
@@ -179,13 +187,28 @@ setGymresultArgs([exerciseDetail.length+1,0,Math.floor((currentTimeSecond - getT
 
   useEffect(() => {
     if (option === 1) {
+      if (exerciseDetail[index].stopwatch) {
+        setTimer(exerciseDetail[index].time);
+      }
       interval.current = setInterval(() => {
         setSecond((second) => second - 1);
       }, 1000);
     } else {
       setSecond(5);
+      if (exerciseDetail[index].stopwatch) {
+        stopwatch.current = setInterval(() => {
+          setTimer((time) => time - 1);
+        }, 1000);
+      }
     }
   }, [option]);
+  useEffect(() => {
+    if (timer === 0) {
+      clearInterval(stopwatch.current);
+      setOption(1)
+      setIndex(index=>index+1)
+    }
+  }, [timer]);
   return (
     <Box
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -451,6 +474,8 @@ setGymresultArgs([exerciseDetail.length+1,0,Math.floor((currentTimeSecond - getT
                 <CameraAlt sx={{ color: "grey" }} />
               </Button>
               <Box
+                component={motion.div}
+                drag
                 variants={variants}
                 animate={
                   animationActive === true
@@ -486,7 +511,9 @@ setGymresultArgs([exerciseDetail.length+1,0,Math.floor((currentTimeSecond - getT
                     textAlign: "center",
                   }}
                 >
-                  {exerciseDetail[index].reps}
+                  {exerciseDetail[index].stopwatch
+                    ? timer
+                    : exerciseDetail[index].reps}
                 </Typography>
                 <Box
                   sx={{
@@ -607,6 +634,8 @@ setGymresultArgs([exerciseDetail.length+1,0,Math.floor((currentTimeSecond - getT
                 onClick={() => {
                   setSecond(0);
                   setOption(0);
+                  if (exerciseDetail[index].stopwatch) {
+                  }
                 }}
               >
                 Skip

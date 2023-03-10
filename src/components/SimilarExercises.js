@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { Update } from "../App";
 
 const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
-const { Color, textColor, bColor }=useContext(Update);
+const {  textColor }=useContext(Update);
 
   return (
     <Box sx={{ mt: { lg: "100px", xs: "0" } }}>

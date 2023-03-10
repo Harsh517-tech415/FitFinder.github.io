@@ -43,7 +43,7 @@ const Navbar = () => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
    if(border===""){
-    setTimeout(()=>{setBorder(`3px ${Color} solid`)},180)
+    setTimeout(()=>{setBorder(`3px ${Color} solid`)},230)
    }else {
       setBorder('');
     }
@@ -52,22 +52,22 @@ const Navbar = () => {
   return (
  
     <AppBar
-    
+  
       component="nav"
       position="sticky"
       style={{ display:displayAppBar,boxShadow: boxShadow, backgroundColor: "white", height: "60px", }}
     >
-      <Stack
+      {/* <Stack
         position="fixed"
         direction="row"
         // justifyContent="space-around"
         sx={{
           gap: { sm: "122px", xs: "40px" },
           mt: { sm: "20px", lg: "20px" },
-          // justifyContent: "none",
-        }}
-      >
-        <Link to="/">
+        }} */}
+        <Stack direction="row" spacing={4} alignItem="flex-end" >
+      
+        <Link to="/" >
           <img
             src={Logo}
             alt="logo"
@@ -79,7 +79,7 @@ const Navbar = () => {
             }}
           />
         </Link>
-        <Stack direction="row" gap="40px" fontSize="24px" alignItem="flex-end">
+        
           <Link
             to="/"
             style={{
@@ -88,7 +88,8 @@ const Navbar = () => {
               borderBottom: location.pathname === "/" ? border : "",
             }}
             onClick={() => {
-              setBorder(`3px ${Color} solid`);
+              setExpanded(false)
+              setTimeout(()=>{setBorder(`3px ${Color} solid`);},180)
             }}
           >
             Home
@@ -102,14 +103,15 @@ const Navbar = () => {
               borderBottom: location.pathname === "/explore" ? border : "",
             }}
             onClick={() => {
-              setBorder(`3px ${Color} solid`);
+              setExpanded(false)
+              setTimeout(()=>{setBorder(`3px ${Color} solid`);},180)
             }}
           >
             Explore
           </Link>
-          <Card position="relative">
-          <Stack direction="row"> 
-          <Typography  onClick={handleExpandClick} sx={{userSelect: "none",color:"black",fontSize:"22px",cursor:'pointer'}}> 
+          <Card position="relative" sx={{width:"150px"}}>
+          <Stack direction="row" sx={{display:"inline",textAlign:"center"}}> 
+          <Typography  onClick={handleExpandClick} sx={{userSelect: "none",cursor:'pointer'}}> 
           Workout
           <ExpandMore expand={expanded} onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
           <ExpandMoreIcon/>
@@ -127,7 +129,8 @@ const Navbar = () => {
           <Link
             to="/dashboard"
             onClick={() => {
-              setBorder(`3px ${Color} solid`);
+              setExpanded(false);
+              setTimeout(()=>{setBorder(`3px ${Color} solid`);},180)
             }}
             style={{
               textDecoration: "none",
@@ -141,6 +144,7 @@ const Navbar = () => {
             {nav===0?<Link
               to={'/signup'}
               onClick={() => {
+                setExpanded(false);
                 setBorder(`3px ${textColor} solid`);
               }}
               style={{
@@ -151,10 +155,10 @@ const Navbar = () => {
               }}
             >
               Sign
-            </Link>:<Button color="error" variant="outlined" onClick={()=>{document.cookie="_hash=b229jjcWX9sczZSgE3hL";navigate("/");setNav(0)}}>LogOut <LogoutIcon fontSize="verysmall" sx={{ml:"5%",mb:"4%"}}/> </Button>}
+            </Link>:<Button color="error" variant="outlined" onClick={()=>{setExpanded(false);document.cookie="_hash=b229jjcWX9sczZSgE3hL";navigate("/");setNav(0)}}>LogOut <LogoutIcon fontSize="verysmall" sx={{ml:"5%",mb:"4%"}}/> </Button>}
           </Stack>
         </Stack>
-      </Stack>
+      {/* </Stack> */}
     </AppBar>
    
   );

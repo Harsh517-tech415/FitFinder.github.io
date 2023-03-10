@@ -8,8 +8,8 @@ import React from 'react';
 
 const Dashboard = () => {
   return (
-    <Box sx={{background:"black"}}>
-      {/* <img src={test}/> */}
+    <Box >
+      
     </Box>
   )
 }

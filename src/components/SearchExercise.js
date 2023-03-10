@@ -50,7 +50,7 @@ const SearchExercise = ({ setExercises, bodyPart, setBodyPart }) => {
         Awesome Exercise you <br />
         should know
       </Typography>
-      <Box position="relative" mb="72px">
+      <Box mb="72px" display="flex" justifyContent="center">
         <TextField
           sx={{
             input: { fontWeight: "700", border: "none", borderRadius: "4px" },

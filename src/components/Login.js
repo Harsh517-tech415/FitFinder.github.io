@@ -6,7 +6,7 @@ import { Update } from "../App";
 import { auth, db } from "./firebase";
 import { UserC } from "../components/FitFinderInfo";
 import Cookies from "js-cookie";
-import { collection,addDoc, doc,updateDoc, setDoc } from "firebase/firestore";
+import { doc,setDoc } from "firebase/firestore";
 
 const Login = () => {
   const navigate = useNavigate();
