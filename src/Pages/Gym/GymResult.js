@@ -23,40 +23,42 @@ const GymResult = ({ pathIndex }) => {
   const navigate = useNavigate();
   const date = new Date();
   const [value, setValue] = useState();
-  const { setDisplayAppBar } = useContext(Update);
+  const { setDisplayAppBar,gymResultargs } = useContext(Update);
   const location = useLocation();
   const height = useRef();
   const weight = useRef();
   const data = useRef();
-  const d=useRef()
+  const d = useRef();
   useEffect(() => {
     if (location.pathname === "/gym/gymresult") {
       setDisplayAppBar("none");
     }
     async function getData() {
+      console.log(gymResultargs)
       let a;
       try {
-        a = await getDoc(doc(db, Cookies.get("_hash"), "_dash"));
+        a = await getDoc(doc(db, "UserData", `${Cookies.get("_hash")}`));
         a = a.data();
-        
-        if (a[`${date.getFullYear()}` +[date.getMonth() + 1] +[date.getDate() + 1]])
-         {
-          
-          data.current =
-            a[
-              `${date.getFullYear()}` +
-                [date.getMonth() + 1] +
-                [date.getDate() + 1]
-            ]["exercise"];
-            console.log(1)
-            
-        }
-        else{
 
-          data.current=["2"];
-          console.log(2)
-        }
-      } catch (err) {
+        // if (
+        //   a[
+        //     `${date.getFullYear()}` +
+        //       [date.getMonth() + 1] +
+        //       [date.getDate() + 1]
+        //   ]
+        // ) {
+        //   data.current =
+        //     a[
+        //       `${date.getFullYear()}` +
+        //         [date.getMonth() + 1] +
+        //         [date.getDate() + 1]
+        //     ]["exercise"];
+        //   console.log(1);
+        // } else {
+        //   data.current = ["2"];
+        //   console.log(2);
+        // }
+            } catch (err) {
         console.log(err);
       }
     }
@@ -91,21 +93,30 @@ const GymResult = ({ pathIndex }) => {
           position: "absolute",
           height: { sm: "10%", lg: "10%" },
           boxShadow: "0px 0px 14px 1px grey",
-          mt: { sm: "32%", lg: "15.5%" },
+          mt: { sm: "34%", lg: "17%" },
           ml: { sm: "3%", lg: "3%" },
+          display:"flex",
+          justifyContent:"left",
+          textAlign:"center",
+          alignItems:"center",
           borderRadius: "7px",
           width: { sm: "600px", lg: "800px" },
+          height:"80px"
         }}
       >
-        <Stack direction="row">
-          <Typography sx={{ ml: "16%" }}>Exercise</Typography>
-          <Typography sx={{ ml: "20%" }}>Calorie</Typography>
-          <Typography sx={{ ml: "22%" }}>Time</Typography>
-        </Stack>
-        <Stack direction="row">
-          <Typography sx={{ ml: "19%" }}>{time[pathIndex]}</Typography>
-          <Typography sx={{ ml: { sm: "27%", lg: "25%" } }}>0</Typography>
-          <Typography sx={{ ml: { sm: "30%", lg: "27%" } }}>0</Typography>
+        <Stack direction="row" spacing={20} sx={{textAlign:"center",justifyContent:"center"}}>
+         
+         <CardContent sx={{mb:"10px"}}> <Typography>Exercise</Typography>
+         <Typography >{gymResultargs[0]}</Typography></CardContent>
+         <CardContent>
+          <Typography >Calorie</Typography>
+          <Typography >{gymResultargs[1]}</Typography>
+          </CardContent>
+          <CardContent><Typography >Time</Typography>
+          <Typography>{gymResultargs[2]}</Typography>
+
+          </CardContent>
+
         </Stack>
       </CardContent>
       <CardMedia
@@ -174,24 +185,30 @@ const GymResult = ({ pathIndex }) => {
       <Button
         onClick={() => {
           async function setData() {
-            try {
-               d.current=`${`${date.getFullYear()}` +
-              [date.getMonth() + 1] +
-              [date.getDate() ]}`;
-              // d.current=d.current.stringify()
-              await setDoc(doc(db, Cookies.get("_hash"), "_dash"), {
-                d: {
-                  year: date.getFullYear(),
-                  month: date.getMonth() + 1,
-                  date: date.getDate() + 1,
-                  weight: weight.current.value,
-                  height: height.current.value,
-                  // exercise: [Cookies.get("_#*_")]
-                },
-              },{merge:"true"});
-            } catch (err) {
-              console.log(err);
-            }
+            // try {
+            //   d.current = `${
+            //     `${date.getFullYear()}` +
+            //     [date.getMonth() + 1] +
+            //     [date.getDate()]
+            //   }`;
+            //   // d.current=d.current.stringify()
+            //   await setDoc(
+            //     doc(db, Cookies.get("_hash"), "_dash"),
+            //     {
+            //       d: {
+            //         year: date.getFullYear(),
+            //         month: date.getMonth() + 1,
+            //         date: date.getDate() + 1,
+            //         weight: weight.current.value,
+            //         height: height.current.value,
+            //         // exercise: [Cookies.get("_#*_")]
+            //       },
+            //     },
+            //     { merge: "true" }
+            //   );
+            // } catch (err) {
+            //   console.log(err);
+            // }
           }
           setData();
           // navigate("/gym/discovergym");

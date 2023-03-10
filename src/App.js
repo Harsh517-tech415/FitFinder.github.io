@@ -52,6 +52,7 @@ function App() {
 const[pathIndex,setPathIndex]=useState(0);
 const [url,setUrl]=useState()
 const [frame ,setFrame]=useState(0)
+const [gymResultargs,setGymresultArgs]=useState([0,0,0])
   const getColor = (item1, item2, item3, item4, item5, item6) => {
     setColor(item1);
     seTextColor(item2);
@@ -93,7 +94,9 @@ const [frame ,setFrame]=useState(0)
         url:url,
         setUrl:setUrl,
         frame:frame,
-        setFrame:setFrame
+        setFrame:setFrame,
+        gymResultargs:gymResultargs,
+        setGymresultArgs:setGymresultArgs
       }}
     >
       <BrowserRouter>
