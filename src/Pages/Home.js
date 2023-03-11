@@ -148,7 +148,7 @@ const Home = () => {
 
 
 
-      <Stack sx={{mt:"10%"}}>
+      <Stack rowGap={5} sx={{mt:"7%"}}>
         <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{xs:12,sm:12,md:12,lg:12,xl:12}}>
           <Grid item xs={10} sm={10} md={5} lg={5} xl={5} >
             <CardMedia component="img" src={testing} />
@@ -173,12 +173,10 @@ const Home = () => {
             </Button>
           </Grid>
         </Grid>
-        <Grid conrainer>
-          <Grid item xs={6} sm={6} md={4} lg={4}>
-            <CardMedia component="img" src={testing} />
-          </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={4}>
-            <CardContent sx={{ fontWeight: "bold" }}>Home Workout</CardContent>
+
+        <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{xs:12,sm:12,md:12,lg:12,xl:12}}>
+        <Grid item xs={10} sm={10} md={5} lg={5} xl={5}>
+            <CardContent sx={{ fontWeight: "bold" }}>Gym</CardContent>
             <CardContent>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
@@ -189,19 +187,23 @@ const Home = () => {
               variant="text"
               color="warning"
               onClick={() => {
-                navigate("/homeworkout");
+                navigate("/gym");
               }}
             >
               Explore Home Workout <ArrowForward />
             </Button>
           </Grid>
-        </Grid>
-        <Grid constainer>
-          <Grid item xs={6} sm={6} md={4} lg={4}>
+          <Grid item xs={10} sm={10} md={5} lg={5} xl={5} >
             <CardMedia component="img" src={testing} />
           </Grid>
-          <Grid item xs={6} sm={6} md={4} lg={4}>
-            <CardContent sx={{ fontWeight: "bold" }}>Yoga</CardContent>
+        </Grid>
+        
+        <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{xs:12,sm:12,md:12,lg:12,xl:12}}>
+          <Grid item xs={10} sm={10} md={5} lg={5} xl={5} >
+            <CardMedia component="img" src={testing} />
+          </Grid>
+        <Grid item xs={10} sm={10} md={5} lg={5} xl={5}>
+            <CardContent sx={{ fontWeight: "bold" }}>Gym</CardContent>
             <CardContent>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
@@ -212,10 +214,10 @@ const Home = () => {
               variant="text"
               color="warning"
               onClick={() => {
-                navigate("yoga");
+                navigate("/gym");
               }}
             >
-              Explore Yoga <ArrowForward />
+              Explore Home Workout <ArrowForward />
             </Button>
           </Grid>
         </Grid>
