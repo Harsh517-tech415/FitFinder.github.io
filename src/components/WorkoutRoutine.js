@@ -1,11 +1,10 @@
-import React, { useEffect, useContext, useState} from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Update } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
-import GymInfo from "../Pages/Gym/GymInfo";
 import { exercises } from "../Pages/Gym/GymInfo";
 import { time } from "../Pages/Gym/GymInfo";
 import WorkoutCollection from "../Pages/Gym/WorkoutCollection";
-import { Typography, Box, TextField, Stack, Button} from "@mui/material";
+import { Typography, Box, TextField, Stack, Button } from "@mui/material";
 import chestb from "../assets/images/chest1.jpg";
 import chesti from "../assets/images/chest2.jpg";
 import chesta from "../assets/images/chest3.png";
@@ -27,14 +26,14 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { doc, getDoc} from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import Cookies from "js-cookie";
 
 const WorkoutRoutine = ({ pathIndex, setPathIndex }) => {
   const [rest, setRest] = useState(10);
   const [option, setOption] = useState(0),
-    [exercisebeginner,setExerciseBeginner] = useState({});
+    [exercisebeginner, setExerciseBeginner] = useState({});
   const workouts = [0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const image = [
     fullbody,
@@ -60,16 +59,17 @@ const WorkoutRoutine = ({ pathIndex, setPathIndex }) => {
   const navigate = useNavigate();
   async function setData() {
     try {
-      let a=await getDoc(doc(db, "Exercise", `${Cookies.get("_adu")}`))
-      a=a.data()
-      setExerciseBeginner(a)
+      let a = await getDoc(doc(db, "Exercise", `${Cookies.get("_adu")}`));
+      a = a.data();
+      setExerciseBeginner(a);
       setOption(1);
     } catch (err) {
       console.log(err);
     }
   }
-
+  
   useEffect(() => {
+    console.log(exercisebeginner)
     exercises.map((value, index) => {
       if (location.pathname === `/gym/${value}`) {
         setDisplayAppBar("none");
@@ -82,9 +82,8 @@ const WorkoutRoutine = ({ pathIndex, setPathIndex }) => {
   }, []);
   return (
     <>
-      <GymInfo />
       <Card>
-        <CardMedia component="img" Height="450px" image={image[pathIndex]} />
+        <CardMedia component="img" Height="450px" src={image[pathIndex]} />
         <CardContent>
           <Typography
             sx={{
@@ -158,12 +157,13 @@ const WorkoutRoutine = ({ pathIndex, setPathIndex }) => {
           className="DiscoverScrollbar"
           sx={{ height: { sm: "600px", lg: "600px" }, overflowY: "scroll" }}
         >
-          {
-          option === 1 ? Object.keys(exercisebeginner).map((item, index) => 
-             (
-              <WorkoutCollection pathexercise={exercisebeginner[index]}/>
-          )
-          ):<span></span>}
+          {option === 1 ? (
+            Object.keys(exercisebeginner).map((item, index) => (
+              <WorkoutCollection pathexercise={exercisebeginner[index]} />
+            ))
+          ) : (
+            <span></span>
+          )}
           <Button
             onClick={() => {
               let hash = Cookies.get("_hash");
