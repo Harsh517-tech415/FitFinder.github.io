@@ -34,9 +34,9 @@ const GymHome = () => {
         sx={{
           opacity: 0.9,
           position: "absolute",
-          m: { sm: "39% 32%", lg: "29.3% 38%" },
-          fontSize: { sm: "24px", lg: "34px" },
+          m: {xs:"35% 24%", sm: "39% 32%", lg: "35.3% 38%",xl:"20% 38%" },
           fontWeight: "bold",
+          fontSize:{xs:".9rem",sm:"1.2rem",md:"1.3rem",lg:"1.5rem",xl:"2.5rem"}
         }}
       >
         Sweat now. Shine later.
@@ -68,6 +68,7 @@ const GymHome = () => {
               background: "linear-gradient(to Top Left,black,grey)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              fontSize:{xs:".9rem",sm:"1.2rem",md:"1.3rem",lg:"1.5rem",xl:"1.7rem"}
             }}
           >
             Tranning
@@ -79,7 +80,7 @@ const GymHome = () => {
           <Stack direction="column">
           <Typography
             paragraph={true}
-            sx={{ textAlign: "left", width: { sm: "641px", lg: "500px" } }}
+            sx={{ textAlign: "left", fontSize:{xs:".6rem",sm:".9rem",md:"1.0rem",lg:"1.2rem",xl:"1.4rem"} }}
           >
             This page offers a range of features for individuals seeking to
             improve their health and fitness. With a fitness tracker and calorie
@@ -158,6 +159,7 @@ const GymHome = () => {
                 background: "linear-gradient(to Top Left,black,grey)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontSize:{xs:".9rem",sm:"1.2rem",md:"1.3rem",lg:"1.5rem",xl:"1.7rem"}
               }}
             >
               Discover
@@ -168,7 +170,7 @@ const GymHome = () => {
           <Stack direction="row">
             <Stack>
             <Typography
-              sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
+              sx={{ fontSize:{xs:".6rem",sm:".9rem",md:"1.0rem",lg:"1.2rem",xl:"1.4rem"}, textAlign: "left" }}
             >
               This page offers exercise plans for people of all levels, from
               beginner to advanced. Whether you are just starting out or looking
@@ -264,6 +266,7 @@ const GymHome = () => {
               background: "linear-gradient(to Top Left,black,grey)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              fontSize:{xs:".9rem",sm:"1.2rem",md:"1.3rem",lg:"1.5rem",xl:"1.7rem"}
             }}
           >
             Custom
@@ -274,7 +277,7 @@ const GymHome = () => {
         <Stack direction="row">
           <Stack>
           <Typography
-            sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
+            sx={{ fontSize:{xs:".6rem",sm:".9rem",md:"1.0rem",lg:"1.2rem",xl:"1.4rem"}, textAlign: "left" }}
           >
             This page provides you with the ability to create customized
             exercises tailored to your fitness level and preferences. With a
@@ -341,6 +344,7 @@ const GymHome = () => {
                 background: "linear-gradient(to Top Left,black,grey)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
+                fontSize:{xs:".9rem",sm:"1.2rem",md:"1.3rem",lg:"1.5rem",xl:"1.7rem"}
               }}
             >
               Dashboard
@@ -351,7 +355,7 @@ const GymHome = () => {
           <Stack direction="row">
             <Stack>
             <Typography
-              sx={{ width: { sm: "641px", lg: "500px" }, textAlign: "left" }}
+              sx={{ fontSize:{xs:".6rem",sm:".9rem",md:"1.0rem",lg:"1.2rem",xl:"1.4rem"}, textAlign: "left" }}
             >
               This page is designed to track and display your workout progress
               using a graph. The graph will provide you with a visual

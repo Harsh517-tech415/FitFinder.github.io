@@ -3,7 +3,9 @@ import { Stack, Typography, Box, TextField, Button } from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import { Update } from "../App";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../components/firebase";
+import { auth, db } from "../components/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import Cookies from "js-cookie";
 const Signup = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -21,6 +23,7 @@ const Signup = () => {
         .then((res) => {
           setMessageColor("green")
           setRes("SignUp Successfully*");
+        
            setTimeout(()=>{navigate('/login')},1000)
         })
         .catch((err) => {

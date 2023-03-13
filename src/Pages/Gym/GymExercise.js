@@ -78,10 +78,10 @@ const GymExercise = ({ pathIndex }) => {
 
   async function fun() {
     setGif(null);
-    if (index !== exerciseDetail.length - 1) {
+    if (index === exerciseDetail.length - 1) {
       setOption(1);
       setIndex(index + 1);
-    } else if (index === exerciseDetail.length - 1) {
+    } else if (index === 0) {
       let getTime = Cookies.get("StarTime").split(",");
       const currentTime = [
         new Date().getHours(),
@@ -101,11 +101,12 @@ const GymExercise = ({ pathIndex }) => {
         console.log(err);
       }
       path = Cookies.get("_adu");
+      let cTime=(currentTimeSecond - getTimeSecond) / 60;
       data = data[path];
       data[0] = data[0] + 1;
-      data[2] = data[2] + (currentTimeSecond - getTimeSecond) / 60;
-      data[2] = 1 * data[2].toFixed(2);
-      console.log(data);
+      data[2] = data[2] + cTime;
+      data[2]=Number(data[2].toFixed(2))
+
       try {
         await setDoc(
           doc(db, "UserData", `${Cookies.get("_hash")}`),
@@ -115,6 +116,21 @@ const GymExercise = ({ pathIndex }) => {
       } catch (err) {
         console.log(err);
       }
+     let chartData;
+      try{
+        chartData=await getDoc(doc(db,"Chart",`${Cookies.get("_hash")}`))
+      }catch(err){console.log(err)}
+      try{
+        await setDoc(doc(db,"Chart",`${Cookies.get("_hash")}`)
+        ,{
+          'Workout':[...chartData.data()['Workout'],exerciseDetail.length],
+        'Kcal':[...chartData.data()['Kcal'],data[1]],
+        'Time':[...chartData.data()['Time'],Number(cTime.toFixed(2))],
+        'Date':[...chartData.data()['Date'],`${new Date().getFullYear()+'-'+new Date().getMonth()+'-'+new Date().getDate()}`],
+        'Name':[...chartData.data()['Name'],`${Cookies.get("_#*_")}`]
+      },{merge:true})
+      }catch(err){console.log(err)}
+
       setGymresultArgs([
         exerciseDetail.length + 1,
         0,
@@ -143,9 +159,7 @@ const GymExercise = ({ pathIndex }) => {
         const starsRef = ref(storage, `${Cookies.get("_hash")}`);
         getDownloadURL(starsRef)
           .then((url) => {
-            console.log("ok");
             setGif(url);
-            console.log(gif);
           })
           .catch((err) => {
             console.log(err);

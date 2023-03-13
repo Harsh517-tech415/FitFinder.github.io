@@ -6,7 +6,7 @@ import { Update } from "../App";
 import { auth, db } from "./firebase";
 import { UserC } from "../components/FitFinderInfo";
 import Cookies from "js-cookie";
-import { doc,setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Login = () => {
         setRes("SuccesFully Logined");
         document.cookie = `_hash=${response.user.uid}`;
         setNav(1);
-        let hash=Cookies.get("_hash")
+        let hash = Cookies.get("_hash");
         async function fun() {
           let a = {
             absb: [0, 0, 0],
@@ -40,35 +40,58 @@ const Login = () => {
             backb: [0, 0, 0],
             backi: [0, 0, 0],
             backa: [0, 0, 0],
-            fullbody:[0,0,0],
-            lowerbody:[0,0,0],
-            name:[]
+            fullbody: [0, 0, 0],
+            lowerbody: [0, 0, 0],
+            name: [],
           };
-          
+
           try {
-            await userc.setDocData(hash,a);
+            await userc.setDocData(hash, a);
           } catch (err) {
             console.log(err);
           }
         }
-        async function verify()
-        {
-          try{
-            const a=await userc.getDocData(hash);
-            if(a.data()){}
-            else{console.log(hash); fun()}
-          }catch(err){console.log(err)}
-        }
-        verify()
-        async function add()
-        {
-          try{
-            await setDoc(doc(db,hash,"xbzmczcbckasdcsxzcsdjlcnz,"),{name:"nb"})
+        async function verify() {
+          try {
+            const a = await userc.getDocData(hash);
+            if (a.data()) {
+            } else {
+              fun();
+            }
+          } catch (err) {
+            console.log(err);
           }
-          catch(err){console.log(err)}
         }
-      add()
-       setTimeout(()=>{navigate("/")},1000)
+        verify();
+        async function add() {
+          try {
+            await setDoc(doc(db, hash, "xbzmczcbckasdcsxzcsdjlcnz,"), {
+              name: "nb",
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        add();
+        async function setData() {
+          try {
+            await setDoc(doc(db, "Chart", `${Cookies.get("_hash")}`),{Workout:[],Kcal:[],Time:[],Name:[]});
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        async function verifyChart()
+        {let data;
+          try{
+            data=await getDoc(doc(db,"Chart",`${Cookies.get("_hash")}`))
+            if(data.data()){}
+            else{setData()}
+          }catch(err){}
+        }
+        verifyChart()
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       })
       .catch((err) => {
         setRes(err.message);

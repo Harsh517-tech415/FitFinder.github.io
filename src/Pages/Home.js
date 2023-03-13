@@ -83,8 +83,8 @@ const Home = () => {
         <Grid item xs={6} sm={6} md={4} lg={4}>
           <Card>
             <CardMedia component="img" src={testing} />
-            <CardContent sx={{ fontWeight: "bold" }}>Explore</CardContent>
-            <CardContent>
+            <CardContent sx={{ fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>Explore</CardContent>
+            <CardContent sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
@@ -96,6 +96,7 @@ const Home = () => {
               onClick={() => {
                 navigate("/explore");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
               Explore <ArrowForward />
             </Button>
@@ -105,8 +106,8 @@ const Home = () => {
         <Grid item xs={6} sm={6} md={4} lg={4}>
           <Card>
             <CardMedia component="img" src={testing} />
-            <CardContent sx={{ fontWeight: "bold" }}>DashBoard</CardContent>
-            <CardContent>
+            <CardContent sx={{ fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>DashBoard</CardContent>
+            <CardContent  sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
@@ -118,6 +119,7 @@ const Home = () => {
               onClick={() => {
                 navigate("dashboard");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
               Explore DashBoard <ArrowForward />
             </Button>
@@ -126,8 +128,8 @@ const Home = () => {
         <Grid item xs={6} sm={6} md={4} lg={4}>
           <Card>
             <CardMedia component="img" src={testing} />
-            <CardContent sx={{ fontWeight: "bold" }}>SignUp</CardContent>
-            <CardContent>
+            <CardContent sx={{ fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>SignUp</CardContent>
+            <CardContent  sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
@@ -139,6 +141,7 @@ const Home = () => {
               onClick={() => {
                 navigate("signup");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
               SignUp/SignIn <ArrowForward />
             </Button>
@@ -155,8 +158,8 @@ const Home = () => {
           </Grid>
 
           <Grid item xs={10} sm={10} md={5} lg={5} xl={5}>
-            <CardContent sx={{ fontWeight: "bold" }}>Gym</CardContent>
-            <CardContent>
+            <CardContent sx={{ fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>Gym</CardContent>
+            <CardContent  sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
@@ -164,20 +167,21 @@ const Home = () => {
             </CardContent>
             <Button
               variant="text"
-              color="warning"
+              color="error"
               onClick={() => {
                 navigate("/gym");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
               Explore Gym <ArrowForward />
             </Button>
           </Grid>
         </Grid>
 
-        <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{xs:12,sm:12,md:12,lg:12,xl:12}}>
-        <Grid item xs={10} sm={10} md={5} lg={5} xl={5}>
-            <CardContent sx={{ fontWeight: "bold" }}>Gym</CardContent>
-            <CardContent>
+        <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{md:12,lg:12,xl:12}}>
+        <Grid sx={{display:{xs:"none",sm:"none",md:"block",lg:"block",xl:"block"}}}item md={5} lg={5} xl={5} >
+            <CardContent sx={{fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>Home Workout</CardContent>
+            <CardContent  sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
@@ -185,16 +189,51 @@ const Home = () => {
             </CardContent>
             <Button
               variant="text"
-              color="warning"
+              color="primary"
               onClick={() => {
-                navigate("/gym");
+                navigate("/homeworkout");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
               Explore Home Workout <ArrowForward />
             </Button>
           </Grid>
-          <Grid item xs={10} sm={10} md={5} lg={5} xl={5} >
-            <CardMedia component="img" src={testing} />
+          <Grid sx={{display:{xs:"none",sm:"none",md:"block",lg:"block",xl:"block"}}}item md={5} lg={5} xl={5} >
+            <CardMedia component="img" 
+            src={testing} />
+          </Grid>
+        </Grid>
+
+
+        <Grid container sx={{display:"flex",alignItems:"center",justifyContent:"center"}} columnSpacing={1} columns={{xs:12,sm:12}}>
+        <Grid item  sx={{
+          display:{xs:"block",sm:"block",md:"none",lg:"none",xl:"none"}
+        }}xs={10} sm={10} >
+            <CardMedia component="img" 
+            sx={{objectFit:"cover"}}
+            src={testing} />
+          </Grid>
+        <Grid item sx={{
+          display:{xs:"block",sm:"block",md:"none",lg:"none",xl:"none"}
+        }} xs={10} sm={10} >
+            <CardContent sx={{fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>Gym</CardContent>
+            <CardContent  sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Explicabo sunt sapiente cupiditate dolores consectetur in velit,
+              sed architecto natus veritatis quisquam aliquid ducimus laboriosam
+              ratione rem asperiores omnis. Voluptate, officia.
+            </CardContent>
+            <Button
+            
+              variant="text"
+              color="primary"
+              onClick={() => {
+                navigate("/homeworkout");
+              }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
+            >
+              Explore Home Workout <ArrowForward  />
+            </Button>
           </Grid>
         </Grid>
         
@@ -203,9 +242,8 @@ const Home = () => {
             <CardMedia component="img" src={testing} />
           </Grid>
         <Grid item xs={10} sm={10} md={5} lg={5} xl={5}>
-            <CardContent sx={{ fontWeight: "bold" }}>Gym</CardContent>
-            <CardContent>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            <CardContent sx={{ fontWeight: "bold",fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"} }}>Gym</CardContent>
+            <CardContent sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}>
               Explicabo sunt sapiente cupiditate dolores consectetur in velit,
               sed architecto natus veritatis quisquam aliquid ducimus laboriosam
               ratione rem asperiores omnis. Voluptate, officia.
@@ -214,10 +252,11 @@ const Home = () => {
               variant="text"
               color="warning"
               onClick={() => {
-                navigate("/gym");
+                navigate("/yoga");
               }}
+              sx={{fontSize:{xs:".4rem",sm:".8rem",md:"1.0rem",lg:"1.2rem",xl:"1.6rem"}}}
             >
-              Explore Home Workout <ArrowForward />
+              Explore Yoga <ArrowForward sx={{fontSize:{xs:"small",sm:"small",md:"medium",lg:"large",xl:"large"}}}/>
             </Button>
           </Grid>
         </Grid>
